@@ -20,7 +20,7 @@ img{display:block;max-width:100%}
 .top.scrolled{background:rgba(247,245,240,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.brand img{width:30px;height:30px;border-radius:8px}
+.brand img{width:30px;height:30px}
 .menu{display:flex;align-items:center;gap:6px}
 .menu a{text-decoration:none;color:var(--soft);padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
 .menu a:hover{color:var(--ink);background:rgba(0,0,0,.04)}
