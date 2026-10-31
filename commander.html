@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commander un site · Nawa Studio</title>
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f0f10'/><text x='16' y='22' font-family='Arial' font-weight='700' font-size='17' fill='white' text-anchor='middle'>N</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .order{display:grid;grid-template-columns:1fr 340px;gap:40px;padding-top:50px;padding-bottom:100px;align-items:start}
+  .order h1{font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;line-height:1.05;font-weight:600;margin-bottom:10px}
+  .order .lead{color:var(--soft);margin-bottom:34px}
+  .track{display:flex;gap:8px;margin-bottom:34px}
+  .track span{flex:1;color:var(--faint);position:relative;padding-top:12px}
+  .track span::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px;background:var(--line)}
+  .track span::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px;background:var(--ink);transform:scaleX(0);transform-origin:0;transition:transform .7s var(--ease)}
+  .track span.on{color:var(--ink)}
+  .track span.on::after{transform:scaleX(1)}
+  .stage{position:relative}
+  .pane{display:none}
+  .pane.on{display:block;animation:paneIn .6s var(--ease) both}
+  .pane.back.on{animation-name:paneBack}
+  @keyframes paneIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+  @keyframes paneBack{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;gap:16px;align-items:center;background:var(--paper);border-radius:16px;padding:20px 22px;cursor:pointer;box-shadow:0 0 0 1px var(--line);transition:box-shadow .3s,transform .3s var(--ease)}
+  .opt:hover{transform:translateY(-2px)}
+  .opt:has(input:checked){box-shadow:0 0 0 2px var(--ink)}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .radio{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--faint);flex:none;position:relative;transition:box-shadow .3s}
+  .opt:has(input:checked) .radio{box-shadow:inset 0 0 0 6px var(--ink)}
+  .opt div{flex:1}
+  .opt b{display:block;font-weight:600}
+  .opt small{color:var(--soft);font-size:.92rem}
+  .opt .p{font-weight:600;white-space:nowrap}
+  .field{display:block;margin-bottom:16px}
+  .field span{display:block;font-weight:500;margin-bottom:6px;font-size:.95rem}
+  .field span i{font-style:normal;color:var(--faint);font-weight:400}
+  .field input,.field select,.field textarea{width:100%;padding:14px 16px;border:0;border-radius:12px;background:var(--paper);box-shadow:0 0 0 1px var(--line);font:inherit;color:var(--ink);transition:box-shadow .25s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;box-shadow:0 0 0 2px var(--ink)}
+  .field.bad input{box-shadow:0 0 0 2px var(--accent)}
+  .field textarea{min-height:110px;resize:vertical}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips label{cursor:pointer}
+  .chips input{position:absolute;opacity:0;pointer-events:none}
+  .chips span{display:inline-block;padding:9px 15px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px var(--line);font-size:.93rem;transition:all .25s}
+  .chips input:checked+span{background:var(--ink);color:#fff;box-shadow:none}
+  .actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px}
+  .link{background:none;border:0;font:inherit;color:var(--soft);cursor:pointer;padding:10px 0}
+  .link:hover{color:var(--ink)}
+  .err{color:var(--accent);font-size:.92rem;margin-top:4px;min-height:1.4em}
+  .summary{position:sticky;top:96px;background:var(--ink);color:#eeece7;border-radius:22px;padding:28px}
+  .summary .mono{color:#8d8c89}
+  .summary h3{font-size:1.4rem;font-weight:600;margin:6px 0 2px;color:#fff}
+  .summary .big{font-size:2.4rem;font-weight:600;letter-spacing:-.03em;color:#fff;margin:14px 0 4px;transition:opacity .3s}
+  .summary ul{list-style:none;margin:16px 0;border-top:1px solid #2a2a2d}
+  .summary li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #2a2a2d;font-size:.93rem}
+  .summary li span:first-child{color:#8d8c89}
+  .summary .tiny{font-size:.85rem;color:#8d8c89}
+  .recap{background:var(--paper);border-radius:18px;padding:8px 22px;box-shadow:0 0 0 1px var(--line);margin-bottom:22px}
+  .recap div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .recap div:last-child{border:0}
+  .recap span:first-child{color:var(--soft)}
+  .recap span:last-child{text-align:right}
+  .recap .tot span{font-weight:600;color:var(--ink)}
+  .pay{display:grid;gap:10px}
+  .pay .btn{justify-content:center;padding:16px}
+  .pay .paypal{background:#ffc439;color:#111!important}
+  .pay .paypal::before{background:#f0b429}
+  .pay .off{background:#e8e6e1;color:#9a9a9e!important;pointer-events:none}
+  .done{display:none;text-align:center;padding:30px 0}
+  .done.on{display:block;animation:paneIn .6s var(--ease) both}
+  .check{width:64px;height:64px;border-radius:50%;background:var(--green);margin:0 auto 18px;display:grid;place-items:center}
+  .check svg{width:30px;height:30px;stroke:#fff;stroke-width:3;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .6s .2s var(--ease) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .note{color:var(--soft);font-size:.9rem;margin-top:16px}
+  @media(max-width:900px){.order{grid-template-columns:1fr}.summary{position:static;order:-1}}
+  @media(max-width:560px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress"></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><i>N</i>Nawa Studio</a>
+    <nav class="menu"><a href="index.html#projets">Projets</a><a href="index.html#disponibilites">Disponibilités</a><a class="btn small ghost" href="index.html">← Retour</a></nav>
+  </div>
+</header>
+
+<main class="wrap order">
+  <div>
+    <h1 class="words">Commandez votre site.</h1>
+    <p class="lead rv" style="--d:.3s">Trois étapes, deux minutes. Réponse sur WhatsApp sous 24h, sans appel.</p>
+
+    <div class="track mono rv" style="--d:.4s"><span id="t1" class="on">1 · Formule</span><span id="t2">2 · Votre projet</span><span id="t3">3 · Confirmation</span></div>
+
+    <form id="form" class="stage rv" style="--d:.45s" novalidate>
+      <div class="pane on" data-pane="1">
+        <div class="opts">
+          <label class="opt"><input type="radio" name="formule" value="essentiel"><span class="radio"></span><div><b>Essentiel</b><small>Une page, bouton WhatsApp, livrée en 5 jours</small></div><span class="p">600 DH</span></label>
+          <label class="opt"><input type="radio" name="formule" value="vitrine" checked><span class="radio"></span><div><b>Vitrine</b><small>Jusqu'à 4 pages, menu ou catalogue, Google Maps, 1 mois de retouches</small></div><span class="p">1 200 DH</span></label>
+          <label class="opt"><input type="radio" name="formule" value="entretien"><span class="radio"></span><div><b>Entretien</b><small>Mises à jour de votre site existant</small></div><span class="p">150 DH/mois</span></label>
+          <label class="opt"><input type="radio" name="formule" value="sur-mesure"><span class="radio"></span><div><b>Sur mesure</b><small>Plateforme, espace membres, réservation en ligne…</small></div><span class="p">Sur devis</span></label>
+        </div>
+        <div class="actions"><span></span><button type="button" class="btn" data-next>Continuer <span class="arr">→</span></button></div>
+      </div>
+
+      <div class="pane" data-pane="2">
+        <div class="two">
+          <label class="field" data-req><span>Votre nom</span><input type="text" name="nom" autocomplete="name"></label>
+          <label class="field" data-req><span>Téléphone</span><input type="tel" name="tel" placeholder="06 …" autocomplete="tel"></label>
+        </div>
+        <div class="two">
+          <label class="field" data-req><span>Nom du commerce</span><input type="text" name="commerce"></label>
+          <label class="field" data-req><span>Ville</span><input type="text" name="ville"></label>
+        </div>
+        <div class="field"><span>Type d'activité</span>
+          <div class="chips">
+            <label><input type="radio" name="activite" value="Café / restaurant" checked><span>Café / restaurant</span></label>
+            <label><input type="radio" name="activite" value="Boutique"><span>Boutique</span></label>
+            <label><input type="radio" name="activite" value="Artisanat"><span>Artisanat</span></label>
+            <label><input type="radio" name="activite" value="Beauté / bien-être"><span>Beauté / bien-être</span></label>
+            <label><input type="radio" name="activite" value="École / cours"><span>École / cours</span></label>
+            <label><input type="radio" name="activite" value="Autre"><span>Autre</span></label>
+          </div>
+        </div>
+        <label class="field"><span>Démarrage souhaité</span><select name="debut" id="debut"></select></label>
+        <label class="field"><span>Votre projet <i>(facultatif)</i></span><textarea name="details" placeholder="Ex : je veux montrer mon menu et recevoir des réservations"></textarea></label>
+        <p class="err" id="err"></p>
+        <div class="actions"><button type="button" class="link" data-prev>← Retour</button><button type="button" class="btn" data-next>Voir le récapitulatif <span class="arr">→</span></button></div>
+      </div>
+
+      <div class="pane" data-pane="3">
+        <div class="recap" id="recap"></div>
+        <div class="pay" id="pay"></div>
+        <p class="note">Rien n'est débité sans votre accord. Après l'envoi, vous recevez un message WhatsApp pour envoyer vos photos et votre logo.</p>
+        <div class="actions"><button type="button" class="link" data-prev>← Modifier</button><span></span></div>
+      </div>
+    </form>
+
+    <div class="done" id="done">
+      <div class="check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2 style="font-size:2rem">Commande envoyée.</h2>
+      <p class="note">Si WhatsApp ne s'est pas ouvert, <a data-wa href="#" target="_blank" rel="noopener">écrivez-nous ici</a> avec votre référence <b id="doneRef"></b>.</p>
+      <p style="margin-top:24px"><a class="btn ghost" href="index.html">Retour à l'accueil</a></p>
+    </div>
+  </div>
+
+  <aside class="summary rv" style="--d:.5s">
+    <span class="mono">Votre commande</span>
+    <h3 id="sName">Vitrine</h3>
+    <div class="big" id="sPrice">1 200 DH</div>
+    <span class="tiny" id="sNote">Acompte de 600 DH au démarrage</span>
+    <ul>
+      <li><span>Places libres en <span data-mois></span></span><span><span data-restantes></span> / <span data-total></span></span></li>
+      <li><span>Démarrage possible</span><span data-demarrage></span></li>
+      <li><span>Contact</span><span>par message uniquement</span></li>
+    </ul>
+    <span class="tiny">Paiement en deux fois · virement, espèces ou PayPal</span>
+  </aside>
+</main>
+
+<footer><div class="wrap mono"><span>© <span data-year></span> Nawa Studio</span><a href="index.html">Accueil</a></div></footer>
+
+<script src="assets/site.js"></script>
+<script>
+const FORMULES = {
+  "essentiel":  {nom:"Essentiel",  prix:600},
+  "vitrine":    {nom:"Vitrine",    prix:1200},
+  "entretien":  {nom:"Entretien",  prix:150, mensuel:true},
+  "sur-mesure": {nom:"Sur mesure", prix:null}
+};
+const form = $("#form");
+let step = 1;
+const dh = n => n.toLocaleString("fr-FR").replace(/ | /g, " ") + " DH";
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const pre = new URLSearchParams(location.search).get("formule");
+if (pre && FORMULES[pre]) form.querySelector(`input[value="${pre}"]`).checked = true;
+
+/* Semaines de démarrage */
+const deb = $("#debut");
+for (let i = 0; i < 5; i++) {
+  const d = new Date(nextStart); d.setDate(d.getDate() + i * 7);
+  const o = document.createElement("option");
+  o.textContent = (i === 0 ? "Dès que possible · " : "") + `semaine du ${d.getDate()} ${MOIS[d.getMonth()]}`;
+  deb.append(o);
+}
+deb.append(new Option("Pas pressé, à discuter"));
+
+const acompteOf = f => f.prix ? (f.mensuel ? f.prix : Math.round(f.prix / 2)) : null;
+function updateSummary(){
+  const f = FORMULES[form.formule.value];
+  $("#sName").textContent = f.nom;
+  const p = $("#sPrice"); p.style.opacity = 0;
+  setTimeout(() => { p.textContent = f.prix ? dh(f.prix) + (f.mensuel ? " / mois" : "") : "Sur devis"; p.style.opacity = 1; }, 150);
+  const a = acompteOf(f);
+  $("#sNote").textContent = !a ? "Devis gratuit sous 48h" : f.mensuel ? "Premier mois à payer au démarrage" : `Acompte de ${dh(a)} au démarrage`;
+}
+form.addEventListener("change", e => { if (e.target.name === "formule") updateSummary(); });
+updateSummary();
+
+function show(n){
+  const back = n < step; step = n;
+  $$(".pane").forEach(p => { p.classList.toggle("on", +p.dataset.pane === n); p.classList.toggle("back", back); });
+  [1,2,3].forEach(i => $("#t"+i).classList.toggle("on", i <= n));
+  scrollTo({top: 0, behavior: "smooth"});
+}
+
+function valid(){
+  let ok = true;
+  $$("[data-req]").forEach(f => { const bad = !$("input", f).value.trim(); f.classList.toggle("bad", bad); if (bad) ok = false; });
+  const tel = form.tel.value.replace(/\D/g, "");
+  if (form.tel.value.trim() && tel.length < 9) { form.tel.closest(".field").classList.add("bad"); $("#err").textContent = "Le numéro de téléphone semble incomplet."; return false; }
+  $("#err").textContent = ok ? "" : "Merci de remplir les champs en rouge.";
+  return ok;
+}
+$$("[data-req] input").forEach(i => i.addEventListener("input", () => i.closest(".field").classList.remove("bad")));
+
+let ref = "";
+function buildRecap(){
+  const f = FORMULES[form.formule.value];
+  ref = "NW-" + iso(new Date()).slice(2).replace(/-/g, "") + "-" + Math.floor(100 + Math.random() * 900);
+  const a = acompteOf(f);
+  const v = k => form[k].value.trim();
+  const rows = [
+    ["Référence", ref], ["Formule", f.nom],
+    ["Prix", f.prix ? dh(f.prix) + (f.mensuel ? " / mois" : "") : "Sur devis"],
+    ["Nom", v("nom")], ["Téléphone", v("tel")],
+    ["Commerce", v("commerce") + ", " + v("ville")],
+    ["Activité", form.activite.value], ["Démarrage", deb.value]
+  ];
+  if (v("details")) rows.push(["Projet", v("details")]);
+  if (a) rows.push([f.mensuel ? "À payer pour démarrer" : "Acompte (50%)", dh(a)]);
+  $("#recap").innerHTML = rows.map(([k, x], i) => `<div class="${a && i === rows.length - 1 ? "tot" : ""}"><span>${k}</span><span>${esc(x)}</span></div>`).join("");
+
+  const msg = "Bonjour Nawa Studio, je souhaite commander un site.\n\n" + rows.map(([k, x]) => `${k} : ${x}`).join("\n");
+  let html = `<a class="btn wa" id="send" href="${wa(msg)}" target="_blank" rel="noopener">Envoyer ma commande sur WhatsApp <span class="arr">→</span></a>`;
+  if (a) html += CONFIG.paypal
+    ? `<a class="btn paypal" href="https://paypal.me/${CONFIG.paypal}" target="_blank" rel="noopener">Payer l'acompte avec PayPal · ${dh(a)}</a>`
+    : `<span class="btn off">Paiement PayPal bientôt disponible</span>`;
+  $("#pay").innerHTML = html;
+  $("#send").addEventListener("click", () => setTimeout(() => {
+    form.style.display = "none"; $(".track").style.display = "none";
+    $("#doneRef").textContent = ref; $("#done").classList.add("on");
+  }, 400));
+}
+
+form.addEventListener("click", e => {
+  const next = e.target.closest("[data-next]"), prev = e.target.closest("[data-prev]");
+  if (next) { if (step === 2) { if (!valid()) return; buildRecap(); } show(step + 1); }
+  if (prev) show(step - 1);
+});
+</script>
+</body>
+</html>

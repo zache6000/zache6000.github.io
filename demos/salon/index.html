@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Yasmine · Projet démo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,sans-serif;background:#fff7f6;color:#3d1f2b;line-height:1.6}
+  .demo{background:#3d1f2b;color:#f3c6c1;text-align:center;font-size:.8rem;padding:6px}
+  .wrap{max-width:900px;margin:0 auto;padding-left:22px;padding-right:22px}
+  header{text-align:center;padding:90px 22px;background:linear-gradient(160deg,#f9dcd8,#e8a3b5)}
+  h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,7vw,4.4rem);font-weight:400}
+  header p{margin:8px 0 28px}
+  .btn{display:inline-block;background:#3d1f2b;color:#fff;padding:13px 28px;border-radius:999px;font-weight:600;text-decoration:none}
+  section{padding:64px 0}
+  h2{font-family:'DM Serif Display',serif;font-weight:400;font-size:2.1rem;text-align:center;margin-bottom:28px}
+  .list{background:#fff;border-radius:18px;padding:12px 30px}
+  .row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f3dede}
+  .row:last-child{border:0}
+  .row small{display:block;color:#9a7480}
+  .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .gal div{aspect-ratio:1;border-radius:14px}
+  footer{text-align:center;padding:30px;font-size:.85rem;color:#9a7480}
+  footer a{color:inherit}
+  @media(max-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="demo">Projet démo : salon fictif créé pour illustrer un site web</div>
+<header>
+  <h1>Salon Yasmine</h1>
+  <p>Coiffure, soins et hammam · Rabat</p>
+  <a class="btn" href="#">Prendre rendez-vous</a>
+</header>
+<section class="wrap">
+  <h2>Prestations</h2>
+  <div class="list">
+    <div class="row"><span>Brushing<small>Cheveux courts ou longs</small></span><span>80 – 120 DH</span></div>
+    <div class="row"><span>Coloration<small>Produits professionnels</small></span><span>250 DH</span></div>
+    <div class="row"><span>Soin kératine<small>Durée 2h</small></span><span>600 DH</span></div>
+    <div class="row"><span>Hammam traditionnel<small>Gommage + savon beldi</small></span><span>150 DH</span></div>
+    <div class="row"><span>Pack mariée<small>Coiffure, maquillage, henné</small></span><span>Sur devis</span></div>
+  </div>
+</section>
+<section class="wrap">
+  <h2>Galerie</h2>
+  <div class="gal">
+    <div style="background:linear-gradient(135deg,#f3c6c1,#b5577a)"></div>
+    <div style="background:linear-gradient(135deg,#e9b44c,#c8553d)"></div>
+    <div style="background:linear-gradient(135deg,#b5577a,#3d1f2b)"></div>
+    <div style="background:linear-gradient(135deg,#f9dcd8,#e9b44c)"></div>
+  </div>
+</section>
+<footer>© Salon Yasmine · <a href="../../index.html">Retour au portfolio</a></footer>
+</body>
+</html>
