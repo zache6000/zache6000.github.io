@@ -70,7 +70,7 @@ const onScroll = () => {
   if (fab) fab.classList.toggle("show", scrollY > innerHeight * 0.7);
 };
 addEventListener("scroll", onScroll, { passive: true }); onScroll();
-if (fab) fab.href = wa("Bonjour Nawa Studio, j'ai une question sur un site web.");
+if (fab) fab.href = wa("Bonjour Babora, j'ai une question sur un site web.");
 
 /* ---------- Aperçus des projets : défilement au survol ---------- */
 const sizeViews = () => $$(".view").forEach(v => v.style.setProperty("--vh", v.clientHeight + "px"));
@@ -154,5 +154,5 @@ $$(".q button").forEach(b => b.addEventListener("click", () => {
 }));
 
 /* ---------- Liens WhatsApp génériques ---------- */
-$$("[data-wa]").forEach(a => a.href = wa(a.dataset.wa || "Bonjour Nawa Studio, je suis intéressé par un site web."));
+$$("[data-wa]").forEach(a => a.href = wa(a.dataset.wa || "Bonjour Babora, je suis intéressé par un site web."));
 $$("[data-year]").forEach(el => el.textContent = now.getFullYear());

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Commander un site · Nawa Studio</title>
+<title>Commander un site · Babora</title>
 <meta name="theme-color" content="#f7f5f0">
 <link rel="icon" type="image/svg+xml" href="brand/mark.svg">
 <link rel="apple-touch-icon" href="brand/icon-512.png">
@@ -86,7 +86,7 @@
 <div class="progress"></div>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="brand/mark.svg" alt="" width="30" height="30">Nawa Studio</a>
+    <a class="brand" href="index.html"><img src="brand/mark.svg" alt="" width="30" height="30">Babora</a>
     <nav class="menu"><a href="index.html#projets">Projets</a><a href="index.html#disponibilites">Disponibilités</a><a class="btn small ghost" href="index.html">← Retour</a></nav>
   </div>
 </header>
@@ -164,7 +164,7 @@
   </aside>
 </main>
 
-<footer><div class="wrap mono"><span>© <span data-year></span> Nawa Studio</span><a href="index.html">Accueil</a></div></footer>
+<footer><div class="wrap mono"><span>© <span data-year></span> Babora</span><a href="index.html">Accueil</a></div></footer>
 
 <script src="assets/site.js"></script>
 <script>
@@ -224,7 +224,7 @@ $$("[data-req] input").forEach(i => i.addEventListener("input", () => i.closest(
 let ref = "";
 function buildRecap(){
   const f = FORMULES[form.formule.value];
-  ref = "NW-" + iso(new Date()).slice(2).replace(/-/g, "") + "-" + Math.floor(100 + Math.random() * 900);
+  ref = "BB-" + iso(new Date()).slice(2).replace(/-/g, "") + "-" + Math.floor(100 + Math.random() * 900);
   const a = acompteOf(f);
   const v = k => form[k].value.trim();
   const rows = [
@@ -238,7 +238,7 @@ function buildRecap(){
   if (a) rows.push([f.mensuel ? "À payer pour démarrer" : "Acompte (50%)", dh(a)]);
   $("#recap").innerHTML = rows.map(([k, x], i) => `<div class="${a && i === rows.length - 1 ? "tot" : ""}"><span>${k}</span><span>${esc(x)}</span></div>`).join("");
 
-  const msg = "Bonjour Nawa Studio, je souhaite commander un site.\n\n" + rows.map(([k, x]) => `${k} : ${x}`).join("\n");
+  const msg = "Bonjour Babora, je souhaite commander un site.\n\n" + rows.map(([k, x]) => `${k} : ${x}`).join("\n");
   let html = `<a class="btn wa" id="send" href="${wa(msg)}" target="_blank" rel="noopener">Envoyer ma commande sur WhatsApp <span class="arr">→</span></a>`;
   if (a) html += CONFIG.paypal
     ? `<a class="btn paypal" href="https://paypal.me/${CONFIG.paypal}" target="_blank" rel="noopener">Payer l'acompte avec PayPal · ${dh(a)}</a>`
