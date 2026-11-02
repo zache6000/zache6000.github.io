@@ -177,11 +177,11 @@
 .dm-pt .pr b{font-size:4rem;font-weight:600;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
 .dm-pt .pr span{color:var(--soft)}
 /* before / after */
-.dm-ba{position:absolute;inset:0;--p:50%}
+.dm-ba{position:absolute;inset:0;--p:50%;touch-action:pan-y;cursor:ew-resize}
 .dm-ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
 .dm-ba>img{filter:grayscale(1) contrast(.7) brightness(.8) blur(1px)}
 .dm-ba .af{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
-.dm-ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.dm-ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
 .dm-ba .hd{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:#fff;pointer-events:none}
 .dm-ba .hd::after{content:"⇆";position:absolute;top:50%;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;font-size:1rem}
 .dm-ba .l,.dm-ba .r{position:absolute;top:12px;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,.6);color:#fff;pointer-events:none}
