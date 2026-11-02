@@ -1,27 +1,7 @@
 /* =====================================================
    RÉGLAGES DU SITE — modifie seulement cette partie
    ===================================================== */
-const CONFIG = {
-  whatsapp: "212614325435",   // numéro international, sans + ni 0
-  paypal: "",                 // nom PayPal.me (vide = bouton "bientôt disponible")
-
-  // Places de projets ce mois-ci
-  projetsParMois: 3,
-  projetsReserves: 1,         // mets à jour quand tu acceptes un projet
-
-  // Heures où tu réponds aux messages (affichées sur le site, en direct)
-  // 0 = dimanche, 1 = lundi ... 6 = samedi. null = pas de réponse ce jour-là
-  reponses: {
-    0: null,
-    1: ["17:00", "22:00"],
-    2: ["17:00", "22:00"],
-    3: ["14:00", "22:00"],
-    4: ["17:00", "22:00"],
-    5: ["15:00", "22:00"],
-    6: ["10:00", "20:00"]
-  },
-  email: ""                   // adresse email du studio (vide = bouton email caché)
-};
+const CONFIG = window.CONFIG;
 /* ===================================================== */
 
 const $ = (s, el = document) => el.querySelector(s);

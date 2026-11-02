@@ -1,0 +1,26 @@
+/* Habillage v2 (sombre / clair) pour la page Commander */
+@font-face{font-family:"Inter Tight";font-weight:400;font-display:swap;src:url(fonts/inter-tight-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:500;font-display:swap;src:url(fonts/inter-tight-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:600;font-display:swap;src:url(fonts/inter-tight-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
+:root{--bg:#0b0b0c;--paper:#151517;--ink:#f3efe7;--soft:#a7a39b;--faint:#6d6a65;--line:rgba(255,255,255,.1);--accent:#ff5a2c;--accent-soft:rgba(255,90,44,.12);--green:#25d366;--dark:#000;color-scheme:dark}
+[data-theme=light]{--bg:#f4f0e8;--paper:#fffdf8;--ink:#121212;--soft:#57534d;--faint:#8b867e;--line:rgba(0,0,0,.1);color-scheme:light}
+body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.mono{font-family:"JetBrains Mono",monospace}
+.top.scrolled{background:color-mix(in srgb,var(--bg) 80%,transparent)}
+.btn{color:var(--bg)!important}
+.btn:hover{color:#fff!important}
+.btn.ghost{color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{color:var(--bg)!important}
+.chips input:checked+span{color:var(--bg)}
+.summary{background:linear-gradient(160deg,rgba(255,90,44,.16),var(--paper) 60%);color:var(--ink);border:1px solid rgba(255,90,44,.3)}
+.summary h3,.summary .big{color:var(--ink)}
+.summary .mono,.summary li span:first-child,.summary .tiny{color:var(--soft)}
+.summary ul,.summary li{border-color:var(--line)}
+.opt:has(input:checked){box-shadow:0 0 0 2px var(--accent)}
+.opt:has(input:checked) .radio{box-shadow:inset 0 0 0 6px var(--accent)}
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:0 0 0 2px var(--accent)}
+.track span::after{background:var(--accent)}
+.pay .off{background:var(--paper);color:var(--faint)!important}
+.field select option{background:var(--paper)}
+::selection{background:var(--accent);color:#fff}

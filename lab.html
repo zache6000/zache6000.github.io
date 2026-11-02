@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Le Labo · Animations et widgets · Babora</title>
+<meta name="description" content="Plus de 40 animations, effets et widgets à essayer en direct et à ajouter à votre futur site. Par Babora, studio web au Maroc.">
+<meta property="og:title" content="Le Labo de Babora · Animations et widgets">
+<meta property="og:description" content="Essayez en direct les effets que vous voulez sur votre site.">
+<meta property="og:image" content="https://babora.vercel.app/brand/logo-horizontal-dark.png">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" type="image/svg+xml" href="brand/mark.svg">
+<link rel="apple-touch-icon" href="brand/icon-512.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/inter-tight-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/v2.css">
+<link rel="stylesheet" href="assets/lab.css">
+<script>try{var t=localStorage.getItem("bb-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="progress"></div>
+
+<header class="nav">
+  <div class="in">
+    <a class="brand" href="index.html" aria-label="Babora, accueil">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M152 452V288.6A128 128 0 1 1 360 288.6V452" fill="none" stroke="currentColor" stroke-width="44" stroke-linejoin="round"/><path d="M198 452V298A74 74 0 1 1 314 298V452Z" fill="#ff5a2c"/></svg>Babora
+    </a>
+    <nav class="links" aria-label="Navigation principale">
+      <a href="index.html#projets">Projets</a><a href="index.html#services">Services</a><a href="index.html#estimation">Estimer</a><a href="index.html#tarifs">Tarifs</a><a href="lab.html" class="on">Labo</a><a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="tools">
+      <button class="ib kbdbtn" data-palette aria-label="Recherche rapide (Ctrl+K)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="ib" data-theme-toggle aria-label="Changer de thème"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+      <span class="mag"><a class="btn sm" href="commander.html">Commander <span class="arr">→</span></a></span>
+      <button class="ib burger" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="mmenu" aria-label="Menu mobile">
+  <a href="index.html">Accueil</a><a href="index.html#projets">Projets</a><a href="index.html#estimation">Estimer mon prix</a><a href="index.html#tarifs">Tarifs</a><a href="lab.html">Le Labo</a>
+  <div class="bt"><a class="btn acc" href="commander.html">Commander</a><a class="btn wa" data-wa href="#">WhatsApp</a></div>
+</div>
+
+<main id="main">
+  <section class="lab-hero" style="padding-bottom:40px">
+    <div class="wrap">
+      <span class="eyebrow mono rv in">Le Labo · <span id="ndemos">40</span> démos en direct</span>
+      <h1 class="kinetic" id="kin" aria-label="Le Labo.">Le Labo<span class="serif gtext">.</span></h1>
+      <p class="rv">Des animations, des effets et des widgets à essayer en vrai. Touchez, survolez, cliquez. Ajoutez ceux qui vous plaisent avec le bouton <b style="color:var(--accent)">+</b>, puis envoyez votre sélection : ils seront intégrés à votre site.</p>
+      <div class="lab-tools">
+        <div class="filters" role="tablist" aria-label="Filtrer les démos"><span class="pill"></span><button class="on" data-f="all">Tout</button><button data-f="motion">Mouvement</button><button data-f="effet">Effets</button><button data-f="widget">Widgets</button><button data-f="commerce">Commerce</button></div>
+        <span class="count mono" id="count"></span>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:20px">
+    <div class="wrap"><div class="grid" id="grid"></div></div>
+  </section>
+  <section class="cta" style="padding-top:60px">
+    <div class="blob" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="split">Une idée qui <span class="serif gtext">n'est pas</span> ici ?</h2>
+      <p class="muted rv" style="max-width:520px;margin:24px auto 0">Décrivez l'effet ou le widget que vous imaginez. S'il peut exister sur le web, il peut exister sur votre site.</p>
+      <div class="ctas rv"><span class="mag"><a class="btn wa" data-wa="Bonjour Babora, j'ai une idée d'animation pour mon site :" href="#">Proposer mon idée</a></span><span class="mag"><a class="btn ghost" href="index.html#estimation">Estimer mon site</a></span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="bot mono" style="border:0;padding-top:0"><span>© <span data-year></span> Babora · Le Labo</span><span><a href="index.html">Accueil</a> · <a href="commander.html">Commander</a> · <button data-copy-wa style="text-decoration:underline">Copier le numéro</button></span></div>
+    <div class="wordmark" aria-hidden="true">labo</div>
+  </div>
+</footer>
+
+<div class="cart" id="cart" role="status"><span><b id="cartn">0</b> effet<span id="carts">s</span> choisi<span id="carts2">s</span></span><button class="mono" id="cartclear" style="color:inherit;opacity:.6">vider</button><a class="btn acc" id="cartsend" href="#" target="_blank" rel="noopener">Envoyer ma sélection →</a></div>
+<button class="totop" aria-label="Revenir en haut"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22"/></svg><span>↑</span></button>
+
+<script src="assets/config.js"></script>
+<script src="assets/v2.js"></script>
+<script src="assets/lab.js"></script>
+</body>
+</html>

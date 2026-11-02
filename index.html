@@ -1,231 +1,349 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Babora · Sites web au Maroc</title>
-<meta name="description" content="Sites web et plateformes pour commerces, écoles et indépendants au Maroc. Prix fixes, livraison rapide, réponse en français et en darija.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Babora · Studio web au Maroc</title>
+<meta name="description" content="Babora conçoit des sites web premium pour les commerces, écoles et indépendants au Maroc. Design sur mesure, animations, prix fixes, tout par message.">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://babora.vercel.app/">
-<meta property="og:title" content="Babora · Sites web au Maroc">
-<meta property="og:description" content="Sites web et plateformes pour commerces, écoles et indépendants au Maroc.">
-<meta property="og:image" content="https://babora.vercel.app/brand/logo-horizontal.png">
-<meta name="theme-color" content="#f7f5f0">
+<meta property="og:title" content="Babora · Studio web au Maroc">
+<meta property="og:description" content="Sites web premium, prix fixes, livraison rapide, tout par WhatsApp.">
+<meta property="og:image" content="https://babora.vercel.app/brand/logo-horizontal-dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b0c">
 <link rel="icon" type="image/svg+xml" href="brand/mark.svg">
 <link rel="apple-touch-icon" href="brand/icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/inter-tight-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/v2.css">
+<script>try{var t=localStorage.getItem("bb-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Babora","url":"https://babora.vercel.app/","description":"Studio de création de sites web au Maroc","areaServed":"MA","priceRange":"600 - 3500 MAD","availableLanguage":["fr","ar"]}</script>
 </head>
 <body>
+<a class="skip" href="#main">Aller au contenu</a>
 <div class="progress"></div>
 
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#"><img src="brand/mark.svg" alt="" width="30" height="30">Babora</a>
-    <nav class="menu">
-      <a href="#projets">Projets</a>
-      <a href="#disponibilites">Disponibilités</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn small" href="commander.html">Commander <span class="arr">→</span></a>
+<div class="loader" aria-hidden="true">
+  <div class="lt mono"><span>Babora — studio web</span><span>Casablanca, Maroc</span></div>
+  <div><div class="num">0</div><div class="bar"><i></i></div></div>
+</div>
+
+<header class="nav">
+  <div class="in">
+    <a class="brand" href="#top" aria-label="Babora, accueil">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M152 452V288.6A128 128 0 1 1 360 288.6V452" fill="none" stroke="currentColor" stroke-width="44" stroke-linejoin="round"/><path d="M198 452V298A74 74 0 1 1 314 298V452Z" fill="#ff5a2c"/></svg>Babora
+    </a>
+    <nav class="links" aria-label="Navigation principale">
+      <a href="#projets">Projets</a><a href="#services">Services</a><a href="#estimation">Estimer</a><a href="#tarifs">Tarifs</a><a href="lab.html">Labo</a><a href="#faq">FAQ</a>
     </nav>
+    <div class="tools">
+      <button class="ib kbdbtn" data-palette aria-label="Recherche rapide (Ctrl+K)" title="Recherche rapide · Ctrl K"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="ib" data-theme-toggle aria-label="Changer de thème" title="Clair / sombre"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+      <span class="mag"><a class="btn sm" href="commander.html">Commander <span class="arr">→</span></a></span>
+      <button class="ib burger" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
   </div>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-meta rv">
-        <span class="chip mono"><span class="dot"></span><span><span data-restantes></span> places libres en <span data-mois></span></span></span>
-        <span class="chip mono">Casablanca · <span id="clock">--:--</span> · <span data-status-short>…</span></span>
-      </div>
-      <h1 class="words">Des sites web qui donnent envie de <em>pousser la porte.</em></h1>
-      <div class="hero-row">
-        <p class="rv" style="--d:.5s">Babora crée des sites et des plateformes pour les commerces, les écoles et les indépendants au Maroc. Tout se fait par message : vous envoyez vos infos sur WhatsApp, le studio s'occupe du design, du code et de la mise en ligne.</p>
-        <div class="hero-cta rv" style="--d:.6s">
-          <a class="btn" href="commander.html">Commander un site <span class="arr">→</span></a>
-          <a class="btn ghost" data-wa href="#" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
-        </div>
-      </div>
-      <div class="facts">
-        <div class="rv" style="--d:.7s"><b>&lt; 24h</b><span>pour une réponse sur WhatsApp</span></div>
-        <div class="rv" style="--d:.8s"><b>5 à 10 jours</b><span>pour livrer un site vitrine</span></div>
-        <div class="rv" style="--d:.9s"><b>50 / 50</b><span>moitié au début, moitié à la livraison</span></div>
+<div class="mmenu" aria-label="Menu mobile">
+  <a href="#projets">Projets</a><a href="#services">Services</a><a href="#estimation">Estimer mon prix</a><a href="#tarifs">Tarifs</a><a href="lab.html">Le Labo</a><a href="#faq">FAQ</a>
+  <div class="bt"><a class="btn acc" href="commander.html">Commander</a><a class="btn wa" data-wa href="#">WhatsApp</a></div>
+</div>
+
+<main id="main">
+<section class="hero" id="top" data-label="Accueil">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="meta rv in">
+      <span class="chip mono"><span class="dot" data-status-dot></span><span data-status-short>…</span> · Casablanca <span data-clock>--:--</span></span>
+      <span class="chip mono"><b style="color:var(--text)" data-restantes></b>&nbsp;places libres en <span data-mois></span></span>
+    </div>
+    <h1 class="split">Des sites qui font <span class="rot serif" id="rot"><span class="on">vendre</span><span>réserver</span><span>briller</span><span>grandir</span></span><br>votre <span class="serif">commerce.</span></h1>
+    <div class="row">
+      <p class="rv" style="--d:.7s">Babora est un studio web indépendant au Maroc. Design sur mesure, animations soignées, site rapide sur téléphone. Tout se fait par message, sans appel et sans rendez-vous.</p>
+      <div class="ctas rv" style="--d:.8s">
+        <span class="mag"><a class="btn acc" href="#estimation">Estimer mon site <span class="arr">→</span></a></span>
+        <span class="mag"><a class="btn ghost" href="lab.html">Voir le Labo</a></span>
       </div>
     </div>
-  </section>
+    <div class="stats">
+      <div class="rv" style="--d:.9s"><b>&lt;<span data-count="24">0</span>h</b><span>pour une réponse</span></div>
+      <div class="rv" style="--d:1s"><b><span data-count="7">0</span> j</b><span>en moyenne pour un site vitrine</span></div>
+      <div class="rv" style="--d:1.1s"><b><span data-count="100">0</span>%</b><span>pensé pour le téléphone</span></div>
+      <div class="rv" style="--d:1.2s"><b><span data-count="0">0</span></b><span>appel nécessaire</span></div>
+    </div>
+  </div>
+  <div class="scrollcue mono" aria-hidden="true"><span>Défiler</span><i></i></div>
+</section>
 
-  <section id="projets">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="rv"><span class="eyebrow mono">Projets</span><h2>Projets réalisés.</h2></div>
-        <p class="rv" style="--d:.1s">Passez la souris sur un aperçu pour faire défiler la page. Cliquez pour ouvrir le site en vrai.</p>
+<div class="marq" aria-hidden="true"><div class="track"><span>Sites vitrines</span><span>Plateformes</span><span>Réservation en ligne</span><span>Catalogues</span><span>Animations</span><span>Sites multilingues</span><span>Espaces membres</span><span>Menus digitaux</span></div></div>
+
+<section id="services" data-label="Services" data-wamsg="Bonjour Babora, j'aimerais en savoir plus sur vos services.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Services</span><h2 class="split">Tout ce qu'il faut pour être <span class="serif">vu</span> et choisi.</h2></div>
+      <p class="rv">Du site d'une page à la plateforme complète. Chaque projet est dessiné pour votre activité, jamais copié d'un modèle.</p>
+    </div>
+    <div class="svc">
+      <div class="card rv"><span class="n mono">01</span><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h3>Site vitrine</h3><p>Une présence en ligne qui inspire confiance : votre activité, vos photos, vos horaires et un bouton WhatsApp.</p></div>
+      <div class="card rv" style="--d:.08s"><span class="n mono">02</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></div><h3>Catalogue & menu</h3><p>Produits, menu de restaurant ou tarifs, avec filtres et commande en un clic sur WhatsApp.</p></div>
+      <div class="card rv" style="--d:.16s"><span class="n mono">03</span><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><h3>Réservation</h3><p>Rendez-vous et réservations en ligne pour salons, cabinets, restaurants et locations.</p></div>
+      <div class="card rv"><span class="n mono">04</span><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div><h3>Plateformes & espaces membres</h3><p>Accès par code, documents protégés, administration : comme la plateforme Belkhatir Maths.</p></div>
+      <div class="card rv" style="--d:.08s"><span class="n mono">05</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/></svg></div><h3>Animations & effets</h3><p>Apparitions, défilements, survols, widgets interactifs. Faites votre choix dans le Labo.</p></div>
+      <div class="card rv" style="--d:.16s"><span class="n mono">06</span><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><h3>Multilingue</h3><p>Français, arabe, anglais, espagnol… le site entier change de langue en un clic.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projets" data-label="Projets" data-wamsg="Bonjour Babora, j'ai vu vos projets et je voudrais un site dans ce style.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Projets</span><h2 class="split">Des projets <span class="serif">réels</span>, à tester en direct.</h2></div>
+      <p class="rv">Cliquez sur un projet pour l'ouvrir ici même, et voyez-le comme sur un ordinateur, une tablette ou un téléphone.</p>
+    </div>
+    <div class="filters rv" role="tablist" aria-label="Filtrer les projets"><span class="pill"></span><button class="on" data-f="all">Tous</button><button data-f="client">Clients</button><button data-f="concept">Concepts</button></div>
+    <div class="projects">
+      <a class="proj wide rv" data-cat="client" href="https://belkhatir-maths.vercel.app" data-url="https://belkhatir-maths.vercel.app" data-title="Belkhatir Maths" data-cursor="Ouvrir" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">belkhatir-maths.vercel.app</span></div><div class="view"><img src="img/belkhatir.jpg" alt="Plateforme Belkhatir Maths" loading="lazy"><div class="glare"></div></div></div>
+        <div class="pinfo"><div><h3>Belkhatir Maths</h3><p>Plateforme privée pour les élèves d'un professeur de mathématiques : séries, corrections, examens et un espace d'administration complet.</p><div class="feat"><span>Accès par code et QR code</span><span>PDF protégés</span><span>Tableau blanc</span><span>Applis Windows et Android</span><span>Next.js</span></div></div><span class="tag client mono">Client · Éducation</span></div>
+      </a>
+      <a class="proj rv" data-cat="concept" href="demos/cafe/index.html" data-url="demos/cafe/index.html" data-title="Café Atlas" data-cursor="Ouvrir">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">cafe-atlas</span></div><div class="view"><img src="img/cafe.jpg" alt="Site Café Atlas" loading="lazy"><div class="glare"></div></div></div>
+        <div class="pinfo"><div><h3>Café Atlas</h3><p>Menu, horaires, plan d'accès et réservation par WhatsApp.</p></div><span class="tag mono">Concept · Café</span></div>
+      </a>
+      <a class="proj rv" style="--d:.1s" data-cat="concept" href="demos/artisan/index.html" data-url="demos/artisan/index.html" data-title="Dar Zellige" data-cursor="Ouvrir">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">dar-zellige</span></div><div class="view"><img src="img/artisan.jpg" alt="Site Dar Zellige" loading="lazy"><div class="glare"></div></div></div>
+        <div class="pinfo"><div><h3>Dar Zellige</h3><p>Catalogue artisanal avec commande en un clic.</p></div><span class="tag mono">Concept · Artisanat</span></div>
+      </a>
+      <a class="proj rv" data-cat="concept" href="demos/salon/index.html" data-url="demos/salon/index.html" data-title="Salon Yasmine" data-cursor="Ouvrir">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">salon-yasmine</span></div><div class="view"><img src="img/salon.jpg" alt="Site Salon Yasmine" loading="lazy"><div class="glare"></div></div></div>
+        <div class="pinfo"><div><h3>Salon Yasmine</h3><p>Prestations, tarifs, galerie et rendez-vous.</p></div><span class="tag mono">Concept · Beauté</span></div>
+      </a>
+      <a class="proj rv" style="--d:.1s" data-cat="concept" href="lab.html" data-cursor="Explorer">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="mono">babora.vercel.app/lab</span></div><div class="view" style="display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,rgba(255,90,44,.35),transparent 60%),#0b0b0c"><div style="text-align:center;color:#f3efe7"><div style="font-size:clamp(2.4rem,5vw,4rem);font-weight:600;letter-spacing:-.04em;line-height:1">Le <span class="serif gtext">Labo</span></div><p class="mono" style="color:#a7a39b;margin-top:10px">animations · widgets · effets</p></div><div class="glare"></div></div></div>
+        <div class="pinfo"><div><h3>Le Labo</h3><p>Plus de 40 animations et widgets à essayer, à ajouter à votre futur site.</p></div><span class="tag mono">Démo · Interactif</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="viewer" role="dialog" aria-modal="true" aria-label="Aperçu du projet">
+  <div class="box">
+    <div class="mbar"><b id="vtitle">Projet</b><div class="devs" role="tablist"><button class="on" data-dev="">Ordinateur</button><button data-dev="tab">Tablette</button><button data-dev="mob">Téléphone</button></div><button class="ib" id="vclose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="stage"><div class="device" id="device"><iframe id="vframe" title="Aperçu" loading="lazy"></iframe></div></div>
+    <div class="mfoot"><span class="mono muted">Faites défiler et cliquez dans l'aperçu : c'est le vrai site.</span><div style="display:flex;gap:8px"><a class="btn ghost sm" id="vopen" href="#" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a><a class="btn acc sm" id="vwa" href="#" target="_blank" rel="noopener">Je veux un site comme ça</a></div></div>
+  </div>
+</div>
+
+<section id="process" data-label="Méthode">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Méthode</span><h2 class="split">De l'idée au site <span class="serif">en ligne.</span></h2></div>
+      <p class="rv">Vous suivez chaque étape sur WhatsApp. Pas de jargon, pas de surprise, une trace écrite de tout.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="line"><i></i></div>
+      <div class="step rv"><div class="n">01</div><h3>Vous écrivez</h3><p>Quelques messages pour comprendre votre activité et vos envies.</p><span class="d mono">Jour 1</span></div>
+      <div class="step rv" style="--d:.1s"><div class="n">02</div><h3>Première version</h3><p>Un lien privé pour voir le site sur votre téléphone.</p><span class="d mono">Jours 2 à 5</span></div>
+      <div class="step rv" style="--d:.2s"><div class="n">03</div><h3>Ajustements</h3><p>Textes, couleurs, photos, ordre des sections : vous demandez, c'est fait.</p><span class="d mono">Jours 5 à 8</span></div>
+      <div class="step rv" style="--d:.3s"><div class="n">04</div><h3>En ligne</h3><p>Publié, rapide, prêt à partager sur Instagram, WhatsApp et Google.</p><span class="d mono">Livraison</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="qualite" data-label="Qualité">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Qualité</span><h2 class="split">Rapide, lisible, <span class="serif">trouvable.</span></h2></div>
+      <p class="rv">Chaque site est testé avec l'outil de mesure de Google avant la livraison. L'objectif : au moins 90 sur 100 dans les quatre catégories.</p>
+    </div>
+    <div class="perf">
+      <div class="card rv"><div class="ring" data-score="90"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><b>90+</b></div><h3>Performance</h3><p class="muted">Le site s'ouvre vite, même en 4G.</p></div>
+      <div class="card rv" style="--d:.08s"><div class="ring" data-score="90"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><b>90+</b></div><h3>Accessibilité</h3><p class="muted">Lisible par tous, contrastes soignés.</p></div>
+      <div class="card rv" style="--d:.16s"><div class="ring" data-score="90"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><b>90+</b></div><h3>Bonnes pratiques</h3><p class="muted">Sécurisé en HTTPS, code propre.</p></div>
+      <div class="card rv" style="--d:.24s"><div class="ring" data-score="90"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><b>90+</b></div><h3>Référencement</h3><p class="muted">Prêt pour Google et les partages.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="estimation" data-label="Estimer" data-wamsg="Bonjour Babora, je voudrais une estimation pour mon site.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Estimation</span><h2 class="split">Combien coûte <span class="serif">votre</span> site ?</h2></div>
+      <p class="rv">Choisissez ce dont vous avez besoin, le prix s'affiche en direct. Envoyez l'estimation sur WhatsApp pour la confirmer.</p>
+    </div>
+    <div class="calc rv">
+      <div class="card opts" id="calc">
+        <div class="grp"><h3>1. Le type de site</h3><div class="seg">
+          <label><input type="radio" name="f" value="essentiel"><span>Essentiel <em>1 page</em></span></label>
+          <label><input type="radio" name="f" value="vitrine" checked><span>Vitrine <em>jusqu'à 4 pages</em></span></label>
+          <label><input type="radio" name="f" value="plateforme"><span>Plateforme <em>sur mesure</em></span></label>
+        </div></div>
+        <div class="grp"><h3>2. Nombre de pages</h3><div class="range"><input type="range" id="pages" min="1" max="12" value="4" aria-label="Nombre de pages"><b id="pagesv">4</b></div><p class="mono muted" id="pagesinfo" style="margin-top:8px"></p></div>
+        <div class="grp"><h3>3. Options</h3><div class="seg">
+          <label><input type="checkbox" name="o" value="multilingue"><span>Multilingue <em data-p="multilingue"></em></span></label>
+          <label><input type="checkbox" name="o" value="reservation"><span>Réservation <em data-p="reservation"></em></span></label>
+          <label><input type="checkbox" name="o" value="catalogue"><span>Catalogue / menu <em data-p="catalogue"></em></span></label>
+          <label><input type="checkbox" name="o" value="animations"><span>Animations premium <em data-p="animations"></em></span></label>
+          <label><input type="checkbox" name="o" value="logo"><span>Logo simple <em data-p="logo"></em></span></label>
+          <label><input type="checkbox" name="o" value="express"><span>Livraison express <em data-p="express"></em></span></label>
+        </div></div>
+        <div class="grp" style="margin:0"><h3>4. Entretien mensuel</h3><div class="seg"><label><input type="checkbox" id="ent"><span>Mises à jour chaque mois <em id="entp"></em></span></label></div></div>
       </div>
-
-      <div class="projects">
-        <a class="proj wide rv" href="https://belkhatir-maths.vercel.app" target="_blank" rel="noopener">
-          <div class="frame">
-            <div class="bar"><i></i><i></i><i></i><span class="mono">belkhatir-maths.vercel.app</span></div>
-            <div class="view"><img src="img/belkhatir.jpg" alt="Plateforme Belkhatir Maths" loading="lazy"></div>
-          </div>
-          <div class="info">
-            <div>
-              <h3>Belkhatir Maths</h3>
-              <p>Plateforme privée pour les élèves du professeur Belkhatir : séries, corrections et examens, avec un espace d'administration complet pour le professeur.</p>
-              <div class="feat">
-                <span>Accès par code et QR code</span><span>Documents PDF protégés</span><span>Tableau blanc + tracé de fonctions</span><span>Applis Windows et Android</span><span>Next.js</span>
-              </div>
-            </div>
-            <span class="tag client mono">Client · Éducation</span>
-          </div>
-        </a>
-
-        <a class="proj rv" href="demos/cafe/index.html">
-          <div class="frame">
-            <div class="bar"><i></i><i></i><i></i><span class="mono">cafe-atlas</span></div>
-            <div class="view"><img src="img/cafe.jpg" alt="Site Café Atlas" loading="lazy"></div>
-          </div>
-          <div class="info"><div><h3>Café Atlas</h3><p>Menu, horaires, plan d'accès et réservation par WhatsApp.</p></div><span class="tag mono">Concept · Café</span></div>
-        </a>
-
-        <a class="proj rv" style="--d:.1s" href="demos/artisan/index.html">
-          <div class="frame">
-            <div class="bar"><i></i><i></i><i></i><span class="mono">dar-zellige</span></div>
-            <div class="view"><img src="img/artisan.jpg" alt="Site Dar Zellige" loading="lazy"></div>
-          </div>
-          <div class="info"><div><h3>Dar Zellige</h3><p>Catalogue artisanal avec commande en un clic.</p></div><span class="tag mono">Concept · Artisanat</span></div>
-        </a>
-
-        <a class="proj rv" href="demos/salon/index.html">
-          <div class="frame">
-            <div class="bar"><i></i><i></i><i></i><span class="mono">salon-yasmine</span></div>
-            <div class="view"><img src="img/salon.jpg" alt="Site Salon Yasmine" loading="lazy"></div>
-          </div>
-          <div class="info"><div><h3>Salon Yasmine</h3><p>Prestations, tarifs, galerie et rendez-vous.</p></div><span class="tag mono">Concept · Beauté</span></div>
-        </a>
+      <div class="card total">
+        <span class="mono muted">Estimation</span>
+        <div class="amt"><span id="tot">0</span> <small>DH</small></div>
+        <span class="muted" id="totm"></span>
+        <ul id="lines"></ul>
+        <p class="mono muted" style="margin-bottom:18px">Délai estimé : <b style="color:var(--text)" id="delay"></b></p>
+        <span class="mag" style="display:flex"><a class="btn acc" id="calcwa" href="#" target="_blank" rel="noopener" style="width:100%">Envoyer sur WhatsApp <span class="arr">→</span></a></span>
+        <p class="mono muted" style="margin-top:12px;font-size:.7rem">Prix indicatif, confirmé par message avant de commencer.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="disponibilites" class="dark">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="rv"><span class="eyebrow mono">Disponibilités</span><h2>Tout se fait par message.</h2></div>
-        <p class="rv" style="--d:.1s">Pas d'appel, pas de rendez-vous. Vous écrivez quand vous voulez, sur WhatsApp ou par email, et vous gardez une trace écrite de tout.</p>
+<section id="tarifs" data-label="Tarifs" data-wamsg="Bonjour Babora, j'ai une question sur vos tarifs.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Tarifs</span><h2 class="split">Des prix <span class="serif">clairs</span>, fixés à l'avance.</h2></div>
+      <p class="rv">Moitié au démarrage, moitié à la livraison. Virement, espèces ou PayPal.</p>
+    </div>
+    <div class="prices">
+      <div class="card price rv"><div class="top"><h3>Essentiel</h3></div><div class="amt">600 <small>DH</small></div><p class="desc">Pour être trouvé en ligne rapidement.</p><ul><li>Site d'une page</li><li>Parfait sur téléphone</li><li>Bouton WhatsApp</li><li>Livré en 5 jours</li></ul><a class="btn ghost" href="commander.html?formule=essentiel">Choisir Essentiel <span class="arr">→</span></a></div>
+      <div class="card price hl rv" style="--d:.08s"><div class="top"><h3>Vitrine</h3><span class="badge mono">Le plus choisi</span></div><div class="amt">1 200 <small>DH</small></div><p class="desc">Le site complet d'un commerce.</p><ul><li>Jusqu'à 4 pages ou sections</li><li>Menu, catalogue ou tarifs</li><li>Google Maps et horaires</li><li>Animations soignées</li><li>1 mois de retouches offertes</li></ul><a class="btn acc" href="commander.html?formule=vitrine">Choisir Vitrine <span class="arr">→</span></a></div>
+      <div class="card price rv" style="--d:.16s"><div class="top"><h3>Entretien</h3></div><div class="amt">150 <small>DH / mois</small></div><p class="desc">Votre site reste toujours à jour.</p><ul><li>Prix, photos et textes</li><li>Petites modifications</li><li>Réponse sous 48h</li><li>Sans engagement</li></ul><a class="btn ghost" href="commander.html?formule=entretien">Choisir Entretien <span class="arr">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section id="comparer" data-label="Comparer">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Comparer</span><h2 class="split">Pourquoi un <span class="serif">studio</span> ?</h2></div>
+      <p class="rv">Un résumé honnête des options qui s'offrent à vous pour mettre votre commerce en ligne.</p>
+    </div>
+    <div class="cmp rv"><table>
+      <thead><tr><th></th><th class="us">Babora</th><th>Agence classique</th><th>Le faire soi-même</th></tr></thead>
+      <tbody>
+        <tr><td>Prix d'un site vitrine</td><td class="us">dès 600 DH, fixe</td><td>souvent plusieurs milliers</td><td>abonnement mensuel</td></tr>
+        <tr><td>Délai</td><td class="us">5 à 10 jours</td><td>plusieurs semaines</td><td>votre temps libre</td></tr>
+        <tr><td>Design sur mesure</td><td class="us yes">Oui</td><td class="yes">Oui</td><td class="no">Modèle générique</td></tr>
+        <tr><td>Tout par message</td><td class="us yes">Oui, WhatsApp et email</td><td class="no">Réunions et appels</td><td class="no">Seul face à l'outil</td></tr>
+        <tr><td>Animations et widgets</td><td class="us yes">Inclus, au choix</td><td>En option</td><td class="no">Limité</td></tr>
+        <tr><td>Hébergement</td><td class="us yes">Gratuit pour un site vitrine</td><td>Facturé</td><td>Inclus dans l'abonnement</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="disponibilites" data-label="Disponibilités" data-wamsg="Bonjour Babora, je voudrais réserver une place pour mon projet.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Disponibilités</span><h2 class="split">Réservez votre <span class="serif">place.</span></h2></div>
+      <p class="rv">Peu de projets à la fois, pour que chaque site soit soigné et que chaque message reçoive une vraie réponse.</p>
+    </div>
+    <div class="dispo">
+      <div class="card rv"><span class="mono muted">Projets en <span data-mois></span></span><div style="margin-top:14px"><span class="big" data-restantes></span><span class="muted" style="font-size:1.4rem"> / <span data-total></span></span></div><span class="mono muted">places libres</span><div class="slots"></div><p class="muted" style="font-size:.92rem">Prochain démarrage possible : <b style="color:var(--text)" data-demarrage></b></p></div>
+      <div class="card rv" style="--d:.08s"><span class="mono muted">Horaires de réponse · heure du Maroc</span><div class="status" id="status"></div><ul class="hours" id="hours"></ul></div>
+      <div class="card rv" style="--d:.16s"><div class="calhead"><span class="mono muted">Choisir une semaine de démarrage</span><div style="display:flex;gap:4px"><button class="ib" id="calprev" aria-label="Mois précédent" style="width:32px;height:32px">‹</button><button class="ib" id="calnext" aria-label="Mois suivant" style="width:32px;height:32px">›</button></div></div><b id="calm" style="display:block;margin-top:10px;font-size:1.1rem"></b><div class="cal" id="cal"></div><a class="btn acc sm" id="calwa" href="#" target="_blank" rel="noopener" style="width:100%;margin-top:14px">Choisissez un lundi</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="brief" data-label="Ma demande" data-wamsg="Bonjour Babora, je voudrais préparer ma demande de site.">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Ma demande</span><h2 class="split">Votre demande, prête en <span class="serif">1 minute.</span></h2></div>
+      <p class="rv">Répondez à 5 petites questions. Le message s'écrit tout seul, il ne reste qu'à l'envoyer.</p>
+    </div>
+    <div class="brief rv">
+      <div class="card side">
+        <div class="stepper" id="stepper"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="mono muted">Aperçu de votre message</span>
+        <div class="preview" id="bprev">Bonjour Babora,</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:auto"><button class="btn ghost sm" id="bcopy">Copier</button><a class="btn wa sm" id="bsend" href="#" target="_blank" rel="noopener">Envoyer sur WhatsApp</a></div>
       </div>
-
-      <div class="dispo">
-        <div class="panel rv">
-          <span class="mono muted">Projets en <span data-mois></span></span>
-          <div class="cap-top" style="margin-top:14px"><b><span data-restantes></span><span class="muted" style="font-size:1.4rem"> / <span data-total></span></span></b><span class="mono muted">places libres</span></div>
-          <div class="slots-bar"></div>
-          <p class="muted">Peu de projets à la fois, pour que chaque client ait un site soigné et des réponses rapides.</p>
-          <div class="next"><span class="muted">Prochain démarrage possible</span><b data-demarrage></b></div>
-        </div>
-
-        <div class="panel rv" style="--d:.1s">
-          <span class="mono muted">Horaires de réponse · heure du Maroc</span>
-          <div class="status" id="status"></div>
-          <ul class="hours" id="hours"></ul>
-          <div class="channels">
-            <a class="btn light" data-wa href="#" target="_blank" rel="noopener">Écrire sur WhatsApp <span class="arr">→</span></a>
-            <a class="btn ghost" data-mail href="#" style="color:#fff!important;box-shadow:inset 0 0 0 1.5px #555">Email</a>
-          </div>
-        </div>
+      <div class="card bstage" id="bstage">
+        <div class="bq on" data-k="nom"><span class="mono muted">Question 1 / 5</span><h3>Comment s'appelle votre activité ?</h3><input placeholder="Ex. Café Atlas, Salon Yasmine…" autocomplete="organization"></div>
+        <div class="bq" data-k="type"><span class="mono muted">Question 2 / 5</span><h3>Quel est votre domaine ?</h3><div class="seg"><label><input type="radio" name="bt" value="Restaurant / café"><span>Restaurant / café</span></label><label><input type="radio" name="bt" value="Boutique"><span>Boutique</span></label><label><input type="radio" name="bt" value="Beauté / bien-être"><span>Beauté / bien-être</span></label><label><input type="radio" name="bt" value="École / formation"><span>École / formation</span></label><label><input type="radio" name="bt" value="Santé"><span>Santé</span></label><label><input type="radio" name="bt" value="Industrie / B2B"><span>Industrie / B2B</span></label><label><input type="radio" name="bt" value="Autre"><span>Autre</span></label></div></div>
+        <div class="bq" data-k="but"><span class="mono muted">Question 3 / 5</span><h3>Que doit faire votre site ?</h3><div class="seg"><label><input type="checkbox" name="bb" value="présenter l'activité"><span>Présenter l'activité</span></label><label><input type="checkbox" name="bb" value="recevoir des messages WhatsApp"><span>Recevoir des messages</span></label><label><input type="checkbox" name="bb" value="afficher un menu ou catalogue"><span>Menu / catalogue</span></label><label><input type="checkbox" name="bb" value="prendre des réservations"><span>Réservations</span></label><label><input type="checkbox" name="bb" value="être en plusieurs langues"><span>Plusieurs langues</span></label><label><input type="checkbox" name="bb" value="avoir un espace membres"><span>Espace membres</span></label></div></div>
+        <div class="bq" data-k="style"><span class="mono muted">Question 4 / 5</span><h3>Quel style vous ressemble ?</h3><div class="seg"><label><input type="radio" name="bs" value="sombre et premium"><span>Sombre & premium</span></label><label><input type="radio" name="bs" value="clair et minimaliste"><span>Clair & minimal</span></label><label><input type="radio" name="bs" value="coloré et joyeux"><span>Coloré & joyeux</span></label><label><input type="radio" name="bs" value="traditionnel marocain"><span>Traditionnel marocain</span></label><label><input type="radio" name="bs" value="je ne sais pas encore"><span>Je ne sais pas</span></label></div></div>
+        <div class="bq" data-k="quand"><span class="mono muted">Question 5 / 5</span><h3>Pour quand ?</h3><div class="seg"><label><input type="radio" name="bw" value="dès que possible"><span>Dès que possible</span></label><label><input type="radio" name="bw" value="dans le mois"><span>Dans le mois</span></label><label><input type="radio" name="bw" value="pas pressé"><span>Pas pressé</span></label></div><textarea placeholder="Un détail à ajouter ? (facultatif)"></textarea></div>
+        <div class="bnav"><button class="btn ghost sm" id="bprevb">← Retour</button><button class="btn sm" id="bnext">Suivant →</button></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="process">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="rv"><span class="eyebrow mono">Méthode</span><h2>De l'idée au site en ligne.</h2></div>
-        <p class="rv" style="--d:.1s">Vous suivez chaque étape sur WhatsApp. Pas de jargon, pas de surprise.</p>
-      </div>
-      <div class="steps">
-        <div class="step rv"><div class="n">01</div><h3>Vous écrivez</h3><p>Quelques messages sur WhatsApp pour comprendre votre activité et ce que vous voulez.</p><span class="mono">Jour 1</span></div>
-        <div class="step rv" style="--d:.15s"><div class="n">02</div><h3>Première version</h3><p>Vous recevez un lien pour voir le site sur votre téléphone.</p><span class="mono">Jours 2 à 5</span></div>
-        <div class="step rv" style="--d:.3s"><div class="n">03</div><h3>Ajustements</h3><p>Vous demandez les changements : textes, couleurs, photos, ordre des sections.</p><span class="mono">Jours 5 à 8</span></div>
-        <div class="step rv" style="--d:.45s"><div class="n">04</div><h3>En ligne</h3><p>Votre site est publié, prêt à partager sur Instagram, WhatsApp et Google.</p><span class="mono">Livraison</span></div>
-      </div>
+<section id="garanties" data-label="Garanties">
+  <div class="wrap">
+    <div class="sh">
+      <div><span class="eyebrow mono rv">Garanties</span><h2 class="split">Sans <span class="serif">risque</span> pour vous.</h2></div>
     </div>
-  </section>
-
-  <section id="tarifs">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="rv"><span class="eyebrow mono">Tarifs</span><h2>Des prix clairs, fixés à l'avance.</h2></div>
-        <p class="rv" style="--d:.1s">Moitié au démarrage, moitié à la livraison. Paiement par virement, en espèces ou par PayPal.</p>
-      </div>
-      <div class="prices">
-        <div class="price rv">
-          <div class="top-row"><h3>Essentiel</h3></div>
-          <div class="amt">600 <small>DH</small></div>
-          <p class="desc">Pour être trouvé en ligne rapidement.</p>
-          <ul><li>Site d'une page</li><li>Parfait sur téléphone</li><li>Bouton WhatsApp</li><li>Livré en 5 jours</li></ul>
-          <a class="btn ghost" href="commander.html?formule=essentiel">Choisir Essentiel <span class="arr">→</span></a>
-        </div>
-        <div class="price hl rv" style="--d:.1s">
-          <div class="top-row"><h3>Vitrine</h3><span class="badge mono">Le plus choisi</span></div>
-          <div class="amt">1 200 <small>DH</small></div>
-          <p class="desc">Le site complet d'un commerce.</p>
-          <ul><li>Jusqu'à 4 pages ou sections</li><li>Menu, catalogue ou tarifs</li><li>Google Maps et horaires</li><li>Mise en ligne incluse</li><li>1 mois de retouches offertes</li></ul>
-          <a class="btn" href="commander.html?formule=vitrine">Choisir Vitrine <span class="arr">→</span></a>
-        </div>
-        <div class="price rv" style="--d:.2s">
-          <div class="top-row"><h3>Entretien</h3></div>
-          <div class="amt">150 <small>DH / mois</small></div>
-          <p class="desc">Votre site reste toujours à jour.</p>
-          <ul><li>Prix, photos et textes</li><li>Petites modifications</li><li>Réponse sous 48h</li><li>Sans engagement</li></ul>
-          <a class="btn ghost" href="commander.html?formule=entretien">Choisir Entretien <span class="arr">→</span></a>
-        </div>
-      </div>
-      <div class="custom rv">
-        <div><b>Un projet plus grand ?</b><p>Plateforme pour école, espace membres, réservation en ligne… comme Belkhatir Maths.</p></div>
-        <a class="btn ghost" href="commander.html?formule=sur-mesure">Demander un devis <span class="arr">→</span></a>
-      </div>
+    <div class="guar">
+      <div class="card rv"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>Vous voyez avant de payer</h3><p>La deuxième moitié se paie seulement quand le site vous plaît.</p></div>
+      <div class="card rv" style="--d:.08s"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg><h3>Tout est écrit</h3><p>Chaque demande et chaque validation restent dans la conversation.</p></div>
+      <div class="card rv" style="--d:.16s"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Délais annoncés</h3><p>Une date de livraison est donnée au démarrage, et tenue.</p></div>
+      <div class="card rv" style="--d:.24s"><svg viewBox="0 0 24 24"><path d="M15 7a4 4 0 1 1-6 3.5L3 17v3h3l1-1h2v-2h2l1.5-1.5A4 4 0 0 1 15 7z"/></svg><h3>Le site est à vous</h3><p>Vos textes, vos photos, votre nom de domaine : tout vous appartient.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="faq">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="rv"><span class="eyebrow mono">Questions</span><h2>Questions fréquentes.</h2></div>
-      </div>
-      <div class="faq rv">
-        <div class="q"><button aria-expanded="false">Faut-il s'appeler ou se rencontrer ?<span class="pm"></span></button><div class="a"><div><p>Non. Tout se fait par écrit, sur WhatsApp ou par email : vos demandes, les retours sur le site, les validations. C'est plus rapide, et vous gardez une trace de tout ce qui a été convenu.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Je n'ai pas de photos ni de logo, c'est un problème ?<span class="pm"></span></button><div class="a"><div><p>Non. Des photos prises avec un bon téléphone suffisent, et vous recevez une liste précise de celles à prendre. Pour le logo, une version simple avec le nom de votre commerce peut être créée.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Combien coûte l'hébergement ?<span class="pm"></span></button><div class="a"><div><p>Pour un site vitrine, l'hébergement est gratuit : le site est publié sur des services fiables qui ne facturent rien pour ce type de site. Un nom de domaine personnalisé (par exemple votrecommerce.ma) est en option, à votre charge, et sa configuration est incluse.</p></div></div></div>
+<section id="faq" data-label="FAQ">
+  <div class="wrap faqwrap">
+    <div><span class="eyebrow mono rv">Questions</span><h2 class="split">On vous <span class="serif">répond.</span></h2><p class="muted rv" style="margin-top:20px;max-width:360px">Une autre question ? Écrivez sur WhatsApp, la réponse arrive vite.</p></div>
+    <div class="rv">
+      <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="fsearch" placeholder="Rechercher une question…" aria-label="Rechercher dans la FAQ"></div>
+      <div id="faql">
+        <div class="q"><button aria-expanded="false">Faut-il s'appeler ou se rencontrer ?<span class="pm"></span></button><div class="a"><div><p>Non. Tout se fait par écrit, sur WhatsApp ou par email : vos demandes, les retours sur le site, les validations. C'est plus rapide, et vous gardez une trace de tout.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Je n'ai pas de photos ni de logo, c'est un problème ?<span class="pm"></span></button><div class="a"><div><p>Non. Des photos prises avec un bon téléphone suffisent, et vous recevez une liste précise de celles à prendre. Un logo simple peut aussi être créé.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Combien coûte l'hébergement ?<span class="pm"></span></button><div class="a"><div><p>Pour un site vitrine, l'hébergement est gratuit. Un nom de domaine personnalisé (par exemple votrecommerce.ma) est en option, à votre charge, et sa configuration est incluse.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Est-ce que je pourrai modifier mon site après ?<span class="pm"></span></button><div class="a"><div><p>Oui. La formule Vitrine inclut un mois de retouches. Ensuite, vous pouvez demander des changements ponctuels ou prendre l'Entretien à 150 DH par mois.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Comment se passe le paiement ?<span class="pm"></span></button><div class="a"><div><p>50% au démarrage pour réserver votre place, 50% quand vous validez le site. Vous pouvez payer par virement, en espèces ou par PayPal.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Et si le résultat ne me plaît pas ?<span class="pm"></span></button><div class="a"><div><p>Vous voyez le site avant de payer la deuxième moitié, et on fait les ajustements ensemble jusqu'à ce qu'il vous convienne.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Comment se passe le paiement ?<span class="pm"></span></button><div class="a"><div><p>50% au démarrage pour réserver votre place, 50% quand vous validez le site. Virement, espèces ou PayPal.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Et si le résultat ne me plaît pas ?<span class="pm"></span></button><div class="a"><div><p>Vous voyez le site avant de payer la deuxième moitié, et on fait les ajustements jusqu'à ce qu'il vous convienne.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Le site peut-il être en arabe ou en plusieurs langues ?<span class="pm"></span></button><div class="a"><div><p>Oui : français, arabe (avec l'écriture de droite à gauche), anglais, espagnol et d'autres. Le visiteur choisit sa langue et tout le site change.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Puis-je choisir les animations de mon site ?<span class="pm"></span></button><div class="a"><div><p>Oui. Dans le Labo, ajoutez les effets qui vous plaisent à votre sélection, puis envoyez la liste sur WhatsApp.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Mon site sera-t-il visible sur Google ?<span class="pm"></span></button><div class="a"><div><p>Oui. Chaque site est préparé pour Google : titres, descriptions, vitesse et partage sur les réseaux. La fiche Google Maps de votre commerce peut aussi y être reliée.</p></div></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta">
-    <div class="wrap">
-      <h2 class="rv">Prêt à mettre votre commerce en ligne ?</h2>
-      <div class="row rv" style="--d:.1s">
-        <a class="btn" href="commander.html">Commander un site <span class="arr">→</span></a>
-        <a class="btn wa" data-wa href="#" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
-        <a class="btn ghost" data-mail href="#">Envoyer un email</a>
-      </div>
+<section class="cta">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="split">Prêt à <span class="serif gtext">briller</span> en ligne ?</h2>
+    <div class="ctas rv">
+      <span class="mag"><a class="btn acc" href="commander.html">Commander un site <span class="arr">→</span></a></span>
+      <span class="mag"><a class="btn wa" data-wa href="#">Écrire sur WhatsApp</a></span>
+      <span class="mag"><a class="btn ghost" data-mail href="#">Email</a></span>
     </div>
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
-  <div class="wrap mono">
-    <span>© <span data-year></span> Babora · Sites web au Maroc</span>
-    <span><a href="#projets">Projets</a> · <a href="#tarifs">Tarifs</a> · <a href="commander.html">Commander</a></span>
+  <div class="wrap">
+    <div class="top">
+      <div><a class="brand" href="#top"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M152 452V288.6A128 128 0 1 1 360 288.6V452" fill="none" stroke="currentColor" stroke-width="44" stroke-linejoin="round"/><path d="M198 452V298A74 74 0 1 1 314 298V452Z" fill="#ff5a2c"/></svg>Babora</a><p class="muted" style="margin-top:14px;max-width:320px">Studio web indépendant. Sites premium pour les commerces, écoles et indépendants au Maroc.</p><p class="mono muted" style="margin-top:14px"><span class="dot" data-status-dot style="display:inline-block;margin-right:8px"></span><span data-status-short></span> · <span data-clock></span> à Casablanca</p></div>
+      <nav><h4>Studio</h4><a href="#projets">Projets</a><a href="#services">Services</a><a href="#process">Méthode</a><a href="lab.html">Le Labo</a></nav>
+      <nav><h4>Commencer</h4><a href="#estimation">Estimer mon prix</a><a href="#brief">Préparer ma demande</a><a href="#disponibilites">Disponibilités</a><a href="commander.html">Commander</a></nav>
+      <nav><h4>Contact</h4><a data-wa href="#">WhatsApp</a><button data-copy-wa>Copier le numéro</button><button data-share>Partager ce site</button><button data-palette>Recherche rapide <span class="kbd">Ctrl K</span></button></nav>
+    </div>
+    <div class="bot mono"><span>© <span data-year></span> Babora · Sites web au Maroc</span><span>Fait main au Maroc · <button data-theme-toggle style="text-decoration:underline">changer de thème</button></span></div>
+    <div class="wordmark" aria-hidden="true">babora</div>
   </div>
 </footer>
 
-<a class="fab" href="#" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.2 2 11.4c0 2.8 1.3 5.3 3.4 7L4.6 22l4.1-2.1c1 .3 2.1.5 3.3.5 5.5 0 10-4.2 10-9.4S17.5 2 12 2zm-4 10.6a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg>
-</a>
+<nav class="dots" aria-label="Sections"></nav>
+<button class="totop" aria-label="Revenir en haut"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22"/></svg><span>↑</span></button>
+<a class="fab" href="#" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><span class="tip">Une question ? Écrivez-moi</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg></a>
 
-<script src="assets/site.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/v2.js"></script>
+<script src="assets/home.js"></script>
 </body>
 </html>
