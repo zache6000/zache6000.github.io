@@ -103,9 +103,9 @@
     <form id="form" class="stage rv" style="--d:.45s" novalidate>
       <div class="pane on" data-pane="1">
         <div class="opts">
-          <label class="opt"><input type="radio" name="formule" value="essentiel"><span class="radio"></span><div><b>Essentiel</b><small>Une page, bouton WhatsApp, livrée en 5 jours</small></div><span class="p">600 DH</span></label>
-          <label class="opt"><input type="radio" name="formule" value="vitrine" checked><span class="radio"></span><div><b>Vitrine</b><small>Jusqu'à 4 pages, menu ou catalogue, Google Maps, 1 mois de retouches</small></div><span class="p">1 200 DH</span></label>
-          <label class="opt"><input type="radio" name="formule" value="entretien"><span class="radio"></span><div><b>Entretien</b><small>Mises à jour de votre site existant</small></div><span class="p">150 DH/mois</span></label>
+          <label class="opt"><input type="radio" name="formule" value="essentiel"><span class="radio"></span><div><b>Essentiel</b><small>Une page, bouton WhatsApp, livrée en 5 jours</small></div><span class="p">39 €</span></label>
+          <label class="opt"><input type="radio" name="formule" value="vitrine" checked><span class="radio"></span><div><b>Vitrine</b><small>Jusqu'à 4 pages, menu ou catalogue, Google Maps, 1 mois de retouches</small></div><span class="p">79 €</span></label>
+          <label class="opt"><input type="radio" name="formule" value="entretien"><span class="radio"></span><div><b>Entretien</b><small>Mises à jour de votre site existant</small></div><span class="p">9 €/mois</span></label>
           <label class="opt"><input type="radio" name="formule" value="sur-mesure"><span class="radio"></span><div><b>Sur mesure</b><small>Plateforme, espace membres, réservation en ligne…</small></div><span class="p">Sur devis</span></label>
         </div>
         <div class="actions"><span></span><button type="button" class="btn" data-next>Continuer <span class="arr">→</span></button></div>
@@ -155,14 +155,14 @@
   <aside class="summary rv" style="--d:.5s">
     <span class="mono">Votre commande</span>
     <h3 id="sName">Vitrine</h3>
-    <div class="big" id="sPrice">1 200 DH</div>
-    <span class="tiny" id="sNote">Acompte de 600 DH au démarrage</span>
+    <div class="big" id="sPrice">79 €</div>
+    <span class="tiny" id="sNote">Acompte de 39,50 € au démarrage</span>
     <ul>
       <li><span>Places libres en <span data-mois></span></span><span><span data-restantes></span> / <span data-total></span></span></li>
       <li><span>Démarrage possible</span><span data-demarrage></span></li>
       <li><span>Contact</span><span>par message uniquement</span></li>
     </ul>
-    <span class="tiny">Paiement en deux fois · virement, espèces ou PayPal</span>
+    <span class="tiny">Paiement en deux fois · carte bancaire ou PayPal</span>
   </aside>
 </main>
 
@@ -172,14 +172,14 @@
 <script src="assets/site.js"></script>
 <script>
 const FORMULES = {
-  "essentiel":  {nom:"Essentiel",  prix:600},
-  "vitrine":    {nom:"Vitrine",    prix:1200},
-  "entretien":  {nom:"Entretien",  prix:150, mensuel:true},
+  "essentiel":  {nom:"Essentiel",  prix:39},
+  "vitrine":    {nom:"Vitrine",    prix:79},
+  "entretien":  {nom:"Entretien",  prix:9, mensuel:true},
   "sur-mesure": {nom:"Sur mesure", prix:null}
 };
 const form = $("#form");
 let step = 1;
-const dh = n => n.toLocaleString("fr-FR").replace(/ | /g, " ") + " DH";
+const dh = n => n.toLocaleString("fr-FR", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }).replace(/\u202f|\u00a0/g, " ") + " €";
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const pre = new URLSearchParams(location.search).get("formule");
@@ -195,7 +195,7 @@ for (let i = 0; i < 5; i++) {
 }
 deb.append(new Option("Pas pressé, à discuter"));
 
-const acompteOf = f => f.prix ? (f.mensuel ? f.prix : Math.round(f.prix / 2)) : null;
+const acompteOf = f => f.prix ? (f.mensuel ? f.prix : f.prix / 2) : null;
 function updateSummary(){
   const f = FORMULES[form.formule.value];
   $("#sName").textContent = f.nom;
@@ -243,9 +243,11 @@ function buildRecap(){
 
   const msg = "Bonjour Babora, je souhaite commander un site.\n\n" + rows.map(([k, x]) => `${k} : ${x}`).join("\n");
   let html = `<a class="btn wa" id="send" href="${wa(msg)}" target="_blank" rel="noopener">Envoyer ma commande sur WhatsApp <span class="arr">→</span></a>`;
-  if (a) html += CONFIG.paypal
-    ? `<a class="btn paypal" href="https://paypal.me/${CONFIG.paypal}" target="_blank" rel="noopener">Payer l'acompte avec PayPal · ${dh(a)}</a>`
-    : `<span class="btn off">Paiement PayPal bientôt disponible</span>`;
+  const PAY = CONFIG.paiement || {}, link = PAY[form.formule.value] || PAY.libre;
+  if (link) html += a
+    ? `<a class="btn paypal" href="${link}" target="_blank" rel="noopener">Payer ${f.mensuel ? "le premier mois" : "l'acompte"} · ${dh(a)} · carte ou PayPal</a>`
+    : `<a class="btn paypal" href="${link}" target="_blank" rel="noopener">Payer un montant convenu · carte ou PayPal</a>`;
+  else html += `<span class="btn off">Paiement en ligne bientôt disponible</span>`;
   $("#pay").innerHTML = html;
   $("#send").addEventListener("click", () => setTimeout(() => {
     form.style.display = "none"; $(".track").style.display = "none";

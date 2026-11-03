@@ -238,6 +238,7 @@ $$(".slots").forEach(sb => { for (let i = 0; i < CFG.projetsParMois; i++) { cons
 $$("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa || "Bonjour Babora, je suis intéressé par un site web."); a.target = "_blank"; a.rel = "noopener"; });
 $$("[data-mail]").forEach(a => { if (!CFG.email) a.remove(); else a.href = `mailto:${CFG.email}?subject=${encodeURIComponent("Demande de site web")}`; });
 $$("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
+$$("[data-pay]").forEach(a => { const u = CFG.paiement?.[a.dataset.pay]; if (u) a.href = u; else a.remove(); });
 
 /* ---------- application installable (hors ligne) ---------- */
 if ("serviceWorker" in navigator && location.protocol === "https:") addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));

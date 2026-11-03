@@ -492,3 +492,7 @@ footer .bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;p
   .filters button{flex:none}
 }
 @media (max-width:640px){.pinfo{flex-direction:column;gap:10px}.pinfo h3{font-size:1.3rem}}
+
+.paybox{margin-top:14px;padding:28px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:linear-gradient(120deg,rgba(255,196,57,.08),var(--card) 50%)}
+.paybtns{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:640px){.paybox{padding:22px 20px}.paybtns .btn{flex:1 1 calc(50% - 8px);padding:0 10px;font-size:.82rem;white-space:nowrap}}

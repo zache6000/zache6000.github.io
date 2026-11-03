@@ -19,7 +19,7 @@
 <link rel="preload" href="assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/v2.css">
 <script>try{var t=localStorage.getItem("bb-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Babora","url":"https://babora.vercel.app/","description":"Studio de création de sites web au Maroc","areaServed":"MA","priceRange":"600 - 3500 MAD","availableLanguage":["fr","ar"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Babora","url":"https://babora.vercel.app/","description":"Studio de création de sites web au Maroc","areaServed":"MA","priceRange":"39 - 249 EUR","availableLanguage":["fr","ar"]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -194,7 +194,7 @@
       </div>
       <div class="card total">
         <span class="mono muted">Estimation</span>
-        <div class="amt"><span id="tot">0</span> <small>DH</small></div>
+        <div class="amt"><span id="tot">0</span> <small>€</small></div>
         <span class="muted" id="totm"></span>
         <ul id="lines"></ul>
         <p class="mono muted" style="margin-bottom:18px">Délai estimé : <b style="color:var(--text)" id="delay"></b></p>
@@ -209,12 +209,21 @@
   <div class="wrap">
     <div class="sh">
       <div><span class="eyebrow mono rv">Tarifs</span><h2 class="split">Des prix <span class="serif">clairs</span>, fixés à l'avance.</h2></div>
-      <p class="rv">Moitié au démarrage, moitié à la livraison. Virement, espèces ou PayPal.</p>
+      <p class="rv">Petits prix, pour tous les budgets. Moitié au démarrage, moitié à la livraison, par carte ou PayPal.</p>
     </div>
     <div class="prices">
-      <div class="card price rv"><div class="top"><h3>Essentiel</h3></div><div class="amt">600 <small>DH</small></div><p class="desc">Pour être trouvé en ligne rapidement.</p><ul><li>Site d'une page</li><li>Parfait sur téléphone</li><li>Bouton WhatsApp</li><li>Livré en 5 jours</li></ul><a class="btn ghost" href="commander.html?formule=essentiel">Choisir Essentiel <span class="arr">→</span></a></div>
-      <div class="card price hl rv" style="--d:.08s"><div class="top"><h3>Vitrine</h3><span class="badge mono">Le plus choisi</span></div><div class="amt">1 200 <small>DH</small></div><p class="desc">Le site complet d'un commerce.</p><ul><li>Jusqu'à 4 pages ou sections</li><li>Menu, catalogue ou tarifs</li><li>Google Maps et horaires</li><li>Animations soignées</li><li>1 mois de retouches offertes</li></ul><a class="btn acc" href="commander.html?formule=vitrine">Choisir Vitrine <span class="arr">→</span></a></div>
-      <div class="card price rv" style="--d:.16s"><div class="top"><h3>Entretien</h3></div><div class="amt">150 <small>DH / mois</small></div><p class="desc">Votre site reste toujours à jour.</p><ul><li>Prix, photos et textes</li><li>Petites modifications</li><li>Réponse sous 48h</li><li>Sans engagement</li></ul><a class="btn ghost" href="commander.html?formule=entretien">Choisir Entretien <span class="arr">→</span></a></div>
+      <div class="card price rv"><div class="top"><h3>Essentiel</h3></div><div class="amt">39 <small>€</small></div><p class="desc">Pour être trouvé en ligne rapidement.</p><ul><li>Site d'une page</li><li>Parfait sur téléphone</li><li>Bouton WhatsApp</li><li>Livré en 5 jours</li></ul><a class="btn ghost" href="commander.html?formule=essentiel">Choisir Essentiel <span class="arr">→</span></a></div>
+      <div class="card price hl rv" style="--d:.08s"><div class="top"><h3>Vitrine</h3><span class="badge mono">Le plus choisi</span></div><div class="amt">79 <small>€</small></div><p class="desc">Le site complet d'un commerce.</p><ul><li>Jusqu'à 4 pages ou sections</li><li>Menu, catalogue ou tarifs</li><li>Google Maps et horaires</li><li>Animations soignées</li><li>1 mois de retouches offertes</li></ul><a class="btn acc" href="commander.html?formule=vitrine">Choisir Vitrine <span class="arr">→</span></a></div>
+      <div class="card price rv" style="--d:.16s"><div class="top"><h3>Entretien</h3></div><div class="amt">9 <small>€ / mois</small></div><p class="desc">Votre site reste toujours à jour.</p><ul><li>Prix, photos et textes</li><li>Petites modifications</li><li>Réponse sous 48h</li><li>Sans engagement</li></ul><a class="btn ghost" href="commander.html?formule=entretien">Choisir Entretien <span class="arr">→</span></a></div>
+    </div>
+    <div class="card paybox rv" id="payer">
+      <div><span class="eyebrow mono" style="margin-bottom:10px">Paiement en ligne</span><h3 style="font-size:1.4rem">Déjà validé par message ? Payez en 1 clic.</h3><p class="muted" style="font-size:.95rem;margin-top:6px">Paiement sécurisé par PayPal, avec ou sans compte : une simple carte bancaire suffit.</p></div>
+      <div class="paybtns">
+        <a class="btn ghost sm" data-pay="essentiel" href="#" target="_blank" rel="noopener">Essentiel · 19,50 €</a>
+        <a class="btn ghost sm" data-pay="vitrine" href="#" target="_blank" rel="noopener">Vitrine · 39,50 €</a>
+        <a class="btn ghost sm" data-pay="entretien" href="#" target="_blank" rel="noopener">Entretien · 9 €/mois</a>
+        <a class="btn acc sm" data-pay="libre" href="#" target="_blank" rel="noopener">Montant libre</a>
+      </div>
     </div>
   </div>
 </section>
@@ -228,7 +237,7 @@
     <div class="cmp rv"><table>
       <thead><tr><th></th><th class="us">Babora</th><th>Agence classique</th><th>Le faire soi-même</th></tr></thead>
       <tbody>
-        <tr><td>Prix d'un site vitrine</td><td class="us">dès 600 DH, fixe</td><td>souvent plusieurs milliers</td><td>abonnement mensuel</td></tr>
+        <tr><td>Prix d'un site vitrine</td><td class="us">dès 39 €, fixe</td><td>souvent plusieurs centaines d'euros</td><td>abonnement mensuel</td></tr>
         <tr><td>Délai</td><td class="us">5 à 10 jours</td><td>plusieurs semaines</td><td>votre temps libre</td></tr>
         <tr><td>Design sur mesure</td><td class="us yes">Oui</td><td class="yes">Oui</td><td class="no">Modèle générique</td></tr>
         <tr><td>Tout par message</td><td class="us yes">Oui, WhatsApp et email</td><td class="no">Réunions et appels</td><td class="no">Seul face à l'outil</td></tr>
@@ -301,8 +310,8 @@
         <div class="q"><button aria-expanded="false">Faut-il s'appeler ou se rencontrer ?<span class="pm"></span></button><div class="a"><div><p>Non. Tout se fait par écrit, sur WhatsApp ou par email : vos demandes, les retours sur le site, les validations. C'est plus rapide, et vous gardez une trace de tout.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Je n'ai pas de photos ni de logo, c'est un problème ?<span class="pm"></span></button><div class="a"><div><p>Non. Des photos prises avec un bon téléphone suffisent, et vous recevez une liste précise de celles à prendre. Un logo simple peut aussi être créé.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Combien coûte l'hébergement ?<span class="pm"></span></button><div class="a"><div><p>Pour un site vitrine, l'hébergement est gratuit. Un nom de domaine personnalisé (par exemple votrecommerce.ma) est en option, à votre charge, et sa configuration est incluse.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Est-ce que je pourrai modifier mon site après ?<span class="pm"></span></button><div class="a"><div><p>Oui. La formule Vitrine inclut un mois de retouches. Ensuite, vous pouvez demander des changements ponctuels ou prendre l'Entretien à 150 DH par mois.</p></div></div></div>
-        <div class="q"><button aria-expanded="false">Comment se passe le paiement ?<span class="pm"></span></button><div class="a"><div><p>50% au démarrage pour réserver votre place, 50% quand vous validez le site. Virement, espèces ou PayPal.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Est-ce que je pourrai modifier mon site après ?<span class="pm"></span></button><div class="a"><div><p>Oui. La formule Vitrine inclut un mois de retouches. Ensuite, vous pouvez demander des changements ponctuels ou prendre l'Entretien à 9 € par mois.</p></div></div></div>
+        <div class="q"><button aria-expanded="false">Comment se passe le paiement ?<span class="pm"></span></button><div class="a"><div><p>50% au démarrage pour réserver votre place, 50% quand vous validez le site. Par carte bancaire ou PayPal (lien de paiement sécurisé), ou en espèces.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Et si le résultat ne me plaît pas ?<span class="pm"></span></button><div class="a"><div><p>Vous voyez le site avant de payer la deuxième moitié, et on fait les ajustements jusqu'à ce qu'il vous convienne.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Le site peut-il être en arabe ou en plusieurs langues ?<span class="pm"></span></button><div class="a"><div><p>Oui : français, arabe (avec l'écriture de droite à gauche), anglais, espagnol et d'autres. Le visiteur choisit sa langue et tout le site change.</p></div></div></div>
         <div class="q"><button aria-expanded="false">Puis-je choisir les animations de mon site ?<span class="pm"></span></button><div class="a"><div><p>Oui. Dans le Labo, ajoutez les effets qui vous plaisent à votre sélection, puis envoyez la liste sur WhatsApp.</p></div></div></div>
