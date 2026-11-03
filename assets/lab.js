@@ -1,5 +1,5 @@
 /* ================= Babora — Le Labo ================= */
-const IMG1 = "img/cafe.jpg", IMG2 = "img/salon.jpg", IMG3 = "img/artisan.jpg";
+const IMG1 = "img/etaldeco.jpg", IMG2 = "img/massira.jpg", IMG3 = "img/jihawi.jpg";
 const D = [
 /* ------------------- MOUVEMENT ------------------- */
 { id: "split", c: "motion", t: "Titre lettre par lettre", d: "Chaque lettre monte à son tour", h: `<div class="dm-split"><h4>Bienvenue chez vous</h4><button class="mini">Rejouer</button></div>`,

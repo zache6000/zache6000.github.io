@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Massira · La Marche Verte en interactif · 6 novembre 1975</title>
+<meta name="description" content="Plateforme pédagogique interactive sur la Marche Verte du 6 novembre 1975 : chronologie, chiffres clés, symboles et quiz.">
+<meta name="theme-color" content="#062a1c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23062a1c'/%3E%3Cpath d='M32 14l4.6 13.2H51l-11.7 8.3 4.5 13.5L32 40.7 20.2 49l4.5-13.5L13 27.2h14.4z' fill='none' stroke='%23e9c46a' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(../../assets/fonts/inter-tight-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(../../assets/fonts/inter-tight-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(../../assets/fonts/inter-tight-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(../../assets/fonts/inter-tight-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Serif;font-style:italic;font-display:swap;src:url(../../assets/fonts/instrument-serif-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:Amiri;font-weight:400;font-display:swap;src:url(../fonts/amiri-arabic-400-normal.woff2) format("woff2")}
+@font-face{font-family:Amiri;font-weight:700;font-display:swap;src:url(../fonts/amiri-arabic-700-normal.woff2) format("woff2")}
+:root{--night:#062a1c;--night2:#0a3a27;--green:#0f7a4a;--leaf:#2fbf71;--sand:#e9c46a;--sand2:#f4dfa8;--dune:#c98d4b;--red:#c1272d;--cream:#fbf4e4;--ink:#1b1a17;--soft:#6e6656;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--night)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--cream);background:var(--night);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.ar{font-family:Amiri,serif;direction:rtl}
+.serif{font-family:Serif,Georgia,serif;font-style:italic;font-weight:400}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;font-weight:600;background:var(--sand);color:var(--night);transition:transform .35s var(--ease),box-shadow .35s;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(233,196,106,.6)}
+.btn.o{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1px rgba(251,244,228,.35)}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s}
+.nav.s{background:rgba(6,42,28,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+.brand svg{width:26px;height:26px}
+.nav nav{display:flex;gap:4px}
+.nav nav a{padding:6px 14px;border-radius:999px;text-decoration:none;color:rgba(251,244,228,.7);font-weight:500;font-size:.94rem}
+.nav nav a:hover{color:var(--cream);background:rgba(255,255,255,.06)}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(1200px 600px at 70% 10%,#14523a,transparent 60%),linear-gradient(#041f14,#0a3a27 55%,#7a4f22 80%,#c98d4b)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(1.2px 1.2px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),radial-gradient(1.4px 1.4px at 40% 10%,#fff,transparent),radial-gradient(1px 1px at 85% 40%,#fff,transparent),radial-gradient(1px 1px at 10% 15%,#fff,transparent),radial-gradient(1.2px 1.2px at 55% 35%,#fff,transparent),radial-gradient(1px 1px at 30% 45%,#fff,transparent),radial-gradient(1px 1px at 92% 12%,#fff,transparent);opacity:.7;animation:tw 6s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.35}}
+.moon{position:absolute;top:14%;right:12%;width:90px;height:90px;border-radius:50%;box-shadow:inset -18px -6px 0 0 var(--sand2);transform:rotate(-20deg);opacity:.9}
+.dunes{position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none}
+.dunes svg{position:absolute;bottom:0;width:120%;left:-10%;height:100%;will-change:transform}
+.marchers{position:absolute;left:0;right:0;bottom:23%;height:30px;overflow:hidden;pointer-events:none}
+.marchers i{position:absolute;bottom:0;width:4px;height:12px;border-radius:2px 2px 0 0;background:#1d1307;animation:walk linear infinite}
+.marchers i::after{content:"";position:absolute;top:-5px;left:-1px;width:6px;height:6px;border-radius:50%;background:#1d1307}
+.marchers i.f::before{content:"";position:absolute;top:-16px;left:3px;width:1px;height:14px;background:#1d1307;box-shadow:1px 0 0 0 #1d1307}
+.marchers i.f b{position:absolute;top:-16px;left:4px;width:9px;height:6px;background:var(--red)}
+@keyframes walk{from{transform:translateX(-30px)}to{transform:translateX(calc(100vw + 30px))}}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-top:110px;padding-bottom:32vh}
+.hero .ar{font-size:clamp(2rem,5vw,3.2rem);color:var(--sand);line-height:1.2;text-align:left;direction:rtl;display:inline-block}
+.hero h1{font-size:clamp(3.4rem,10vw,9rem);line-height:.88;letter-spacing:-.05em;font-weight:700;margin:10px 0 18px}
+.hero h1 .serif{color:var(--sand);letter-spacing:-.02em}
+.hero p{max-width:540px;color:rgba(251,244,228,.8);font-size:1.15rem}
+.cd{display:inline-flex;align-items:center;gap:14px;margin-top:28px;padding:10px 12px 10px 20px;border-radius:999px;background:rgba(0,0,0,.25);border:1px solid rgba(233,196,106,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);flex-wrap:wrap}
+.cd small{color:rgba(251,244,228,.75)}
+.cd span{display:inline-flex;gap:6px}
+.cd b{min-width:46px;padding:6px 8px;border-radius:12px;background:var(--sand);color:var(--night);text-align:center;font-variant-numeric:tabular-nums}
+.cd b em{display:block;font-style:normal;font-size:.62rem;font-weight:600;opacity:.75;line-height:1}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+/* sections */
+section{position:relative;padding:120px 0;scroll-margin-top:70px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--sand);text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;font-weight:600;margin-bottom:16px}
+.eyebrow::before{content:"";width:26px;height:1px;background:currentColor}
+h2{font-size:clamp(2.4rem,6vw,4.6rem);line-height:.98;letter-spacing:-.04em;font-weight:700}
+h2 .serif{color:var(--sand)}
+.light{background:var(--cream);color:var(--ink)}
+.light .eyebrow{color:var(--green)}
+.light h2 .serif{color:var(--green)}
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.n{padding:30px 26px;border-radius:22px;background:#fff;border:1px solid #eadfc6;position:relative;overflow:hidden}
+.n b{display:block;font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--green);font-variant-numeric:tabular-nums}
+.n span{display:block;margin-top:10px;color:var(--soft);font-size:.95rem}
+.n:nth-child(2) b{color:var(--red)}
+.n:nth-child(4){background:var(--green);border-color:var(--green)}.n:nth-child(4) b{color:var(--sand2)}.n:nth-child(4) span{color:#cfe8d9}
+/* timeline */
+.tl{position:relative;margin-top:70px;padding-inline-start:44px}
+.tl .rail{position:absolute;inset-inline-start:13px;top:6px;bottom:6px;width:2px;background:rgba(251,244,228,.12)}
+.tl .rail i{position:absolute;inset:0;background:linear-gradient(var(--sand),var(--leaf));transform-origin:top;transform:scaleY(var(--p,0))}
+.ev{position:relative;padding:0 0 54px;display:grid;grid-template-columns:200px 1fr;gap:28px}
+.ev::before{content:"";position:absolute;inset-inline-start:-38px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--night);border:2px solid rgba(251,244,228,.3);transition:all .5s var(--ease)}
+.ev.on::before{background:var(--sand);border-color:var(--sand);box-shadow:0 0 0 6px rgba(233,196,106,.15)}
+.ev time{font-weight:700;font-size:1.6rem;letter-spacing:-.02em;line-height:1.1;color:var(--sand)}
+.ev time small{display:block;font-size:.8rem;font-weight:500;color:rgba(251,244,228,.55);letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.ev h3{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:6px}
+.ev p{color:rgba(251,244,228,.72);max-width:620px}
+.ev.big h3{font-size:2rem;color:var(--sand)}
+/* route */
+.route{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
+.map{position:relative;border-radius:26px;overflow:hidden;background:radial-gradient(circle at 30% 20%,#f8e7bf,#e9c98a 60%,#d9a45c);aspect-ratio:1;border:1px solid #e1c690}
+.map svg{width:100%;height:100%}
+.map .sea{fill:#9cc9c3}
+.map .coast{fill:none;stroke:#7a5a2a;stroke-width:1.5}
+.map .path{fill:none;stroke:var(--green);stroke-width:5;stroke-linecap:round;stroke-dasharray:6 10}
+.map .ghost{fill:none;stroke:rgba(15,122,74,.18);stroke-width:5;stroke-linecap:round}
+.map text{font-family:Inter,sans-serif;font-weight:700;font-size:15px;fill:#3e2c10}
+.map .city{fill:var(--red)}
+.walker{fill:var(--green)}
+.steps2{display:grid;gap:10px}
+.steps2 div{padding:18px 22px;border-radius:18px;background:#fff;border:1px solid #eadfc6;transition:all .4s var(--ease)}
+.steps2 div.on{background:var(--green);color:#fff;border-color:var(--green);transform:translateX(8px)}
+.steps2 b{display:block;font-size:1.1rem}
+.steps2 span{color:var(--soft);font-size:.94rem}
+.steps2 div.on span{color:#cfe8d9}
+.mcount{margin-top:18px;font-weight:700;font-size:1.1rem;color:var(--green)}
+.mcount b{font-size:2rem;font-variant-numeric:tabular-nums}
+/* symbols */
+.sym{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.card{perspective:900px;height:300px;cursor:pointer}
+.card .in{position:relative;width:100%;height:100%;transition:transform .9s var(--ease);transform-style:preserve-3d}
+.card.on .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:26px;display:flex;flex-direction:column}
+.card .f{background:linear-gradient(160deg,var(--night2),#0d4a31);border:1px solid rgba(233,196,106,.2);justify-content:space-between}
+.card .f svg{width:64px;height:64px}
+.card .f h3{font-size:1.5rem;letter-spacing:-.02em}
+.card .f small{color:rgba(251,244,228,.55)}
+.card .b{background:var(--sand);color:var(--night);transform:rotateY(180deg);justify-content:center}
+.card .b p{font-size:1rem;line-height:1.6}
+.card .b .ar{font-size:1.7rem;margin-bottom:10px}
+/* quiz */
+.quiz{max-width:760px;margin:56px auto 0;background:#fff;color:var(--ink);border-radius:28px;padding:34px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}
+.qbar{display:flex;gap:6px;margin-bottom:24px}
+.qbar i{flex:1;height:5px;border-radius:9px;background:#eee2c8;transition:background .4s}
+.qbar i.ok{background:var(--green)}.qbar i.ko{background:var(--red)}.qbar i.cur{background:var(--sand)}
+.quiz h3{font-size:1.6rem;letter-spacing:-.02em;line-height:1.25;margin-bottom:20px}
+.opts{display:grid;gap:10px}
+.opts button{text-align:left;padding:16px 20px;border-radius:16px;border:1.5px solid #eadfc6;font-weight:500;transition:all .25s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.opts button:hover:not(:disabled){border-color:var(--green);background:#f4faf6}
+.opts button.ok{background:var(--green);border-color:var(--green);color:#fff}
+.opts button.ko{background:#fbe9e9;border-color:var(--red);color:var(--red)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:16px;padding:14px 18px;border-radius:14px;background:#f7f0de;color:var(--soft);display:none}
+.expl.on{display:block;animation:fade .5s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.qnav .btn{background:var(--green);color:#fff}
+.score{text-align:center;padding:20px 0}
+.score b{display:block;font-size:5rem;font-weight:700;letter-spacing:-.05em;color:var(--green);line-height:1}
+/* footer */
+footer{padding:70px 0 40px;background:#041f14;color:rgba(251,244,228,.6);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .ar{font-size:2rem;color:var(--sand);display:block;margin-bottom:6px}
+footer a{color:var(--sand);text-decoration:none;font-weight:600}
+.flag{height:6px;background:linear-gradient(90deg,var(--red) 0 50%,var(--green) 50%)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+@media (max-width:900px){
+  .nums,.sym{grid-template-columns:1fr 1fr}
+  .route{grid-template-columns:1fr}
+  .ev{grid-template-columns:1fr;gap:6px}
+  .nav nav{display:none}
+}
+@media (max-width:560px){
+  .nums,.sym{grid-template-columns:1fr}
+  section{padding:84px 0}
+  .quiz{padding:24px 20px;border-radius:22px}
+  .quiz h3{font-size:1.3rem}
+  .moon{width:60px;height:60px;top:12%}
+  .card{height:250px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="#top" style="text-decoration:none"><svg viewBox="0 0 64 64"><path d="M32 6l6.2 17.8H57l-15.4 11 6 18L32 41.6 16.4 52.8l6-18L7 23.8h18.8z" fill="none" stroke="#e9c46a" stroke-width="3.5" stroke-linejoin="round"/></svg>Massira</a>
+  <nav><a href="#chiffres">Chiffres</a><a href="#chronologie">Chronologie</a><a href="#marche">La marche</a><a href="#symboles">Symboles</a><a href="#quiz">Quiz</a></nav>
+  <a class="btn o" href="#quiz" style="height:42px;padding:0 18px">Faire le quiz</a>
+</div></header>
+
+<main id="top">
+<section class="hero" style="padding:0">
+  <div class="stars"></div><div class="moon"></div>
+  <div class="dunes" aria-hidden="true">
+    <svg viewBox="0 0 1600 400" preserveAspectRatio="none" data-depth=".15"><path d="M0 220 C200 140 380 190 560 170 S920 120 1100 160 1420 130 1600 170 V400 H0Z" fill="#a8703a" opacity=".8"/></svg>
+    <svg viewBox="0 0 1600 400" preserveAspectRatio="none" data-depth=".3"><path d="M0 280 C240 210 420 260 640 240 S1000 200 1220 250 1460 220 1600 240 V400 H0Z" fill="#c98d4b"/></svg>
+    <svg viewBox="0 0 1600 400" preserveAspectRatio="none" data-depth=".5"><path d="M0 330 C260 290 520 340 760 310 S1180 290 1380 320 1520 300 1600 310 V400 H0Z" fill="#e0ad68"/></svg>
+  </div>
+  <div class="marchers" id="marchers" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="ar rv in">المسيرة الخضراء</div>
+    <h1 class="rv in" style="--d:.1s">6 novembre<br><span class="serif">1975.</span></h1>
+    <p class="rv in" style="--d:.25s">Environ 350 000 volontaires, venus de toutes les régions du Maroc, marchent sans armes, le drapeau et le Coran à la main. Revivez la Marche Verte, étape par étape.</p>
+    <div class="cd rv in" style="--d:.35s" id="cd"><small id="cdl">Anniversaire dans</small><span><b><span id="cdd">0</span><em>jours</em></b><b><span id="cdh">0</span><em>h</em></b><b><span id="cdm">0</span><em>min</em></b><b><span id="cds">0</span><em>s</em></b></span></div>
+    <div class="ctas rv in" style="--d:.45s"><a class="btn" href="#chronologie">Commencer le voyage ↓</a><a class="btn o" href="#quiz">Tester mes connaissances</a></div>
+  </div>
+</section>
+<div class="flag"></div>
+
+<section class="light" id="chiffres">
+  <div class="wrap">
+    <span class="eyebrow rv">Les chiffres</span>
+    <h2 class="rv">Une marche <span class="serif">pacifique</span>,<br>un peuple en mouvement.</h2>
+    <div class="nums">
+      <div class="n rv"><b data-c="350000">0</b><span>volontaires, hommes et femmes</span></div>
+      <div class="n rv" style="--d:.08s"><b>0</b><span>arme : le drapeau et le Coran pour seuls bagages</span></div>
+      <div class="n rv" style="--d:.16s"><b>≈ <span data-c="10">0</span> %</b><span>de femmes parmi les marcheurs</span></div>
+      <div class="n rv" style="--d:.24s"><b><span data-c="8">0</span> jours</b><span>entre le départ de la marche et les accords de Madrid</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="chronologie">
+  <div class="wrap">
+    <span class="eyebrow rv">Chronologie</span>
+    <h2 class="rv">D'octobre 1975<br>à <span class="serif">février 1976.</span></h2>
+    <div class="tl" id="tl">
+      <div class="rail"><i></i></div>
+      <div class="ev rv"><time>16 oct.<small>1975</small></time><div><h3>L'avis de la Cour internationale de justice</h3><p>La Cour de La Haye rend son avis consultatif sur le Sahara. Le même jour, le roi Hassan II annonce l'organisation d'une grande marche pacifique.</p></div></div>
+      <div class="ev rv"><time>Fin oct.<small>1975</small></time><div><h3>Le grand rassemblement</h3><p>De toutes les régions du Royaume, les volontaires convergent par trains, camions et autobus vers Tarfaya, première étape de la marche.</p></div></div>
+      <div class="ev rv"><time>5 nov.<small>1975</small></time><div><h3>Le discours aux marcheurs</h3><p>Le roi s'adresse aux volontaires rassemblés et donne le signal du départ pour le lendemain.</p></div></div>
+      <div class="ev big rv"><time>6 nov.<small>1975</small></time><div><h3>La Marche Verte</h3><p>Environ 350 000 marcheurs franchissent la frontière, sans armes, portant drapeaux et exemplaires du Coran. C'est la date commémorée chaque année au Maroc.</p></div></div>
+      <div class="ev rv"><time>12 nov.<small>1975</small></time><div><h3>Négociations à Madrid</h3><p>Les délégations de l'Espagne, du Maroc et de la Mauritanie ouvrent les discussions.</p></div></div>
+      <div class="ev rv"><time>14 nov.<small>1975</small></time><div><h3>Les accords de Madrid</h3><p>Les trois pays signent l'accord tripartite qui prévoit la fin de la présence espagnole au Sahara.</p></div></div>
+      <div class="ev rv" style="padding-bottom:0"><time>28 fév.<small>1976</small></time><div><h3>Le départ espagnol</h3><p>Date prévue par les accords pour la fin de la présence espagnole sur le territoire.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="marche">
+  <div class="wrap route">
+    <div>
+      <span class="eyebrow rv">La marche</span>
+      <h2 class="rv">Pas à pas,<br>vers le <span class="serif">sud.</span></h2>
+      <p class="rv" style="color:var(--soft);margin:18px 0 26px;max-width:460px">Faites défiler : le tracé se dessine et les marcheurs avancent. Représentation simplifiée et illustrative.</p>
+      <div class="steps2" id="st2">
+        <div><b>Départ des régions</b><span>Les volontaires quittent leurs villes et villages.</span></div>
+        <div><b>Rassemblement à Tarfaya</b><span>Campements, organisation, attente du signal.</span></div>
+        <div><b>Le franchissement</b><span>Le 6 novembre au matin, la marche s'élance.</span></div>
+      </div>
+      <p class="mcount" id="mc"><b>0</b> marcheurs en route</p>
+    </div>
+    <div class="map rv" id="map">
+      <svg viewBox="0 0 400 400" aria-label="Carte illustrative de la marche">
+        <path class="sea" d="M0 0 H140 C120 60 110 110 90 160 C70 220 60 260 40 310 C30 340 20 370 0 400 Z"/>
+        <path class="coast" d="M140 0 C120 60 110 110 90 160 C70 220 60 260 40 310 C30 340 20 370 0 400"/>
+        <path class="ghost" d="M330 40 C300 90 250 120 220 170 C200 205 170 225 150 260 C138 282 128 300 118 330"/>
+        <path class="path" id="rpath" d="M330 40 C300 90 250 120 220 170 C200 205 170 225 150 260 C138 282 128 300 118 330"/>
+        <circle class="city" cx="330" cy="40" r="7"/><text x="300" y="28">Régions</text>
+        <circle class="city" cx="150" cy="260" r="8"/><text x="164" y="264">Tarfaya</text>
+        <path d="M60 300 L250 300" stroke="#7a5a2a" stroke-width="2" stroke-dasharray="4 6"/><text x="190" y="294" style="font-size:12px;font-weight:600">frontière de 1975</text>
+        <g id="walker"><circle class="walker" r="10"/><path d="M-3 -2 L0 -14 L0 2" stroke="#fff" stroke-width="2" fill="none"/><rect x="0" y="-14" width="9" height="6" fill="#c1272d"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="symboles">
+  <div class="wrap">
+    <span class="eyebrow rv">Symboles</span>
+    <h2 class="rv">Quatre <span class="serif">symboles</span>,<br>touchez pour découvrir.</h2>
+    <div class="sym">
+      <div class="card rv" tabindex="0" role="button"><div class="in"><div class="f"><svg viewBox="0 0 64 64"><path d="M14 8v50" stroke="#e9c46a" stroke-width="3"/><path d="M16 10h36v26H16z" fill="#c1272d"/><path d="M34 15l2.6 7.4h7.8l-6.3 4.6 2.4 7.4L34 29.8l-6.5 4.6 2.4-7.4-6.3-4.6h7.8z" fill="none" stroke="#0f7a4a" stroke-width="1.8"/></svg><div><h3>Le drapeau</h3><small>Touchez pour retourner</small></div></div><div class="b"><div class="ar">العلم الوطني</div><p>Des milliers de drapeaux rouges à l'étoile verte ont accompagné les marcheurs : le symbole d'une nation rassemblée.</p></div></div></div>
+      <div class="card rv" style="--d:.08s" tabindex="0" role="button"><div class="in"><div class="f"><svg viewBox="0 0 64 64"><path d="M8 16c8-4 16-4 24 2 8-6 16-6 24-2v34c-8-4-16-4-24 2-8-6-16-6-24-2z" fill="none" stroke="#e9c46a" stroke-width="3" stroke-linejoin="round"/><path d="M32 18v34" stroke="#e9c46a" stroke-width="3"/></svg><div><h3>Le Coran</h3><small>Touchez pour retourner</small></div></div><div class="b"><div class="ar">القرآن الكريم</div><p>À la place des armes, les volontaires portaient le Coran : la marche se voulait pacifique et spirituelle.</p></div></div></div>
+      <div class="card rv" style="--d:.16s" tabindex="0" role="button"><div class="in"><div class="f"><svg viewBox="0 0 64 64"><circle cx="22" cy="14" r="5" fill="none" stroke="#e9c46a" stroke-width="3"/><circle cx="42" cy="14" r="5" fill="none" stroke="#e9c46a" stroke-width="3"/><path d="M22 20v16l-6 18M22 36l6 18M42 20v16l-6 18M42 36l6 18M14 28h16M34 28h16" fill="none" stroke="#e9c46a" stroke-width="3" stroke-linecap="round"/></svg><div><h3>La marche</h3><small>Touchez pour retourner</small></div></div><div class="b"><div class="ar">المسيرة السلمية</div><p>Une mobilisation civile d'une ampleur rare : des hommes et des femmes, jeunes et âgés, de tous les métiers.</p></div></div></div>
+      <div class="card rv" style="--d:.24s" tabindex="0" role="button"><div class="in"><div class="f"><svg viewBox="0 0 64 64"><path d="M32 6l6.2 17.8H57l-15.4 11 6 18L32 41.6 16.4 52.8l6-18L7 23.8h18.8z" fill="none" stroke="#e9c46a" stroke-width="3" stroke-linejoin="round"/></svg><div><h3>Le vert</h3><small>Touchez pour retourner</small></div></div><div class="b"><div class="ar">الأخضر</div><p>« Verte » comme l'étoile du drapeau et comme la paix : la couleur a donné son nom à la marche.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" style="background:linear-gradient(#062a1c,#0a3a27)">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow rv">Quiz</span>
+    <h2 class="rv">Êtes-vous <span class="serif">incollable</span> ?</h2>
+    <div class="quiz rv" id="qz" style="text-align:left"></div>
+  </div>
+</section>
+</main>
+
+<div class="flag"></div>
+<footer><div class="wrap">
+  <div><span class="ar">المسيرة الخضراء</span>Plateforme pédagogique interactive · dates et chiffres issus de sources historiques publiques.</div>
+  <div>Conçue par <a href="https://babora.vercel.app" target="_blank" rel="noopener">Babora</a></div>
+</div></footer>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+/* marcheurs dans le hero */
+const mw=$("#marchers");
+for(let i=0;i<34;i++){const m=document.createElement("i");if(i%5===0){m.className="f";m.innerHTML="<b></b>"}m.style.animationDuration=(38+Math.random()*10)+"s";m.style.animationDelay=(-Math.random()*45)+"s";m.style.bottom=(Math.random()*8)+"px";mw.append(m)}
+
+/* compte à rebours jusqu'au prochain 6 novembre (heure du Maroc) */
+const casaNow=()=>{ /* heure actuelle à Casablanca, exprimée comme une date UTC */
+  const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Africa/Casablanca",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return new Date(Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second));};
+const ord=n=>n+"e";
+const tick=()=>{const c=casaNow();let y=c.getUTCFullYear();const start=Date.UTC(y,10,6),end=Date.UTC(y,10,7);
+  if(c>=start&&c<end){$("#cdl").textContent=`Aujourd'hui : ${ord(y-1975)} anniversaire de la Marche Verte`;$("#cd>span").style.display="none";return}
+  if(c>=end)y++;const s=Math.max(0,(Date.UTC(y,10,6)-c)/1000|0);
+  $("#cdd").textContent=s/86400|0;$("#cdh").textContent=String((s%86400)/3600|0).padStart(2,"0");$("#cdm").textContent=String((s%3600)/60|0).padStart(2,"0");$("#cds").textContent=String(s%60).padStart(2,"0");
+  $("#cdl").textContent=`${ord(y-1975)} anniversaire dans`;};
+tick();setInterval(tick,1000);
+
+/* parallaxe des dunes */
+const dunes=$$(".dunes svg");
+addEventListener("scroll",()=>{const y=scrollY;if(y<innerHeight)dunes.forEach(d=>d.style.transform=`translateY(${y*d.dataset.depth}px)`);$("#nav").classList.toggle("s",y>30);trace();rail()},{passive:true});
+addEventListener("pointermove",e=>{if(reduced)return;const x=e.clientX/innerWidth-.5;dunes.forEach(d=>d.style.translate=`${-x*60*d.dataset.depth}px 0`)},{passive:true});
+
+/* apparitions + compteurs */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
+$$(".rv:not(.in)").forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.c,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/1800);el.textContent=Math.round(to*(1-Math.pow(1-k,4))).toLocaleString("fr-FR");if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.6});
+$$("[data-c]").forEach(el=>cio.observe(el));
+
+/* chronologie : la ligne se remplit */
+const tl=$("#tl"),evs=$$(".ev",tl);
+function rail(){const r=tl.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.6-r.top)/r.height));$(".rail i",tl).style.setProperty("--p",p);evs.forEach(e=>e.classList.toggle("on",e.getBoundingClientRect().top<innerHeight*.6))}
+rail();
+
+/* tracé de la marche lié au défilement */
+const rp=$("#rpath"),walker=$("#walker"),L=rp.getTotalLength(),st=$$("#st2 div"),map=$("#marche");
+rp.style.strokeDasharray=`${L}`;rp.style.strokeDashoffset=L;
+function trace(){const r=map.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.75-r.top)/(r.height*.9)));rp.style.strokeDashoffset=L*(1-p);const pt=rp.getPointAtLength(L*p);walker.setAttribute("transform",`translate(${pt.x},${pt.y})`);st.forEach((s,i)=>s.classList.toggle("on",p>=i/3&&p<(i+1)/3||(i===2&&p>=1)));$("#mc b").textContent=Math.round(350000*p).toLocaleString("fr-FR")}
+trace();
+
+/* cartes symboles */
+$$(".card").forEach(c=>{const t=()=>c.classList.toggle("on");c.onclick=t;c.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();t()}}});
+
+/* quiz */
+const Q=[
+ ["En quelle année a eu lieu la Marche Verte ?",["1956","1975","1999","1963"],1,"La Marche Verte a eu lieu en novembre 1975."],
+ ["Combien de volontaires ont participé, environ ?",["35 000","100 000","350 000","1 million"],2,"On estime à environ 350 000 le nombre de marcheurs."],
+ ["Quelle ville a servi de point de rassemblement ?",["Agadir","Tarfaya","Ouarzazate","Fès"],1,"Les volontaires ont convergé vers Tarfaya, première étape de la marche."],
+ ["Que portaient les marcheurs à la place des armes ?",["Des pancartes","Le drapeau et le Coran","Des bougies","Des fleurs"],1,"Drapeaux et exemplaires du Coran : la marche se voulait pacifique."],
+ ["Quel accord a été signé le 14 novembre 1975 ?",["Le traité de Fès","Les accords de Madrid","L'accord d'Aix-les-Bains","Le traité de Rabat"],1,"Les accords de Madrid ont été signés par l'Espagne, le Maroc et la Mauritanie."],
+ ["Quel jour le Maroc commémore-t-il la Marche Verte ?",["16 octobre","18 novembre","6 novembre","2 mars"],2,"La Marche Verte est commémorée chaque année le 6 novembre."]
+];
+let qi=0,sc=0,res=[];const qz=$("#qz");
+function rq(){if(qi>=Q.length){const msg=sc===Q.length?"Parfait ! Vous êtes incollable 🎉":sc>=4?"Très bien ! Presque parfait.":"Relisez la chronologie et retentez !";qz.innerHTML=`<div class="score"><span class="eyebrow" style="color:var(--green)">Résultat</span><b>${sc}/${Q.length}</b><p style="color:var(--soft);margin:10px 0 22px">${msg}</p><button class="btn" id="qr" style="background:var(--green);color:#fff">Recommencer</button></div>`;$("#qr").onclick=()=>{qi=0;sc=0;res=[];rq()};if(sc===Q.length)boom();return}
+ const [q,o,a,ex]=Q[qi];qz.innerHTML=`<div class="qbar">${Q.map((_,i)=>`<i class="${res[i]===1?"ok":res[i]===0?"ko":i===qi?"cur":""}"></i>`).join("")}</div><small style="color:var(--soft);font-weight:600">Question ${qi+1} / ${Q.length}</small><h3>${q}</h3><div class="opts">${o.map((x,i)=>`<button data-i="${i}">${x}<span></span></button>`).join("")}</div><div class="expl">${ex}</div><div class="qnav"><span style="color:var(--soft)">Score : <b style="color:var(--green)">${sc}</b></span><button class="btn" id="qn" style="visibility:hidden">${qi===Q.length-1?"Voir mon score":"Question suivante →"}</button></div>`;
+ $$(".opts button",qz).forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i===a;$$(".opts button",qz).forEach(x=>{x.disabled=true;if(+x.dataset.i===a){x.classList.add("ok");x.lastChild.textContent="✓"}});if(!ok){b.classList.add("ko");b.lastChild.textContent="✕"}else sc++;res[qi]=ok?1:0;$(".expl",qz).classList.add("on");$("#qn").style.visibility="visible";$$(".qbar i",qz)[qi].className=ok?"ok":"ko"});
+ $("#qn").onclick=()=>{qi++;rq()}}
+rq();
+function boom(){if(reduced)return;const cv=document.createElement("canvas");cv.className="confetti";document.body.append(cv);const x=cv.getContext("2d");cv.width=innerWidth;cv.height=innerHeight;const C=["#c1272d","#0f7a4a","#e9c46a","#fbf4e4"];const P=Array.from({length:160},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*16-5,r:Math.random()*7+4,c:C[Math.random()*4|0],a:Math.random()*6}));let f=0;(function l(){x.clearRect(0,0,cv.width,cv.height);P.forEach(p=>{p.vy+=.4;p.x+=p.vx;p.y+=p.vy;p.a+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore()});if(f++<200)requestAnimationFrame(l);else cv.remove()})()}
+</script>
+</body>
+</html>
