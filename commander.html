@@ -7,7 +7,6 @@
 <meta name="theme-color" content="#f7f5f0">
 <link rel="icon" type="image/svg+xml" href="brand/mark.svg">
 <link rel="apple-touch-icon" href="brand/icon-512.png">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .order{display:grid;grid-template-columns:1fr 340px;gap:40px;padding-top:50px;padding-bottom:100px;align-items:start}
@@ -96,14 +95,14 @@
 <main class="wrap order">
   <div>
     <h1 class="words">Commandez votre site.</h1>
-    <p class="lead rv" style="--d:.3s">Trois étapes, deux minutes. Réponse sur WhatsApp sous 24h, sans appel.</p>
+    <p class="lead rv" style="--d:.3s">Trois étapes, deux minutes. Réponse sur WhatsApp, en général sous 24h, sans appel.</p>
 
     <div class="track mono rv" style="--d:.4s"><span id="t1" class="on">1 · Formule</span><span id="t2">2 · Votre projet</span><span id="t3">3 · Confirmation</span></div>
 
     <form id="form" class="stage rv" style="--d:.45s" novalidate>
       <div class="pane on" data-pane="1">
         <div class="opts">
-          <label class="opt"><input type="radio" name="formule" value="essentiel"><span class="radio"></span><div><b>Essentiel</b><small>Une page, bouton WhatsApp, livrée en 5 jours</small></div><span class="p">39 €</span></label>
+          <label class="opt"><input type="radio" name="formule" value="essentiel"><span class="radio"></span><div><b>Essentiel</b><small>Une page, bouton WhatsApp, livraison visée : 5 jours</small></div><span class="p">39 €</span></label>
           <label class="opt"><input type="radio" name="formule" value="vitrine" checked><span class="radio"></span><div><b>Vitrine</b><small>Jusqu'à 4 pages, menu ou catalogue, Google Maps, 1 mois de retouches</small></div><span class="p">79 €</span></label>
           <label class="opt"><input type="radio" name="formule" value="entretien"><span class="radio"></span><div><b>Entretien</b><small>Mises à jour de votre site existant</small></div><span class="p">9 €/mois</span></label>
           <label class="opt"><input type="radio" name="formule" value="sur-mesure"><span class="radio"></span><div><b>Sur mesure</b><small>Plateforme, espace membres, réservation en ligne…</small></div><span class="p">Sur devis</span></label>
@@ -113,13 +112,11 @@
 
       <div class="pane" data-pane="2">
         <div class="two">
-          <label class="field" data-req><span>Votre nom</span><input type="text" name="nom" autocomplete="name"></label>
-          <label class="field" data-req><span>Téléphone</span><input type="tel" name="tel" placeholder="06 …" autocomplete="tel"></label>
-        </div>
-        <div class="two">
+          <label class="field" data-req><span>Votre prénom ou nom</span><input type="text" name="nom" autocomplete="name"></label>
           <label class="field" data-req><span>Nom du commerce</span><input type="text" name="commerce"></label>
-          <label class="field" data-req><span>Ville</span><input type="text" name="ville"></label>
         </div>
+        <label class="field" data-req><span>Ville</span><input type="text" name="ville" autocomplete="address-level2"></label>
+        <p class="note" style="margin:-4px 0 14px">Pas besoin de numéro : vous nous écrivez depuis votre WhatsApp.</p>
         <div class="field"><span>Type d'activité</span>
           <div class="chips">
             <label><input type="radio" name="activite" value="Café / restaurant" checked><span>Café / restaurant</span></label>
@@ -132,14 +129,20 @@
         </div>
         <label class="field"><span>Démarrage souhaité</span><select name="debut" id="debut"></select></label>
         <label class="field"><span>Votre projet <i>(facultatif)</i></span><textarea name="details" placeholder="Ex : je veux montrer mon menu et recevoir des réservations"></textarea></label>
-        <p class="err" id="err"></p>
+        <fieldset class="consents">
+          <legend class="sr">Accords</legend>
+          <label class="ck"><input type="checkbox" name="c_cgv"><span>J'ai lu et j'accepte les <a href="conditions.html" target="_blank">conditions de service</a> et la <a href="remboursement.html" target="_blank">politique de remboursement</a>.</span></label>
+          <label class="ck"><input type="checkbox" name="c_rgpd"><span>J'accepte que Babora utilise ces informations uniquement pour répondre à ma demande et réaliser mon site (<a href="confidentialite.html" target="_blank">confidentialité</a>).</span></label>
+          <label class="ck"><input type="checkbox" name="c_age"><span>J'ai 18 ans ou plus, ou j'ai l'accord d'un parent ou tuteur légal.</span></label>
+        </fieldset>
+        <p class="err" id="err" role="alert"></p>
         <div class="actions"><button type="button" class="link" data-prev>← Retour</button><button type="button" class="btn" data-next>Voir le récapitulatif <span class="arr">→</span></button></div>
       </div>
 
       <div class="pane" data-pane="3">
         <div class="recap" id="recap"></div>
         <div class="pay" id="pay"></div>
-        <p class="note">Rien n'est débité sans votre accord. Après l'envoi, vous recevez un message WhatsApp pour envoyer vos photos et votre logo.</p>
+        <p class="note">Conditions et politique de remboursement acceptées. Rien n'est débité sans votre accord. Après l'envoi, vous recevez un message WhatsApp pour envoyer vos photos et votre logo.</p>
         <div class="actions"><button type="button" class="link" data-prev>← Modifier</button><span></span></div>
       </div>
     </form>
@@ -162,13 +165,14 @@
       <li><span>Démarrage possible</span><span data-demarrage></span></li>
       <li><span>Contact</span><span>par message uniquement</span></li>
     </ul>
-    <span class="tiny">Paiement en deux fois · carte bancaire ou PayPal</span>
+    <span class="tiny">Paiement en deux fois · carte bancaire ou PayPal · prix finaux, sans frais ajoutés</span>
   </aside>
 </main>
 
-<footer><div class="wrap mono"><span>© <span data-year></span> Babora</span><a href="index.html">Accueil</a></div></footer>
+<footer><div class="wrap mono"><span>© <span data-year></span> Babora</span><span><a href="index.html">Accueil</a> · <a href="mentions.html">Mentions</a> · <a href="conditions.html">Conditions</a> · <a href="remboursement.html">Remboursement</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="#" data-consent-open>Préférences</a></span></div></footer>
 
 <script src="assets/config.js"></script>
+<script src="assets/consent.js"></script>
 <script src="assets/site.js"></script>
 <script>
 const FORMULES = {
@@ -217,10 +221,12 @@ function show(n){
 function valid(){
   let ok = true;
   $$("[data-req]").forEach(f => { const bad = !$("input", f).value.trim(); f.classList.toggle("bad", bad); if (bad) ok = false; });
-  const tel = form.tel.value.replace(/\D/g, "");
-  if (form.tel.value.trim() && tel.length < 9) { form.tel.closest(".field").classList.add("bad"); $("#err").textContent = "Le numéro de téléphone semble incomplet."; return false; }
   $("#err").textContent = ok ? "" : "Merci de remplir les champs en rouge.";
-  return ok;
+  if (!ok) return false;
+  const miss = ["c_cgv", "c_rgpd", "c_age"].filter(n => !form[n].checked);
+  $$(".ck").forEach(l => l.classList.toggle("bad", miss.includes($("input", l).name)));
+  if (miss.length) { $("#err").textContent = "Merci de cocher les trois cases pour continuer."; return false; }
+  return true;
 }
 $$("[data-req] input").forEach(i => i.addEventListener("input", () => i.closest(".field").classList.remove("bad")));
 
@@ -233,7 +239,7 @@ function buildRecap(){
   const rows = [
     ["Référence", ref], ["Formule", f.nom],
     ["Prix", f.prix ? dh(f.prix) + (f.mensuel ? " / mois" : "") : "Sur devis"],
-    ["Nom", v("nom")], ["Téléphone", v("tel")],
+    ["Nom", v("nom")],
     ["Commerce", v("commerce") + ", " + v("ville")],
     ["Activité", form.activite.value], ["Démarrage", deb.value]
   ];

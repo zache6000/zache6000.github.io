@@ -5,7 +5,7 @@ const wa = t => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t)}`;
 const finePointer = matchMedia("(hover:hover) and (pointer:fine)").matches;
 const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
 const lerp = (a, b, t) => a + (b - a) * t;
-const store = { get: k => { try { return localStorage.getItem(k) } catch (e) { return null } }, set: (k, v) => { try { localStorage.setItem(k, v) } catch (e) {} } };
+const store = { get: k => { try { return localStorage.getItem(k) } catch (e) { return null } }, set: (k, v) => { try { if (window.BBConsent && !BBConsent.allowed()) return; localStorage.setItem(k, v) } catch (e) {} } };
 const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 const JOURS_L = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
 
@@ -235,6 +235,7 @@ $$("[data-total]").forEach(el => el.textContent = CFG.projetsParMois);
 $$("[data-mois]").forEach(el => el.textContent = MOIS[nextStart.getMonth()]);
 $$("[data-demarrage]").forEach(el => el.textContent = `lundi ${nextStart.getDate()} ${MOIS[nextStart.getMonth()]}`);
 $$(".slots").forEach(sb => { for (let i = 0; i < CFG.projetsParMois; i++) { const s = document.createElement("i"); if (i < CFG.projetsReserves) s.className = "taken"; sb.append(s); } });
+$$("[data-wa-stop]").forEach(a => { a.href = wa("Bonjour Babora, je souhaite arrêter mon abonnement Entretien."); });
 $$("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa || "Bonjour Babora, je suis intéressé par un site web."); a.target = "_blank"; a.rel = "noopener"; });
 $$("[data-mail]").forEach(a => { if (!CFG.email) a.remove(); else a.href = `mailto:${CFG.email}?subject=${encodeURIComponent("Demande de site web")}`; });
 $$("[data-year]").forEach(el => el.textContent = new Date().getFullYear());

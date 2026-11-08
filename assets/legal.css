@@ -1,0 +1,30 @@
+.lg{max-width:760px;margin:0 auto;padding:120px 22px 80px}
+.lg-top{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.lg-top a.b{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem}
+.lg-top a.b svg{width:26px;height:26px}
+.lg-top .back{font:500 .85rem var(--mono);color:var(--soft);padding:8px 12px;border-radius:999px;border:1px solid var(--line)}
+.lg-top .back:hover{color:var(--text);border-color:var(--line2)}
+.lg .k{font:500 .78rem var(--mono);color:var(--accent2);letter-spacing:.1em;text-transform:uppercase}
+.lg h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,7vw,4.2rem);line-height:1;letter-spacing:-.01em;margin:14px 0 14px}
+.lg .upd{font:500 .82rem var(--mono);color:var(--soft);margin-bottom:28px}
+.lg .sum{padding:18px 20px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin:0 0 36px;color:var(--soft)}
+.lg .sum b{color:var(--text)}
+.lg h2{font-size:1.3rem;letter-spacing:-.02em;margin:40px 0 12px}
+.lg h3{font-size:1.02rem;margin:22px 0 8px}
+.lg p,.lg li{color:var(--soft);font-size:1rem}
+.lg p{margin:0 0 12px}
+.lg ul{margin:0 0 14px 1.2em;display:grid;gap:6px}
+.lg a:not(.btn){color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line2)}
+.lg a:not(.btn):hover{text-decoration-color:var(--accent)}
+.lg strong{color:var(--text);font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:.92rem}
+.tbl th,.tbl td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font:500 .72rem var(--mono);color:var(--soft);letter-spacing:.06em;text-transform:uppercase}
+.tbl td{color:var(--soft)}.tbl td:first-child{color:var(--text);font-family:var(--mono);font-size:.85rem;white-space:nowrap}
+.tw{overflow-x:auto}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
+.lg .btn{height:46px;font-size:.92rem}
+.lg .btn.o{background:transparent;color:var(--text);border:1px solid var(--line2)}
+.note{font:500 .82rem var(--mono);color:var(--soft);min-height:1.4em}
+.lg-foot{border-top:1px solid var(--line);padding:30px 22px 40px;text-align:center;font:500 .8rem/2 var(--mono);color:var(--soft)}
+.lg-foot a{color:var(--soft);margin:0 8px}.lg-foot a:hover,.lg-foot a[aria-current]{color:var(--text)}
