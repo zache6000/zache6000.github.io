@@ -131,7 +131,7 @@
 
 <div class="modal" id="viewer" role="dialog" aria-modal="true" aria-label="Aperçu du projet">
   <div class="box">
-    <div class="mbar"><b id="vtitle">Projet</b><div class="devs" role="tablist"><button class="on" data-dev="">Ordinateur</button><button data-dev="tab">Tablette</button><button data-dev="mob">Téléphone</button></div><button class="ib" id="vclose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="mbar"><b id="vtitle">Projet</b><div class="devs" role="group" aria-label="Taille de l'aperçu"><button class="on" data-dev="" aria-pressed="true">Ordinateur</button><button data-dev="tab" aria-pressed="false">Tablette</button><button data-dev="mob" aria-pressed="false">Téléphone</button></div><button class="ib" id="vclose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="stage"><div class="device" id="device"><iframe id="vframe" title="Aperçu" loading="lazy"></iframe></div></div>
     <div class="mfoot"><span class="mono muted">Faites défiler et cliquez dans l'aperçu : c'est le vrai site.</span><div style="display:flex;gap:8px"><a class="btn ghost sm" id="vopen" href="#" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a><a class="btn acc sm" id="vwa" href="#" target="_blank" rel="noopener">Je veux un site comme ça</a></div></div>
   </div>

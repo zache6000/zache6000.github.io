@@ -1,5 +1,5 @@
 /* Babora — cache hors ligne (réseau d'abord, cache en secours) */
-const C = "babora-v9";
+const C = "babora-v10";
 const CORE = ["/", "/index.html", "/lab.html", "/commander.html", "/assets/v2.css", "/assets/v2.js", "/assets/config.js", "/assets/home.js", "/assets/lab.js", "/brand/mark.svg"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(C).then(c => c.addAll(CORE)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== C).map(x => caches.delete(x))))); self.clients.claim(); });

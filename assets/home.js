@@ -57,13 +57,32 @@ if (finePointer && !reduced) $$(".proj").forEach(p => {
   const open = p => {
     $("#vtitle").textContent = p.dataset.title; fr.src = p.dataset.url; $("#vopen").href = p.dataset.url;
     $("#vwa").href = wa(`Bonjour Babora, j'ai vu le projet « ${p.dataset.title} » et je voudrais un site dans ce style.`);
-    m.classList.add("open"); document.body.style.overflow = "hidden"; setTimeout(() => $("#vclose").focus(), 50);
+    m.classList.add("open"); document.body.style.overflow = "hidden"; requestAnimationFrame(() => window.__fitViewer && window.__fitViewer()); setTimeout(() => { window.__fitViewer && window.__fitViewer(); $("#vclose").focus(); }, 50);
   };
   closeModal = () => { m.classList.remove("open"); document.body.style.overflow = ""; setTimeout(() => fr.src = "about:blank", 400); };
   $$(".proj[data-url]").forEach(p => p.addEventListener("click", e => { if (e.metaKey || e.ctrlKey) return; e.preventDefault(); open(p); }));
   $("#vclose").addEventListener("click", closeModal);
   m.addEventListener("click", e => { if (e.target === m) closeModal(); });
-  $$(".devs button", m).forEach(b => b.addEventListener("click", () => { $$(".devs button", m).forEach(x => x.classList.toggle("on", x === b)); dev.className = "device " + b.dataset.dev; }));
+  // L'aperçu affiche le site à la vraie largeur de l'appareil choisi, puis le réduit pour qu'il tienne à l'écran.
+  const WIDTH = { "": 1280, tab: 820, mob: 390 };
+  let mode = "";
+  const fit = () => {
+    const stage = dev.parentElement, cs = getComputedStyle(stage);
+    const avail = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const bezel = mode ? 20 : 2, target = WIDTH[mode];
+    const outer = Math.max(200, Math.min(avail, target + bezel));
+    const s = (outer - bezel) / target;
+    dev.style.width = outer + "px";
+    const inner = dev.clientHeight;
+    fr.style.width = target + "px"; fr.style.height = (inner / s) + "px"; fr.style.transform = s < 1 ? `scale(${s})` : "";
+  };
+  $$(".devs button", m).forEach(b => b.addEventListener("click", () => {
+    $$(".devs button", m).forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+    mode = b.dataset.dev; dev.className = "device " + mode; fit();
+  }));
+  addEventListener("resize", () => { if (m.classList.contains("open")) fit(); });
+  m.addEventListener("transitionend", () => { if (m.classList.contains("open")) fit(); });
+  window.__fitViewer = fit;
 })();
 
 /* ---------- méthode : ligne qui se dessine au défilement ---------- */
