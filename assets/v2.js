@@ -160,7 +160,7 @@ addEventListener("pageshow", e => { if (e.persisted) curtain.classList.remove("g
 function confetti(n = 140) {
   if (reduced) return; const cv = document.createElement("canvas"); cv.className = "confetti"; document.body.append(cv);
   const ctx = cv.getContext("2d"), dpr = devicePixelRatio || 1; cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.scale(dpr, dpr);
-  const cols = ["#ff5a2c", "#ff9a5a", "#e9d8b8", "#3ddc84", "#ffffff"];
+  const cols = ["#2b3fe6", "#5a6cff", "#e9d8b8", "#3ddc84", "#ffffff"];
   const P = Array.from({ length: n }, () => ({ x: innerWidth / 2, y: innerHeight * .6, vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 6, r: Math.random() * 6 + 4, c: cols[Math.random() * 5 | 0], a: Math.random() * 6, va: (Math.random() - .5) * .3 }));
   let f = 0; (function loop() { ctx.clearRect(0, 0, innerWidth, innerHeight); P.forEach(p => { p.vy += .4; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); ctx.restore(); }); if (f++ < 200) requestAnimationFrame(loop); else cv.remove(); })();
 }

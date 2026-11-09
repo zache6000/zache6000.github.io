@@ -38,7 +38,7 @@
     ".bbc .r{display:flex;gap:8px}" +
     ".bbc button{flex:1;height:44px;border-radius:999px;font:600 14px/1 'Inter Tight',IT,system-ui,sans-serif;cursor:pointer;border:1px solid var(--line2,rgba(255,255,255,.2));background:transparent;color:inherit}" +
     ".bbc button:hover{background:rgba(127,127,127,.12)}" +
-    ".bbc button:focus-visible{outline:2px solid var(--accent,#ff5a2c);outline-offset:2px}" +
+    ".bbc button:focus-visible{outline:2px solid var(--accent,#f4b325);outline-offset:2px}" +
     "@media (prefers-reduced-motion:reduce){.bbc{transition:none}}";
   var box;
   function show() {
@@ -47,7 +47,7 @@
       box = document.createElement("section");
       box.className = "bbc"; box.setAttribute("role", "region"); box.setAttribute("aria-label", "Choix de stockage");
       box.innerHTML = '<h2>Vos préférences, votre choix</h2>' +
-        '<p>Ce site n\'utilise <b>aucun cookie</b>, aucune publicité et aucune mesure d\'audience. Il peut seulement garder vos préférences (thème clair ou sombre, votre sélection d\'animations) sur votre appareil. <a href="' + ROOT + 'cookies.html">En savoir plus</a></p>' +
+        '<p>Ce site n\'utilise <b>aucun cookie</b>, aucune publicité et aucune mesure d\'audience. Il peut seulement garder vos préférences (votre sélection d\'animations dans le Labo) sur votre appareil. <a href="' + ROOT + 'cookies.html">En savoir plus</a></p>' +
         '<div class="r"><button type="button" data-c="no">Refuser</button><button type="button" data-c="yes">Accepter</button></div>';
       box.addEventListener("click", function (e) {
         var b = e.target.closest("[data-c]"); if (!b) return;
