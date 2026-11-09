@@ -1,7 +1,7 @@
 /* ============ Base ============ */
 :root{
   --bg:#f7f5f0; --paper:#fff; --ink:#0f0f10; --soft:#5f5f63; --faint:#9a9a9e;
-  --line:#e4e1d9; --accent:#2b3fe6; --accent-soft:#fbe9e3; --green:#22a05a;
+  --line:#e4e1d9; --accent:#2a3a8c; --accent-soft:#fbe9e3; --green:#22a05a;
   --dark:#111112; --ease:cubic-bezier(.22,1,.36,1);
   --r:14px;
 }

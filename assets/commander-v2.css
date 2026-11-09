@@ -3,7 +3,7 @@
 @font-face{font-family:"Inter Tight";font-weight:500;font-display:swap;src:url(fonts/inter-tight-latin-500-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter Tight";font-weight:600;font-display:swap;src:url(fonts/inter-tight-latin-600-normal.woff2) format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
-:root{--bg:#0b0b0c;--paper:#151517;--ink:#f3efe7;--soft:#a7a39b;--faint:#8f8b84;--line:rgba(255,255,255,.1);--accent:#2b3fe6;--accent-soft:rgba(43,63,230,.12);--green:#25d366;--dark:#000;color-scheme:dark}
+:root{--bg:#0b0b0c;--paper:#151517;--ink:#f3efe7;--soft:#a7a39b;--faint:#8f8b84;--line:rgba(255,255,255,.1);--accent:#2a3a8c;--accent-soft:rgba(42,58,140,.12);--green:#25d366;--dark:#000;color-scheme:dark}
 [data-theme=light]{--bg:#f4f0e8;--paper:#fffdf8;--ink:#121212;--soft:#57534d;--faint:#66625b;--line:rgba(0,0,0,.1);color-scheme:light}
 body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
 .mono{font-family:"JetBrains Mono",monospace}
@@ -13,7 +13,7 @@ body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:v
 .btn.ghost{color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--line)}
 .btn.ghost:hover{color:var(--bg)!important}
 .chips input:checked+span{color:var(--bg)}
-.summary{background:linear-gradient(160deg,rgba(43,63,230,.16),var(--paper) 60%);color:var(--ink);border:1px solid rgba(43,63,230,.3)}
+.summary{background:linear-gradient(160deg,rgba(42,58,140,.16),var(--paper) 60%);color:var(--ink);border:1px solid rgba(42,58,140,.3)}
 .summary h3,.summary .big{color:var(--ink)}
 .summary .mono,.summary li span:first-child,.summary .tiny{color:var(--soft)}
 .summary ul,.summary li{border-color:var(--line)}
@@ -27,7 +27,7 @@ body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:v
 .consents{border:0;margin:6px 0 4px;display:grid;gap:10px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .ck{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;line-height:1.5;color:var(--soft,#a7a39b);cursor:pointer;padding:10px 12px;border-radius:12px;border:1px solid transparent}
-.ck input{flex:0 0 18px;width:18px;height:18px;margin-top:2px;accent-color:#2b3fe6;cursor:pointer}
+.ck input{flex:0 0 18px;width:18px;height:18px;margin-top:2px;accent-color:#2a3a8c;cursor:pointer}
 .ck a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .ck.bad{border-color:#ff5a5a}
 footer .wrap{flex-wrap:wrap;gap:10px}

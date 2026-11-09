@@ -1,9 +1,9 @@
 /* Babora 3 : habillage des pages secondaires (Labo, Commander, pages légales). Chaux, encre, cobalt, safran. */
 @font-face{font-family:"Bricolage";src:url(fonts/bricolage-wdth.woff2) format("woff2");font-weight:200 800;font-stretch:75% 100%;font-display:swap}
 :root,[data-theme=dark],[data-theme=light]{
-  --bg:#f1f2ee;--bg2:#e7e9e3;--card:#fbfbf9;--card2:#eceee8;--paper:#fbfbf9;--line:rgba(10,14,36,.12);--line2:rgba(10,14,36,.22);
-  --text:#0a0e24;--ink:#0a0e24;--soft:#555b72;--faint:#5f657c;--accent:#2b3fe6;--accent2:#2b3fe6;--accent-soft:rgba(43,63,230,.1);--cream:#2b3fe6;--green:#0e7a5f;--dark:#0b1238;
-  --grad:linear-gradient(120deg,#2b3fe6,#5a6cff);
+  --bg:#efeeea;--bg2:#e7e9e3;--card:#fbfbf9;--card2:#eceee8;--paper:#fbfbf9;--line:rgba(10,14,36,.12);--line2:rgba(10,14,36,.22);
+  --text:#0b0d18;--ink:#0b0d18;--soft:#555b72;--faint:#5f657c;--accent:#2a3a8c;--accent2:#2a3a8c;--accent-soft:rgba(42,58,140,.1);--cream:#2a3a8c;--green:#0e7a5f;--dark:#0c1022;
+  --grad:linear-gradient(120deg,#2a3a8c,#6f7fd0);
   --sans:"Bricolage",system-ui,sans-serif;--serif:"Bricolage",system-ui,sans-serif;--mono:"Bricolage",system-ui,sans-serif;
   color-scheme:light
 }
@@ -14,7 +14,7 @@ body,.mono,button,input,textarea,select{font-family:"Bricolage",system-ui,sans-s
 h1,h2,.lg h1{font-family:"Bricolage",system-ui,sans-serif!important;font-stretch:75%;font-weight:700!important;letter-spacing:-.015em!important}
 h3{font-stretch:88%}
 [data-theme-toggle]{display:none!important}
-::selection{background:#f4b325;color:#0a0e24}
-:focus-visible{outline-color:#f4b325!important}
+::selection{background:#c9a868;color:#0b0d18}
+:focus-visible{outline-color:#c9a868!important}
 .lg .k,.tbl th,footer h4{text-transform:none!important;letter-spacing:0!important}
-.lg-top .b svg path:last-child,.brand svg path:last-child{fill:#f4b325}
+.lg-top .b svg path:last-child,.brand svg path:last-child{fill:#c9a868}

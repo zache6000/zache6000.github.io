@@ -38,7 +38,7 @@
     ".bbc .r{display:flex;gap:8px}" +
     ".bbc button{flex:1;height:44px;border-radius:999px;font:600 14px/1 'Inter Tight',IT,system-ui,sans-serif;cursor:pointer;border:1px solid var(--line2,rgba(255,255,255,.2));background:transparent;color:inherit}" +
     ".bbc button:hover{background:rgba(127,127,127,.12)}" +
-    ".bbc button:focus-visible{outline:2px solid var(--accent,#f4b325);outline-offset:2px}" +
+    ".bbc button:focus-visible{outline:2px solid var(--accent,#c9a868);outline-offset:2px}" +
     "@media (prefers-reduced-motion:reduce){.bbc{transition:none}}";
   var box;
   function show() {
