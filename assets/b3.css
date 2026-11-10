@@ -337,3 +337,7 @@ body::after{content:"";position:fixed;inset:0;z-index:150;pointer-events:none;op
 .nuit h2 + p,.tete h2{letter-spacing:-.02em}
 .fin h2{background:linear-gradient(180deg,var(--chaux) 55%,#b9b6ab);-webkit-background-clip:text;background-clip:text;color:transparent}
 .heures li.auj{color:var(--safran)}
+
+/* le film */
+.cine{position:relative;border-radius:clamp(14px,2vw,26px);overflow:hidden;background:#0c1022;box-shadow:0 0 0 1px var(--trait),0 50px 90px -40px rgba(11,13,24,.55)}
+.cine video{display:block;width:100%;aspect-ratio:16/9;cursor:pointer}

@@ -52,6 +52,11 @@
   </div>
 </div></div>
 
+<section id="film" style="padding:clamp(56px,7vw,96px) 0 0"><div class="wrap">
+  <div class="cine"><video id="lefilm" src="film.mp4" poster="img/film-poster.jpg" muted loop playsinline preload="metadata" aria-label="Film de présentation de Babora, 34 secondes, sans paroles"></video>
+  <button class="btn safran" id="filmson" hidden>Lire</button></div>
+</div></section>
+
 <section id="projets"><div class="wrap">
   <div class="tete"><h2>Des sites à essayer, pas des images.</h2><p>Chaque projet s'ouvre ici, en vrai. Faites-le défiler comme sur un ordinateur, une tablette ou un téléphone.</p></div>
   <div class="projets">
@@ -217,5 +222,6 @@
 <script src="assets/config.js"></script>
 <script src="assets/consent.js"></script>
 <script src="assets/b3.js"></script>
+<script>(function(){var v=document.getElementById("lefilm");if(!v)return;if(matchMedia("(prefers-reduced-motion: reduce)").matches){v.controls=true;return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){v.play().catch(function(){v.controls=true})}else v.pause()})},{threshold:.35});io.observe(v);v.addEventListener("click",function(){v.paused?v.play():v.pause()})})();</script>
 </body>
 </html>
