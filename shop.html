@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — OFFGRID Streetwear</title>
+<meta name="description" content="Shop every OFFGRID piece: oversized heavyweight hoodies with high-definition prints.">
+<meta name="theme-color" content="#F2EADB">
+<meta property="og:title" content="Shop — OFFGRID Streetwear">
+<meta property="og:description" content="Shop every OFFGRID piece: oversized heavyweight hoodies with high-definition prints.">
+<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.js" defer></script>
+<script src="/assets/js/app.js" defer></script>
+</head>
+<body data-solid="1">
+<main id="main" class="container">
+  <section style="padding:clamp(48px,6vw,80px) 0 28px">
+    <span class="mono eyebrow">Drop 02 — All products</span>
+    <h1 class="display h-xl" style="margin-top:16px">Shop</h1>
+  </section>
+  <div class="filters">
+    <div class="chips" role="group" aria-label="Filter by colour">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-f="cream" aria-pressed="false"><span class="swatch" style="background:#F2EADB"></span>Cream</button>
+      <button class="chip" type="button" data-f="black" aria-pressed="false"><span class="swatch" style="background:#1A1A1A"></span>Black</button>
+      <button class="chip" type="button" data-f="green" aria-pressed="false"><span class="swatch" style="background:#2E4E3A"></span>Green</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <span class="mono" id="count" aria-live="polite"></span>
+      <label class="sr-only" for="sort">Sort</label>
+      <select class="select" id="sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="az">Name A–Z</option></select>
+    </div>
+  </div>
+  <div class="grid" id="grid" style="padding-bottom:110px"></div>
+</main>
+<script>
+document.addEventListener("og:ready", () => {
+  const { $, $$, P, cardHTML, reveal } = OG;
+  let f = new URLSearchParams(location.search).get("c") || "all", sort = "featured";
+  function draw() {
+    let list = P.filter(p => f === "all" || p.color.key === f);
+    if (sort === "low") list = [...list].sort((a,b)=>a.price-b.price);
+    if (sort === "high") list = [...list].sort((a,b)=>b.price-a.price);
+    if (sort === "az") list = [...list].sort((a,b)=>a.name.localeCompare(b.name));
+    $("#grid").innerHTML = list.length ? list.map(cardHTML).join("") : '<p class="lede">Nothing in this colour yet — next drop soon.</p>';
+    $("#count").textContent = list.length + (list.length === 1 ? " piece" : " pieces");
+    $$("[data-f]").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === f));
+    reveal();
+  }
+  $$("[data-f]").forEach(b => b.onclick = () => { f = b.dataset.f; draw(); });
+  $("#sort").onchange = e => { sort = e.target.value; draw(); };
+  draw();
+});
+</script>
+</body>
+</html>

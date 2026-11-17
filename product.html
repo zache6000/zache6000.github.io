@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product — OFFGRID Streetwear</title>
+<meta name="description" content="OFFGRID oversized hoodie — premium cotton, high-definition print.">
+<meta name="theme-color" content="#F2EADB">
+<meta property="og:title" content="Product — OFFGRID Streetwear">
+<meta property="og:description" content="OFFGRID oversized hoodie — premium cotton, high-definition print.">
+<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.js" defer></script>
+<script src="/assets/js/app.js" defer></script>
+</head>
+<body data-solid="1">
+<main id="main" class="container">
+  <nav class="crumbs mono" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="shop.html">Shop</a><span>/</span><span id="crumb"></span></nav>
+  <div class="pdp" id="pdp"></div>
+  <section style="padding-bottom:110px">
+    <div class="section-head"><h2 class="display h-md">You might also like</h2><a class="btn btn-outline" href="shop.html">Shop all</a></div>
+    <div class="grid" id="related"></div>
+  </section>
+</main>
+
+<div class="sticky-buy" id="sticky-buy">
+  <div><div style="font-weight:900;font-style:italic;font-stretch:115%" id="sb-name"></div><div class="mono" id="sb-price" style="opacity:.75"></div></div>
+  <button class="btn btn-dark" type="button" id="sb-add">Add to bag</button>
+</div>
+
+<div class="modal" id="size-modal" role="dialog" aria-modal="true" aria-labelledby="sg-title">
+  <div class="modal-bg" data-close-modal></div>
+  <div class="modal-card">
+    <button class="icon-btn" type="button" data-close-modal aria-label="Close size guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h2 class="display h-md" id="sg-title">Size guide</h2>
+    <p style="color:var(--muted)">Oversized, drop-shoulder, unisex fit. Measurements for size M, laid flat:</p>
+    <table class="fit-table"><tbody>
+      <tr><td>½ Chest (across front)</td><td>60 cm</td></tr>
+      <tr><td>Body length (from HPS)</td><td>68 cm</td></tr>
+      <tr><td>Shoulder width</td><td>60 cm</td></tr>
+      <tr><td>Sleeve length (from shoulder seam)</td><td>59 cm</td></tr>
+      <tr><td>½ Hem (bottom width)</td><td>50 cm</td></tr>
+      <tr><td>Cuff opening</td><td>10.5 cm</td></tr>
+      <tr><td>Hood height</td><td>38 cm</td></tr>
+      <tr><td>Max hood width</td><td>29 cm</td></tr>
+    </tbody></table>
+    <p style="margin-bottom:0;font-size:15px">Between two sizes? Take your usual size for the oversized look, one size down for a cleaner fit. For exact measurements in other sizes, <a href="contact.html">message us</a>.</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener("og:ready", () => {
+  const { $, $$, P, C, esc, money, byId, I, Cart, toast, Lightbox, cardHTML, reveal } = OG;
+  const p = byId(new URLSearchParams(location.search).get("id")) || P[0];
+  document.title = p.name + " — OFFGRID Streetwear";
+  $("#crumb").textContent = p.short;
+  let idx = 0, size = null, qty = 1;
+
+  $("#pdp").innerHTML = `
+    <div class="pdp-gallery">
+      <div class="pdp-main" id="main-img" role="button" tabindex="0" aria-label="Open image full screen">
+        <img id="main-src" src="${p.images[0]}" alt="${esc(p.name)}">
+        <span class="badge">${esc(p.badge)} · Limited</span>
+        <button class="pdp-nav prev" type="button" aria-label="Previous image">${I.left}</button>
+        <button class="pdp-nav next" type="button" aria-label="Next image">${I.right}</button>
+        <span class="pdp-count mono" id="img-count"></span>
+      </div>
+      <div class="thumbs" id="thumbs">${p.images.map((s,i)=>`<button type="button" data-i="${i}" aria-label="Show image ${i+1}"><img src="${s}" alt="" loading="lazy"></button>`).join("")}</div>
+    </div>
+    <div class="pdp-info">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span class="mono eyebrow">${esc(p.model)} — ${esc(p.badge)}</span>
+        <h1 class="display h-lg">${esc(p.name)}</h1>
+        <span class="mono" style="color:var(--muted)">${esc(p.tagline)}</span>
+      </div>
+      <div class="pdp-price"><b>${money(p.price)}</b><span class="mono" style="display:flex;align-items:center;gap:8px"><span class="swatch" style="background:${p.color.hex}"></span>${esc(p.color.name)}</span></div>
+      <p style="margin:0;font-size:17px;line-height:1.65">${esc(p.description)}</p>
+      <div>
+        <div class="opt-label"><span class="mono">Size — <span id="size-label">select</span></span><button class="link-btn mono" type="button" id="open-sg">Size guide</button></div>
+        <div class="sizes" id="sizes" role="group" aria-label="Choose a size">${C.sizes.map(s=>`<button type="button" data-s="${s}" aria-pressed="false">${s}</button>`).join("")}</div>
+      </div>
+      <div class="buy-row">
+        <div class="qty" role="group" aria-label="Quantity"><button type="button" id="q-minus" aria-label="Decrease quantity">−</button><span id="q-val">1</span><button type="button" id="q-plus" aria-label="Increase quantity">+</button></div>
+        <button class="btn btn-dark" type="button" id="add">Add to bag</button>
+      </div>
+      <button class="btn btn-outline btn-block" type="button" id="buy-now">Buy it now</button>
+      <div class="perks">
+        <div class="perk">${I.cotton}<span>Premium cotton</span></div>
+        <div class="perk">${I.fit}<span>Oversized fit</span></div>
+        <div class="perk">${I.gem}<span>HD DTF print</span></div>
+      </div>
+      <div class="acc">
+        <details open><summary>Details</summary><div class="acc-body"><ul>${p.details.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div></details>
+        <details><summary>Fit — size M</summary><div class="acc-body"><table class="fit-table"><tbody>
+          <tr><td>½ Chest</td><td>60 cm</td></tr><tr><td>Body length</td><td>68 cm</td></tr><tr><td>Shoulder</td><td>60 cm</td></tr><tr><td>Sleeve</td><td>59 cm</td></tr></tbody></table></div></details>
+        <details><summary>Care</summary><div class="acc-body">Wash inside out at 30°C. Do not iron directly on the print. Do not tumble dry. Follow the care label.</div></details>
+        <details><summary>Delivery &amp; payment</summary><div class="acc-body">Orders are confirmed with you directly by message. We'll confirm the delivery fee, timing and payment for your city before anything ships. Questions? <a href="contact.html">Contact us</a>.</div></details>
+      </div>
+    </div>`;
+
+  const main = $("#main-src");
+  function show(i) {
+    idx = (i + p.images.length) % p.images.length;
+    main.style.opacity = 0;
+    setTimeout(() => { main.src = p.images[idx]; main.style.opacity = 1; }, 160);
+    $$("#thumbs button").forEach((b,j) => b.setAttribute("aria-current", j === idx));
+    $("#img-count").textContent = (idx+1) + " / " + p.images.length;
+  }
+  show(0);
+  $("#thumbs").onclick = e => { const b = e.target.closest("[data-i]"); if (b) show(+b.dataset.i); };
+  $(".pdp-nav.prev").onclick = e => { e.stopPropagation(); show(idx-1); };
+  $(".pdp-nav.next").onclick = e => { e.stopPropagation(); show(idx+1); };
+  let x0 = null, swiped = false;
+  const openLb = () => { if (swiped) { swiped = false; return; } Lightbox.open(p.images, idx); };
+  $("#main-img").onclick = openLb;
+  $("#main-img").onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(); } };
+  $("#main-img").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; swiped = false; }, { passive: true });
+  $("#main-img").addEventListener("touchend", e => { if (x0===null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { swiped = true; show(idx + (dx < 0 ? 1 : -1)); } x0 = null; });
+
+  $("#sizes").onclick = e => { const b = e.target.closest("[data-s]"); if (!b) return; size = b.dataset.s;
+    $$("#sizes button").forEach(x => x.setAttribute("aria-pressed", x === b)); $("#size-label").textContent = size; };
+  $("#q-minus").onclick = () => { qty = Math.max(1, qty-1); $("#q-val").textContent = qty; };
+  $("#q-plus").onclick = () => { qty = Math.min(10, qty+1); $("#q-val").textContent = qty; };
+  function add() {
+    if (!size) { const s = $("#sizes"); s.classList.remove("shake"); void s.offsetWidth; s.classList.add("shake");
+      $("#size-label").textContent = "please choose a size"; s.scrollIntoView({ behavior: "smooth", block: "center" }); return false; }
+    Cart.add(p.id, size, qty); toast(`${p.short} — size ${size} added`); return true;
+  }
+  $("#add").onclick = add;
+  $("#sb-add").onclick = add;
+  $("#buy-now").onclick = () => { if (add()) location.href = "checkout.html"; };
+
+  // sticky mobile buy bar
+  $("#sb-name").textContent = p.short; $("#sb-price").textContent = money(p.price);
+  const io = new IntersectionObserver(([en]) => $("#sticky-buy").classList.toggle("on", !en.isIntersecting && en.boundingClientRect.top < 0));
+  io.observe($("#add"));
+
+  // size guide
+  const m = $("#size-modal");
+  $("#open-sg").onclick = () => m.classList.add("on");
+  m.addEventListener("click", e => { if (e.target.closest("[data-close-modal]")) m.classList.remove("on"); });
+
+  $("#related").innerHTML = P.filter(x => x.id !== p.id).map(cardHTML).join("");
+  reveal();
+});
+</script>
+</body>
+</html>
