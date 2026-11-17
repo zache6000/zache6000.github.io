@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OFFGRID — Questionnaire site web</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2EADB">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23182B46'/%3E%3Cpath d='M32 8C34 24 40 30 56 32C40 34 34 40 32 56C30 40 24 34 8 32C24 30 30 24 32 8Z' fill='%23F2EADB'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F2EADB;--paper:#F3F0E8;--navy:#182B46;--ink:#111;--blue:#6F8EBA;--muted:#4A5568;--line:rgba(24,43,70,.16);--err:#9B2C2C;--ease:cubic-bezier(.2,.7,.2,1);
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--navy);font-family:'Archivo',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+background:radial-gradient(55% 45% at 100% 0%,rgba(111,142,186,.55) 0%,rgba(111,142,186,0) 70%),radial-gradient(45% 40% at 0% 100%,rgba(24,43,70,.18) 0%,rgba(24,43,70,0) 70%),var(--cream);background-attachment:fixed}
+body::after{content:"";position:fixed;inset:0;background-image:var(--grain);opacity:.12;mix-blend-mode:multiply;pointer-events:none;z-index:50}
+.mono{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
+.display{font-weight:900;font-style:italic;font-stretch:125%;letter-spacing:-.04em;line-height:.92;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:20;background:rgba(242,234,219,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-style:italic;font-stretch:125%;font-size:22px;letter-spacing:-.03em}
+.brand svg{width:16px;height:16px}
+.lang{display:flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:none;background:none;min-width:44px;min-height:36px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;color:var(--navy)}
+.lang button[aria-pressed="true"]{background:var(--navy);color:var(--paper)}
+.progress{height:3px;background:var(--line)}
+.progress i{display:block;height:100%;width:0;background:var(--navy);transition:width .5s var(--ease)}
+.intro{padding:44px 0 24px}
+.intro h1{font-size:clamp(40px,10vw,72px)}
+.intro p{font-size:17px;max-width:560px;margin:18px 0 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chips span{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.4)}
+.steps{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:16px 0 4px;margin:0 -18px;padding-left:18px;padding-right:18px}
+.steps::-webkit-scrollbar{display:none}
+.steps button{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:38px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:transparent;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);cursor:pointer;white-space:nowrap}
+.steps button[aria-current="step"]{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+.steps button.done::before{content:"✓ "}
+.card{background:rgba(243,240,232,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:28px;padding:26px 22px;margin:16px 0}
+.card h2{font-size:clamp(30px,7vw,44px)}
+.card .sub{color:var(--muted);margin:10px 0 0}
+.q{display:flex;flex-direction:column;gap:8px;padding:20px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:none}
+.q>label,.q>.label{font-weight:800;font-size:16px;line-height:1.35}
+.q .help{color:var(--muted);font-size:14px;margin-top:-4px}
+.req{color:var(--blue);margin-left:4px}
+input[type=text],input[type=tel],input[type=email],input[type=url],input[type=number],input[type=date],textarea,select{width:100%;min-height:52px;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:rgba(255,255,255,.65);font:inherit;font-size:16px;color:var(--navy);transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy);background:#fff}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opt span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.45);font-size:15px;transition:all .2s}
+.opt input:checked+span{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+.opt input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:110px;border:1.5px dashed rgba(24,43,70,.35);border-radius:18px;padding:16px;text-align:center;cursor:pointer;background:rgba(255,255,255,.35)}
+.drop input{display:none}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#e8dfcd;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .st{position:absolute;inset:auto 4px 4px 4px;font-size:10px;text-align:center;background:rgba(17,17,17,.7);color:#fff;border-radius:6px;padding:2px}
+.thumb button{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:none;background:rgba(17,17,17,.75);color:#fff;cursor:pointer;font-size:14px;line-height:1}
+.product{border:1.5px solid var(--line);border-radius:22px;padding:18px;margin:12px 0;background:rgba(255,255,255,.3)}
+.product-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.product .q{padding:14px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:1.5px solid transparent;font:inherit;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:transform .25s var(--ease),background .25s}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-out{background:transparent;border-color:var(--navy);color:var(--navy)}
+.btn-small{min-height:40px;padding:0 14px;font-size:12px}
+.btn[disabled]{opacity:.5;cursor:wait}
+.nav{display:flex;gap:10px;justify-content:space-between;margin:8px 0 40px}
+.nav .btn{flex:1}
+.saved{text-align:center;color:var(--muted);margin:-24px 0 40px}
+.err{color:var(--err);font-size:14px;display:none}
+.q.invalid .err{display:block}
+.q.invalid input,.q.invalid textarea,.q.invalid select{border-color:var(--err)}
+.done{text-align:center;padding:60px 0 100px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.done svg{width:56px;height:56px}
+.toast{visibility:hidden;position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,150%);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px;z-index:60;transition:transform .4s var(--ease);max-width:calc(100% - 32px);text-align:center}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+[hidden]{display:none!important}
+@media (min-width:700px){.card{padding:36px 40px}.grid2{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="currentColor"/></svg>OFFGRID</div>
+    <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+  <div class="progress"><i id="prog"></i></div>
+</header>
+
+<main class="wrap" id="app">
+  <section class="intro" id="intro">
+    <span class="mono" data-t="kicker"></span>
+    <h1 class="display" data-t="title" style="margin-top:12px"></h1>
+    <p data-t="lead"></p>
+    <div class="chips mono"><span data-t="chip1"></span><span data-t="chip2"></span><span data-t="chip3"></span></div>
+  </section>
+  <nav class="steps" id="steps" aria-label="Sections"></nav>
+  <form id="form" novalidate></form>
+  <p class="saved mono" id="saved"></p>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+const T = {
+ fr:{kicker:"Questionnaire — site web",title:"Construisons le site OFFGRID.",lead:"Réponds tranquillement : tes réponses sont enregistrées sur ton téléphone pendant que tu remplis, tu peux t'arrêter et revenir plus tard. Rien n'est obligatoire sauf les champs marqués ✦.",chip1:"≈ 10 min",chip2:"6 étapes",chip3:"Photos acceptées",
+ prev:"Retour",next:"Suivant",send:"Envoyer mes réponses",sending:"Envoi…",savedLocal:"Brouillon enregistré sur cet appareil",required:"Ce champ est obligatoire.",addProduct:"+ Ajouter un produit",product:"Produit",remove:"Supprimer",drop:"Touchez pour ajouter des photos",dropSub:"JPG, PNG, WEBP, SVG ou PDF",uploading:"envoi…",failed:"échec",
+ doneTitle:"Merci, c'est envoyé !",doneText:"On a bien reçu tes réponses. On commence à travailler sur ton site et on te recontacte très vite.",edit:"Modifier mes réponses",sendErr:"L'envoi a échoué. Vérifie ta connexion et réessaie.",waitUp:"Attends la fin de l'envoi des photos.",fixErr:"Il manque une réponse obligatoire."},
+ en:{kicker:"Questionnaire — website",title:"Let's build the OFFGRID site.",lead:"Take your time: your answers are saved on your phone as you go, so you can stop and come back later. Nothing is required except fields marked ✦.",chip1:"≈ 10 min",chip2:"6 steps",chip3:"Photos welcome",
+ prev:"Back",next:"Next",send:"Send my answers",sending:"Sending…",savedLocal:"Draft saved on this device",required:"This field is required.",addProduct:"+ Add a product",product:"Product",remove:"Remove",drop:"Tap to add photos",dropSub:"JPG, PNG, WEBP, SVG or PDF",uploading:"uploading…",failed:"failed",
+ doneTitle:"Thanks, it's sent!",doneText:"We received your answers. We're starting work on your site and will get back to you very soon.",edit:"Edit my answers",sendErr:"Sending failed. Check your connection and try again.",waitUp:"Wait for the photos to finish uploading.",fixErr:"A required answer is missing."}
+};
+const L = (fr,en) => ({fr,en});
+const S = [
+ {id:"brand",t:L("La marque","The brand"),s:L("Qui vous êtes et ce que la marque représente.","Who you are and what the brand stands for."),q:[
+  {id:"owner_name",type:"text",req:1,l:L("Ton prénom et nom","Your first and last name")},
+  {id:"brand_name",type:"text",req:1,l:L("Nom exact de la marque, tel qu'il doit apparaître sur le site","Exact brand name as it should appear on the site"),v:"OFFGRID"},
+  {id:"city",type:"text",l:L("Ville où la marque est basée","City where the brand is based")},
+  {id:"since",type:"text",l:L("Depuis quand la marque existe ?","When did the brand start?"),p:L("ex. 2024","e.g. 2024")},
+  {id:"story",type:"textarea",l:L("Raconte l'histoire de la marque : comment elle est née, pourquoi le nom OFFGRID ?","Tell the brand's story: how it started, why the name OFFGRID?")},
+  {id:"message",type:"textarea",l:L("Quel message ou quelles valeurs veux-tu transmettre ?","What message or values do you want to get across?")},
+  {id:"slogan",type:"text",l:L("Slogan principal","Main slogan"),v:"More than just clothing.",h:L("Celui de ta bio Instagram, ou un autre.","The one from your Instagram bio, or another.")},
+  {id:"audience_age",type:"checks",l:L("Âge de tes clients","Your customers' age"),o:["13–17","18–24","25–34","35+"]},
+  {id:"audience_gender",type:"radio",l:L("Pour qui ?","Who is it for?"),o:[L("Hommes","Men"),L("Femmes","Women"),L("Unisexe","Unisex")]},
+  {id:"inspiration",type:"textarea",l:L("Marques ou sites que tu aimes (liens ou noms)","Brands or websites you like (links or names)"),h:L("Ça nous aide à comprendre le style que tu vises.","Helps us understand the style you're going for.")}
+ ]},
+ {id:"contact",t:L("Contact","Contact"),s:L("Comment les clients te joignent et passent commande.","How customers reach you and place orders."),q:[
+  {id:"whatsapp",type:"tel",l:L("Numéro WhatsApp pour recevoir les commandes","WhatsApp number to receive orders"),p:"+212 6XX XX XX XX"},
+  {id:"email",type:"email",l:L("Adresse e-mail de la marque","Brand email address")},
+  {id:"instagram",type:"text",l:L("Instagram","Instagram"),v:"@offgrid.storeoficiel"},
+  {id:"tiktok",type:"text",l:L("TikTok (si tu en as un)","TikTok (if you have one)"),p:"@"},
+  {id:"other_social",type:"text",l:L("Autres réseaux (Snapchat, Facebook, YouTube…)","Other socials (Snapchat, Facebook, YouTube…)")},
+  {id:"show_phone",type:"radio",l:L("Peut-on afficher ton numéro publiquement sur le site ?","Can we show your number publicly on the site?"),o:[L("Oui","Yes"),L("Non, seulement via le bouton WhatsApp","No, only through the WhatsApp button")]},
+  {id:"order_channel",type:"checks",req:1,l:L("Comment veux-tu recevoir les commandes ?","How do you want to receive orders?"),o:[L("WhatsApp","WhatsApp"),L("Message Instagram","Instagram DM"),L("E-mail","Email"),L("Paiement direct sur le site","Direct payment on the site")]}
+ ]},
+ {id:"products",t:L("Produits","Products"),s:L("Ajoute chaque produit que tu veux vendre sur le site, avec son prix et ses photos.","Add every product you want to sell on the site, with its price and photos."),q:[
+  {id:"product_list",type:"products",l:L("Tes produits","Your products")},
+  {id:"size_guide",type:"textarea",l:L("Guide des tailles : mesures pour chaque taille (S, M, L, XL…)","Size guide: measurements for every size (S, M, L, XL…)"),h:L("Largeur poitrine, longueur, manches… ou envoie une photo de ton tableau ci-dessous.","Chest width, length, sleeves… or upload a photo of your chart below.")},
+  {id:"size_guide_file",type:"file",l:L("Photo / fichier du guide des tailles","Photo / file of the size chart")},
+  {id:"fabric",type:"text",l:L("Matière et grammage","Fabric and weight"),p:L("ex. 100% coton, 450 g/m²","e.g. 100% cotton, 450 gsm")},
+  {id:"stock_mode",type:"radio",l:L("Comment gères-tu le stock ?","How do you handle stock?"),o:[L("Stock limité, je veux afficher « épuisé »","Limited stock, I want to show “sold out”"),L("Sur commande / précommande","Made to order / pre-order"),L("Les deux","Both")]},
+  {id:"next_drop",type:"text",l:L("Prochain drop prévu ? (date, nom, nombre de pièces)","Next drop planned? (date, name, number of pieces)")}
+ ]},
+ {id:"orders",t:L("Livraison & paiement","Delivery & payment"),s:L("Ce que le client doit savoir avant d'acheter.","What customers need to know before buying."),q:[
+  {id:"payment",type:"checks",req:1,l:L("Moyens de paiement acceptés","Accepted payment methods"),o:[L("Paiement à la livraison (cash)","Cash on delivery"),L("Virement bancaire","Bank transfer"),L("Carte bancaire en ligne","Card online"),L("PayPal","PayPal"),L("Autre","Other")]},
+  {id:"delivery_zone",type:"radio",l:L("Où livres-tu ?","Where do you deliver?"),o:[L("Tout le Maroc","All of Morocco"),L("Certaines villes seulement","Some cities only"),L("Maroc + international","Morocco + international")]},
+  {id:"delivery_cities",type:"text",l:L("Si certaines villes seulement, lesquelles ?","If some cities only, which ones?")},
+  {id:"delivery_fee",type:"textarea",l:L("Frais de livraison (par ville si différent)","Delivery fees (per city if different)"),p:L("ex. Casablanca 25 MAD, autres villes 35 MAD","e.g. Casablanca 25 MAD, other cities 35 MAD")},
+  {id:"free_shipping",type:"text",l:L("Livraison gratuite à partir de quel montant ? (ou jamais)","Free delivery from what amount? (or never)")},
+  {id:"delivery_time",type:"text",l:L("Délai de livraison habituel","Usual delivery time"),p:L("ex. 24–72 h","e.g. 24–72 h")},
+  {id:"courier",type:"text",l:L("Société de livraison utilisée","Delivery company you use"),p:"Amana, Cathedis, Ozon…"},
+  {id:"returns",type:"radio",l:L("Acceptes-tu les échanges ou retours ?","Do you accept exchanges or returns?"),o:[L("Échange de taille seulement","Size exchange only"),L("Échange et remboursement","Exchange and refund"),L("Non","No")]},
+  {id:"returns_rules",type:"textarea",l:L("Conditions (délai, état du produit, qui paie la livraison…)","Conditions (time limit, item condition, who pays shipping…)")}
+ ]},
+ {id:"design",t:L("Design du site","Site design"),s:L("Le look, les pages et les visuels.","The look, the pages and the visuals."),q:[
+  {id:"logo",type:"file",l:L("Ton logo en bonne qualité (PNG transparent, SVG ou PDF de préférence)","Your logo in good quality (transparent PNG, SVG or PDF if possible)")},
+  {id:"colors",type:"text",l:L("Couleurs de la marque","Brand colours"),p:L("ex. noir, crème, bleu marine","e.g. black, cream, navy")},
+  {id:"vibe",type:"checks",l:L("Le style que tu veux pour le site","The style you want for the site"),o:[L("Premium / luxe","Premium / luxury"),L("Street / brut","Street / raw"),L("Minimaliste","Minimalist"),L("Coloré","Colourful"),L("Sombre","Dark"),L("Clair","Light")]},
+  {id:"pages",type:"checks",l:L("Pages que tu veux sur le site","Pages you want on the site"),o:[L("Boutique","Shop"),L("Page produit","Product page"),L("Lookbook","Lookbook"),L("Notre histoire","Our story"),L("Guide des tailles","Size guide"),L("FAQ","FAQ"),L("Contact","Contact"),L("Avis clients","Customer reviews"),L("Newsletter","Newsletter")]},
+  {id:"languages",type:"checks",req:1,l:L("Langue(s) du site","Site language(s)"),o:[L("Français","French"),L("Anglais","English"),L("Arabe","Arabic")]},
+  {id:"currency",type:"radio",l:L("Devise des prix","Price currency"),o:["MAD","EUR","MAD + EUR"]},
+  {id:"lookbook_photos",type:"file",l:L("Photos lookbook / shooting (portées, ambiance)","Lookbook / shoot photos (worn, mood)")},
+  {id:"must_have",type:"textarea",l:L("Ce que tu veux absolument voir sur le site","What you absolutely want on the site")},
+  {id:"dont_want",type:"textarea",l:L("Ce que tu ne veux surtout pas","What you definitely don't want")}
+ ]},
+ {id:"launch",t:L("Lancement","Launch"),s:L("Dernières infos pour mettre le site en ligne.","Last details to get the site online."),q:[
+  {id:"domain",type:"radio",l:L("Nom de domaine","Domain name"),o:[L("J'en ai déjà un","I already have one"),L("Je veux en acheter un","I want to buy one"),L("Pas besoin pour l'instant","Not needed for now")]},
+  {id:"domain_name",type:"text",l:L("Lequel ? (ou celui que tu aimerais)","Which one? (or the one you'd like)"),p:"offgrid.ma"},
+  {id:"launch_date",type:"text",l:L("Date de lancement souhaitée","Desired launch date")},
+  {id:"promo",type:"text",l:L("Une promo ou un code de lancement ?","A launch promo or discount code?")},
+  {id:"legal",type:"textarea",l:L("Infos légales si tu en as (nom de société, ICE, adresse)","Legal info if you have it (company name, ICE, address)"),h:L("Utile pour les mentions légales. Facultatif.","Used for the legal page. Optional.")},
+  {id:"other",type:"textarea",l:L("Autre chose à nous dire ?","Anything else to tell us?")}
+ ]}
+];
+const PRODUCT_Q = [
+  {id:"name",type:"text",req:1,l:L("Nom du produit","Product name")},
+  {id:"type",type:"text",l:L("Type","Type"),p:L("Hoodie, t-shirt, pantalon…","Hoodie, t-shirt, pants…")},
+  {id:"price",type:"number",req:1,l:L("Prix de vente (MAD)","Selling price (MAD)")},
+  {id:"old_price",type:"number",l:L("Ancien prix si en promo (MAD)","Old price if on sale (MAD)")},
+  {id:"colors",type:"text",l:L("Couleurs disponibles","Available colours")},
+  {id:"sizes",type:"checks",l:L("Tailles disponibles","Available sizes"),o:["XS","S","M","L","XL","XXL","XXXL",L("Taille unique","One size")]},
+  {id:"stock",type:"text",l:L("Stock (par taille si possible)","Stock (per size if possible)")},
+  {id:"desc",type:"textarea",l:L("Description (matière, coupe, impression…)","Description (fabric, fit, print…)")},
+  {id:"photos",type:"file",l:L("Photos du produit (face, dos, détails, porté)","Product photos (front, back, details, worn)")}
+];
+
+const KEY = "offgrid_brief_v1";
+const st = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } })();
+st.id = st.id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2));
+st.lang = st.lang || ((navigator.language||"fr").startsWith("en") ? "en" : "fr");
+st.a = st.a || {};            // answers
+st.f = st.f || {};            // files: field -> [{name,url}]
+st.products = st.products || [{}];
+st.step = st.step || 0;
+st.done = st.done || [];
+let uploadsPending = 0;
+const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const tx = v => typeof v === "string" ? v : v[st.lang];
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); $("#saved").textContent = "✓ " + T[st.lang].savedLocal; } catch(e){} };
+const toast = m => { const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),3200); };
+
+function fieldHTML(q, key, val, files) {
+  const lab = esc(tx(q.l)) + (q.req ? '<span class="req" aria-hidden="true">✦</span>' : "");
+  const help = q.h ? `<div class="help">${esc(tx(q.h))}</div>` : "";
+  const ph = q.p ? ` placeholder="${esc(tx(q.p))}"` : "";
+  const err = `<div class="err">${T[st.lang].required}</div>`;
+  const id = "f_" + key.replace(/[^a-zA-Z0-9_]/g,"_");
+  if (["text","tel","email","url","number"].includes(q.type)) {
+    const v = val ?? q.v ?? "";
+    const im = q.type==="number" ? ' inputmode="numeric"' : "";
+    return `<div class="q" data-key="${key}"${q.req?' data-req="1"':""}><label for="${id}">${lab}</label>${help}<input id="${id}" type="${q.type==="number"?"text":q.type}"${im} name="${key}" value="${esc(v)}"${ph}>${err}</div>`;
+  }
+  if (q.type==="textarea") return `<div class="q" data-key="${key}"${q.req?' data-req="1"':""}><label for="${id}">${lab}</label>${help}<textarea id="${id}" name="${key}"${ph}>${esc(val ?? q.v ?? "")}</textarea>${err}</div>`;
+  if (q.type==="radio" || q.type==="checks") {
+    const sel = Array.isArray(val) ? val : (val ? [val] : []);
+    const opts = q.o.map(o => { const v = typeof o==="string" ? o : o.fr; return `<label class="opt"><input type="${q.type==="radio"?"radio":"checkbox"}" name="${key}" value="${esc(v)}"${sel.includes(v)?" checked":""}><span>${esc(tx(o))}</span></label>`; }).join("");
+    return `<div class="q" data-key="${key}"${q.req?' data-req="1"':""} role="group" aria-labelledby="${id}"><div class="label" id="${id}">${lab}</div>${help}<div class="opts">${opts}</div>${err}</div>`;
+  }
+  if (q.type==="file") {
+    const list = files || [];
+    return `<div class="q" data-key="${key}"><div class="label">${lab}</div>${help}
+      <label class="drop"><input type="file" multiple accept="image/*,.pdf,.svg" data-file="${key}"><strong>${T[st.lang].drop}</strong><span class="mono" style="font-size:10px">${T[st.lang].dropSub}</span></label>
+      <div class="thumbs" data-thumbs="${key}">${list.map((f,i)=>thumbHTML(key,f,i)).join("")}</div></div>`;
+  }
+  return "";
+}
+function thumbHTML(key,f,i){
+  const isImg = /\.(jpe?g|png|webp|svg)$/i.test(f.name||"") || (f.url||"").match(/\.(jpe?g|png|webp|svg)/i);
+  return `<div class="thumb">${isImg && f.url ? `<img src="${esc(f.url)}" alt="">` : `<div class="mono" style="padding:8px;font-size:9px;word-break:break-all">${esc(f.name)}</div>`}${f.state?`<div class="st">${f.state}</div>`:""}<button type="button" aria-label="${T[st.lang].remove}" data-rmfile="${key}" data-i="${i}">×</button></div>`;
+}
+function productsHTML(){
+  return st.products.map((p,pi) => `<div class="product" data-pi="${pi}">
+    <div class="product-head"><span class="display" style="font-size:24px">${T[st.lang].product} ${pi+1}</span>${st.products.length>1?`<button type="button" class="btn btn-out btn-small" data-rmprod="${pi}">${T[st.lang].remove}</button>`:""}</div>
+    ${PRODUCT_Q.map(q => fieldHTML(q, `p${pi}.${q.id}`, p[q.id], st.f[`p${pi}.${q.id}`])).join("")}
+  </div>`).join("") + `<button type="button" class="btn btn-out" id="addprod" style="width:100%">${T[st.lang].addProduct}</button>`;
+}
+function render(){
+  document.documentElement.lang = st.lang;
+  $$("[data-t]").forEach(e => e.textContent = T[st.lang][e.dataset.t]);
+  $$(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===st.lang));
+  $("#steps").innerHTML = S.map((s,i)=>`<button type="button" data-step="${i}"${i===st.step?' aria-current="step"':""} class="${st.done.includes(i)&&i!==st.step?"done":""}">${i+1} · ${esc(tx(s.t))}</button>`).join("");
+  const s = S[st.step];
+  const body = s.q.map(q => q.type==="products" ? productsHTML() : fieldHTML(q, q.id, st.a[q.id], st.f[q.id])).join("");
+  const last = st.step === S.length-1;
+  $("#form").innerHTML = `<section class="card"><span class="mono">${st.step+1} / ${S.length}</span><h2 class="display" style="margin-top:10px">${esc(tx(s.t))}</h2><p class="sub">${esc(tx(s.s))}</p>${body}</section>
+    <div class="nav">${st.step>0?`<button type="button" class="btn btn-out" id="prev">${T[st.lang].prev}</button>`:""}
+    <button type="${last?"submit":"button"}" class="btn btn-dark" id="${last?"send":"next"}">${last?T[st.lang].send:T[st.lang].next} →</button></div>`;
+  $("#prog").style.width = ((st.step+1)/S.length*100) + "%";
+  $("#intro").hidden = st.step !== 0;
+}
+function collect(){
+  $$("#form .q").forEach(q => {
+    const key = q.dataset.key; if (!key || q.querySelector("[data-file]")) return;
+    const inputs = $$("input,textarea,select", q);
+    let v;
+    if (inputs[0] && inputs[0].type==="checkbox") v = inputs.filter(i=>i.checked).map(i=>i.value);
+    else if (inputs[0] && inputs[0].type==="radio") v = (inputs.find(i=>i.checked)||{}).value || "";
+    else v = inputs[0] ? inputs[0].value.trim() : "";
+    if (key.startsWith("p") && key.includes(".")) { const [pp,f]=key.split("."); const pi=+pp.slice(1); (st.products[pi] ||= {})[f]=v; }
+    else st.a[key]=v;
+  });
+  save();
+}
+function validate(){
+  let ok = true, first;
+  $$("#form .q[data-req]").forEach(q => {
+    const inputs = $$("input,textarea", q);
+    const filled = inputs.some(i => (i.type==="checkbox"||i.type==="radio") ? i.checked : i.value.trim());
+    q.classList.toggle("invalid", !filled); if (!filled && !first) first = q; if(!filled) ok=false;
+  });
+  if (first) { first.scrollIntoView({behavior:"smooth",block:"center"}); toast(T[st.lang].fixErr); }
+  return ok;
+}
+function go(i){ collect(); st.step = Math.max(0, Math.min(S.length-1, i)); save(); render(); scrollTo({top:0,behavior:"smooth"}); }
+
+// image compression
+function compress(file){
+  return new Promise((resolve) => {
+    if (!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size < 900000) { const r=new FileReader(); r.onload=()=>resolve({type:file.type,data:r.result.split(",")[1],name:file.name}); r.readAsDataURL(file); return; }
+    const img = new Image(); const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 2200, sc = Math.min(1, max/Math.max(img.width,img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width*sc); c.height = Math.round(img.height*sc);
+      const keepPng = file.type==="image/png" && /logo/i.test(file.name);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      const type = keepPng ? "image/png" : "image/jpeg";
+      const data = c.toDataURL(type, .86).split(",")[1];
+      URL.revokeObjectURL(url);
+      resolve({type, data, name: file.name.replace(/\.\w+$/, type==="image/png"?".png":".jpg")});
+    };
+    img.onerror = () => { const r=new FileReader(); r.onload=()=>resolve({type:file.type,data:r.result.split(",")[1],name:file.name}); r.readAsDataURL(file); };
+    img.src = url;
+  });
+}
+async function upload(key, files){
+  const list = (st.f[key] ||= []);
+  for (const file of files) {
+    const entry = {name:file.name, state:T[st.lang].uploading, url:URL.createObjectURL(file)}; list.push(entry); uploadsPending++;
+    refreshThumbs(key);
+    try {
+      const c = await compress(file);
+      const r = await fetch("/api/upload",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:st.id,field:key.replace(".","_"),name:c.name,type:c.type,data:c.data})});
+      const j = await r.json(); if (!r.ok) throw new Error(j.error);
+      entry.url = j.url; entry.name = j.name; delete entry.state;
+    } catch(e) { entry.state = T[st.lang].failed; }
+    uploadsPending--; refreshThumbs(key); save();
+  }
+}
+function refreshThumbs(key){ const box = $(`[data-thumbs="${CSS.escape(key)}"]`); if (box) box.innerHTML = (st.f[key]||[]).map((f,i)=>thumbHTML(key,f,i)).join(""); }
+
+async function submit(e){
+  e.preventDefault(); collect();
+  if (!validate()) return;
+  const miss = S.findIndex(s => s.q.some(q => q.req && q.type!=="products" && !(Array.isArray(st.a[q.id]) ? st.a[q.id].length : (st.a[q.id] ?? q.v))));
+  const missP = st.products.some(p => !p.name || !p.price);
+  const target = miss >= 0 ? miss : (missP ? S.findIndex(s=>s.id==="products") : -1);
+  if (target >= 0 && target !== st.step) { go(target); setTimeout(validate, 400); return; }
+  if (uploadsPending) { toast(T[st.lang].waitUp); return; }
+  const btn = $("#send"); btn.disabled = true; btn.textContent = T[st.lang].sending;
+  const files = []; Object.entries(st.f).forEach(([k,arr]) => arr.forEach(f => { if (f.url && f.url.startsWith("http")) files.push({field:k,name:f.name,url:f.url}); }));
+  const answers = {...st.a, products: st.products};
+  try {
+    const r = await fetch("/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:st.id,lang:st.lang,answers,files})});
+    if (!r.ok) throw new Error();
+    st.sent = new Date().toISOString(); save();
+    $("#steps").hidden = true; $("#intro").hidden = true; $("#prog").style.width="100%";
+    $("#form").innerHTML = `<div class="done"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="#182B46"/></svg><h2 class="display" style="font-size:44px">${T[st.lang].doneTitle}</h2><p style="max-width:440px;font-size:17px;margin:0">${T[st.lang].doneText}</p><button type="button" class="btn btn-out" id="editagain">${T[st.lang].edit}</button></div>`;
+    scrollTo({top:0,behavior:"smooth"});
+  } catch(err) { btn.disabled=false; btn.textContent=T[st.lang].send+" →"; toast(T[st.lang].sendErr); }
+}
+
+document.addEventListener("click", e => {
+  const t = e.target;
+  if (t.closest("[data-lang]")) { collect(); st.lang = t.closest("[data-lang]").dataset.lang; save(); render(); }
+  else if (t.closest("#next")) { collect(); if (validate()) { if(!st.done.includes(st.step)) st.done.push(st.step); go(st.step+1); } }
+  else if (t.closest("#prev")) go(st.step-1);
+  else if (t.closest("[data-step]")) go(+t.closest("[data-step]").dataset.step);
+  else if (t.closest("#addprod")) { collect(); st.products.push({}); save(); render(); $$(".product").at(-1).scrollIntoView({behavior:"smooth"}); }
+  else if (t.closest("[data-rmprod]")) { collect(); const i=+t.closest("[data-rmprod]").dataset.rmprod; st.products.splice(i,1);
+      const nf={}; Object.entries(st.f).forEach(([k,v])=>{ const m=k.match(/^p(\d+)\.(.+)$/); if(!m) nf[k]=v; else if(+m[1]<i) nf[k]=v; else if(+m[1]>i) nf[`p${+m[1]-1}.${m[2]}`]=v; }); st.f=nf; save(); render(); }
+  else if (t.closest("[data-rmfile]")) { const b=t.closest("[data-rmfile]"); st.f[b.dataset.rmfile].splice(+b.dataset.i,1); save(); refreshThumbs(b.dataset.rmfile); }
+  else if (t.closest("#editagain")) { $("#steps").hidden=false; st.step=0; render(); }
+});
+document.addEventListener("change", e => { const f = e.target.closest("[data-file]"); if (f && f.files.length) { upload(f.dataset.file, [...f.files]); f.value=""; } else collect(); });
+document.addEventListener("input", (() => { let t; return () => { clearTimeout(t); t=setTimeout(collect, 500); }; })());
+$("#form").addEventListener("submit", submit);
+addEventListener("pagehide", collect);
+// drop stale "uploading" states from a previous visit
+Object.values(st.f).forEach(arr => arr.forEach(f => { if (f.state) f.state = T[st.lang].failed; if (f.url && f.url.startsWith("blob:")) f.url = ""; }));
+render(); if (st.a && Object.keys(st.a).length) save();
+})();
+</script>
+</body>
+</html>
