@@ -1,58 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Our story — OFFGRID Streetwear</title>
-<meta name="description" content="OFFGRID is a streetwear brand from Morocco. More than just clothing.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notre histoire — OFFGRID Streetwear</title>
+<meta name="description" content="OFFGRID, marque streetwear née à Casablanca en 2026. More than just clothing — it's a mindset.">
 <meta name="theme-color" content="#F2EADB">
-<meta property="og:title" content="Our story — OFFGRID Streetwear">
-<meta property="og:description" content="OFFGRID is a streetwear brand from Morocco. More than just clothing.">
+<meta property="og:title" content="Notre histoire — OFFGRID Streetwear">
+<meta property="og:description" content="OFFGRID, marque streetwear née à Casablanca en 2026. More than just clothing — it's a mindset.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
 <body>
 <main id="main">
-  <section class="g-dark grain dark">
-    <div class="container" style="padding:clamp(80px,10vw,150px) clamp(18px,3vw,32px);display:flex;flex-direction:column;gap:28px">
-      <span class="mono eyebrow reveal">Our story</span>
-      <h1 class="display reveal" style="font-size:clamp(50px,8vw,124px);max-width:1150px">More than just clothing.</h1>
-      <p class="lede reveal" style="color:rgba(243,240,232,.85)">OFFGRID is a streetwear brand from Morocco, made for people who move on their own frequency.</p>
+  <section class="g-hero grain" style="padding:clamp(80px,10vw,150px) 0 clamp(60px,8vw,110px)">
+    <div class="container" style="display:flex;flex-direction:column;gap:24px;max-width:1000px">
+      <span class="mono eyebrow reveal" data-i18n="story.kicker"></span>
+      <h1 class="display h-xl reveal" data-i18n="story.title"></h1>
+      <p class="lede reveal" data-i18n="story.lede"></p>
     </div>
   </section>
-
-  <section class="section container split">
-    <div class="rounded reveal" style="aspect-ratio:4/5"><img src="/assets/img/nf-model-front.webp" alt="Model wearing the New Future hoodie" loading="lazy"></div>
+  <section class="section"><div class="container split">
+    <div class="rounded reveal" style="aspect-ratio:4/5"><img src="/assets/img/rd-back.webp" alt="Radio Dreams" loading="lazy"></div>
     <div style="display:flex;flex-direction:column;gap:22px" class="reveal">
-      <span class="mono eyebrow">Off the grid</span>
-      <h2 class="display h-lg">Same people.<br>New dreams.<br>Bigger goals.</h2>
-      <p class="lede">Going off the grid means stepping away from what everyone else is wearing and building your own lane. Every OFFGRID piece starts from that idea.</p>
-      <p class="lede">We design in small drops so every print gets the time it deserves — then cut it oversized in heavyweight cotton, so it feels as good as it looks.</p>
+      <p class="display" style="font-size:clamp(28px,3vw,42px);line-height:1.15" data-i18n="story.p1"></p>
+      <p class="lede" data-i18n="story.p2"></p>
+      <p class="mono" style="opacity:.7">— Adam, OFFGRID · Casablanca</p>
     </div>
-  </section>
-
-  <section class="g-soft grain">
-    <div class="container section">
-      <div class="section-head"><h2 class="display h-lg reveal">How it's made</h2></div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-        <div class="reveal" style="border-top:1.5px solid var(--navy);padding-top:22px"><span class="mono">01 — Fabric</span><h3 class="display h-md" style="margin:14px 0 10px">380–450 gsm</h3><p style="margin:0">100% cotton French terry. Heavy, soft and built for daily wear.</p></div>
-        <div class="reveal" style="border-top:1.5px solid var(--navy);padding-top:22px"><span class="mono">02 — Fit</span><h3 class="display h-md" style="margin:14px 0 10px">Oversized</h3><p style="margin:0">Drop shoulder, unisex, ribbed cuffs and hem, double-layer hood.</p></div>
-        <div class="reveal" style="border-top:1.5px solid var(--navy);padding-top:22px"><span class="mono">03 — Print</span><h3 class="display h-md" style="margin:14px 0 10px">DTF HD</h3><p style="margin:0">High-definition prints at 300 dpi, checked on a physical sample before each run.</p></div>
-      </div>
+  </div></section>
+  <section class="g-dark grain dark"><div class="container section" style="display:flex;flex-direction:column;gap:48px">
+    <h2 class="display h-lg reveal" data-i18n="story.how"></h2>
+    <div class="pillars">
+      <div class="reveal"><span class="mono" data-i18n="story.h1"></span><p data-i18n="story.h1t"></p></div>
+      <div class="reveal"><span class="mono" data-i18n="story.h2"></span><p data-i18n="story.h2t"></p></div>
+      <div class="reveal"><span class="mono" data-i18n="story.h3"></span><p data-i18n="story.h3t"></p></div>
     </div>
-  </section>
-
-  <section class="container section" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px">
-    <span class="logo-mark reveal" role="img" aria-label="OFFGRID Streetwear" style="height:clamp(110px,14vw,170px)"></span>
-    <p class="lede reveal" style="margin:0 auto">Drop 02 is live now, in limited pieces.</p>
-    <div class="cta-row reveal" style="justify-content:center"><a class="btn btn-dark" href="shop.html">Shop the drop</a><a class="btn btn-outline" href="contact.html">Get in touch</a></div>
-  </section>
+    <div class="reveal"><a class="btn btn-ghost-light" href="shop.html" data-i18n="hero.cta"></a></div>
+  </div></section>
 </main>
 </body>
 </html>

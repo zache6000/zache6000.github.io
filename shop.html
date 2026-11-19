@@ -1,59 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop — OFFGRID Streetwear</title>
-<meta name="description" content="Shop every OFFGRID piece: oversized heavyweight hoodies with high-definition prints.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boutique — OFFGRID Streetwear</title>
+<meta name="description" content="Tous les hoodies OFFGRID : New Future, Radio Dreams, Static Frequency, Lost Souls. 280 MAD au lieu de 400.">
 <meta name="theme-color" content="#F2EADB">
-<meta property="og:title" content="Shop — OFFGRID Streetwear">
-<meta property="og:description" content="Shop every OFFGRID piece: oversized heavyweight hoodies with high-definition prints.">
+<meta property="og:title" content="Boutique — OFFGRID Streetwear">
+<meta property="og:description" content="Tous les hoodies OFFGRID : New Future, Radio Dreams, Static Frequency, Lost Souls. 280 MAD au lieu de 400.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
 <body data-solid="1">
 <main id="main" class="container">
   <section style="padding:clamp(48px,6vw,80px) 0 28px">
-    <span class="mono eyebrow">Drop 02 — All products</span>
-    <h1 class="display h-xl" style="margin-top:16px">Shop</h1>
+    <span class="mono eyebrow" data-i18n="shop.kicker"></span>
+    <h1 class="display h-xl" style="margin-top:16px" data-i18n="shop.title"></h1>
   </section>
   <div class="filters">
-    <div class="chips" role="group" aria-label="Filter by colour">
-      <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
-      <button class="chip" type="button" data-f="cream" aria-pressed="false"><span class="swatch" style="background:#F2EADB"></span>Cream</button>
-      <button class="chip" type="button" data-f="black" aria-pressed="false"><span class="swatch" style="background:#1A1A1A"></span>Black</button>
-      <button class="chip" type="button" data-f="green" aria-pressed="false"><span class="swatch" style="background:#2E4E3A"></span>Green</button>
-    </div>
-    <div style="display:flex;align-items:center;gap:14px">
-      <span class="mono" id="count" aria-live="polite"></span>
-      <label class="sr-only" for="sort">Sort</label>
-      <select class="select" id="sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="az">Name A–Z</option></select>
-    </div>
+    <div class="chips" role="group" id="chips"></div>
+    <div class="sort"><label class="mono" for="sort" data-i18n="shop.sort"></label>
+      <select id="sort"><option value="featured" data-i18n="shop.featured"></option><option value="low" data-i18n="shop.low"></option><option value="high" data-i18n="shop.high"></option><option value="az" data-i18n="shop.az"></option></select></div>
   </div>
-  <div class="grid" id="grid" style="padding-bottom:110px"></div>
+  <p class="mono" id="count" style="opacity:.7;margin:0 0 22px"></p>
+  <div class="grid grid-4" id="grid" style="padding-bottom:110px"></div>
 </main>
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, $$, P, cardHTML, reveal } = OG;
-  let f = new URLSearchParams(location.search).get("c") || "all", sort = "featured";
+  const { $, $$, P, cardHTML, reveal, t, L } = OG;
+  const colors = [...new Map(P.map(p => [p.color.key, p.color])).values()];
+  $("#chips").innerHTML = `<button class="chip" type="button" data-f="all" aria-pressed="true">${t("shop.all")}</button>` +
+    colors.map(c => `<button class="chip" type="button" data-f="${c.key}" aria-pressed="false"><span class="swatch" style="background:${c.hex}"></span>${L(c)}</button>`).join("");
+  let f = "all", s = "featured";
   function draw() {
     let list = P.filter(p => f === "all" || p.color.key === f);
-    if (sort === "low") list = [...list].sort((a,b)=>a.price-b.price);
-    if (sort === "high") list = [...list].sort((a,b)=>b.price-a.price);
-    if (sort === "az") list = [...list].sort((a,b)=>a.name.localeCompare(b.name));
-    $("#grid").innerHTML = list.length ? list.map(cardHTML).join("") : '<p class="lede">Nothing in this colour yet — next drop soon.</p>';
-    $("#count").textContent = list.length + (list.length === 1 ? " piece" : " pieces");
-    $$("[data-f]").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === f));
+    if (s === "low") list.sort((a,b) => a.price-b.price);
+    if (s === "high") list.sort((a,b) => b.price-a.price);
+    if (s === "az") list.sort((a,b) => a.name.localeCompare(b.name));
+    $("#grid").innerHTML = list.length ? list.map(cardHTML).join("") : `<p class="mono">${t("shop.empty")}</p>`;
+    $("#count").textContent = list.length + " " + (list.length === 1 ? t("shop.count1") : t("shop.countn"));
     reveal();
   }
-  $$("[data-f]").forEach(b => b.onclick = () => { f = b.dataset.f; draw(); });
-  $("#sort").onchange = e => { sort = e.target.value; draw(); };
+  $("#chips").onclick = e => { const b = e.target.closest("[data-f]"); if (!b) return; f = b.dataset.f; $$("#chips .chip").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); };
+  $("#sort").onchange = e => { s = e.target.value; draw(); };
   draw();
 });
 </script>

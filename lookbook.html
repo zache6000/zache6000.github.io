@@ -1,46 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lookbook — OFFGRID Streetwear</title>
-<meta name="description" content="OFFGRID Drop 02 lookbook — New Future, Radio Dreams and Lost Paradise.">
+<meta name="description" content="Le lookbook OFFGRID : New Future et Radio Dreams portés.">
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Lookbook — OFFGRID Streetwear">
-<meta property="og:description" content="OFFGRID Drop 02 lookbook — New Future, Radio Dreams and Lost Paradise.">
+<meta property="og:description" content="Le lookbook OFFGRID : New Future et Radio Dreams portés.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
-<body>
-<main id="main">
-  <section class="g-hero grain">
-    <div class="container" style="padding:clamp(64px,8vw,120px) clamp(18px,3vw,32px) clamp(48px,6vw,80px)">
-      <span class="mono eyebrow reveal">Drop 02 — Fall / Winter 2025</span>
-      <h1 class="display h-xl reveal" style="margin-top:16px">Lookbook</h1>
-      <p class="lede reveal" style="margin-top:22px">Concrete, cold light, heavyweight cotton. Tap any image to see it full screen.</p>
-    </div>
+<body data-solid="1">
+<main id="main" class="container">
+  <section style="padding:clamp(48px,6vw,80px) 0 28px">
+    <span class="mono eyebrow" data-i18n="look.kicker"></span>
+    <h1 class="display h-xl" style="margin-top:16px" data-i18n="look.title"></h1>
+    <p class="lede" style="margin-top:16px" data-i18n="look.lede"></p>
   </section>
-  <section class="container section">
-    <div class="masonry" id="masonry"></div>
-  </section>
-  <section class="container" style="padding-bottom:110px">
-    <div class="section-head"><h2 class="display h-md">Shop the look</h2></div>
-    <div class="grid" id="grid"></div>
-  </section>
+  <div class="masonry" id="look" style="padding-bottom:110px"></div>
 </main>
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, P, cardHTML, Lightbox, reveal } = OG;
-  const imgs = ["nf-model-front","nf-model-back","nf-backprint","rd-back","nf-trio","lp-back","nf-chest","rd-backprint","nf-flat-back","lp-backprint","nf-sleeve","rd-front","lp-front","nf-flat-front"].map(n=>"/assets/img/"+n+".webp");
-  $("#masonry").innerHTML = imgs.map((s,i)=>`<button type="button" class="reveal" data-i="${i}" aria-label="Open image ${i+1} full screen"><img src="${s}" alt="" loading="lazy"></button>`).join("");
-  $("#masonry").onclick = e => { const b = e.target.closest("[data-i]"); if (b) Lightbox.open(imgs, +b.dataset.i); };
-  $("#grid").innerHTML = P.map(cardHTML).join("");
+  const { $, img, t, Lightbox, reveal } = OG;
+  const items = [["nf-model-back","new-future"],["rd-back","radio-dreams"],["nf-model-front","new-future"],["rd-backprint","radio-dreams"],["nf-backprint","new-future"],["rd-front","radio-dreams"],["nf-flat-back","new-future"],["rd-chest","radio-dreams"],["nf-chest","new-future"],["nf-sleeve","new-future"],["nf-flat-front","new-future"]];
+  const list = items.map(i => img(i[0]));
+  $("#look").innerHTML = items.map(([s,id],i)=>`<figure class="look-item reveal"><button type="button" data-lb="${i}" aria-label="Lookbook ${i+1}"><img src="${img(s)}" alt="" loading="lazy"></button><a class="mono look-shop" href="product.html?id=${id}">${t("look.shop")} ↗</a></figure>`).join("");
+  $("#look").addEventListener("click", e => { const b = e.target.closest("[data-lb]"); if (b) Lightbox.open(list, +b.dataset.lb); });
   reveal();
 });
 </script>

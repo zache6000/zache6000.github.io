@@ -1,86 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Checkout — OFFGRID Streetwear</title>
-<meta name="description" content="Complete your OFFGRID order.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Commande — OFFGRID Streetwear</title>
+<meta name="description" content="Finalise ta commande OFFGRID : paiement en cash à la livraison, livraison 48 h partout au Maroc.">
 <meta name="theme-color" content="#F2EADB">
-<meta property="og:title" content="Checkout — OFFGRID Streetwear">
-<meta property="og:description" content="Complete your OFFGRID order.">
+<meta property="og:title" content="Commande — OFFGRID Streetwear">
+<meta property="og:description" content="Finalise ta commande OFFGRID : paiement en cash à la livraison, livraison 48 h partout au Maroc.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
 <body data-solid="1">
 <main id="main" class="container">
   <section style="padding:clamp(40px,5vw,72px) 0 20px">
-    <span class="mono eyebrow">Secure your pieces</span>
-    <h1 class="display h-lg" style="margin-top:14px" id="co-title">Checkout</h1>
+    <span class="mono eyebrow" data-i18n="co.kicker"></span>
+    <h1 class="display h-lg" style="margin-top:14px" id="co-title" data-i18n="co.title"></h1>
   </section>
   <div id="co"></div>
 </main>
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, $$, C, esc, money, byId, I, Cart, store, orderText, copy, igDm, toast } = OG;
-  const cities = ["Casablanca","Rabat","Salé","Témara","Kénitra","Marrakech","Fès","Meknès","Tanger","Tétouan","Agadir","Oujda","El Jadida","Mohammedia","Safi","Béni Mellal","Nador","Khouribga","Settat","Laâyoune","Other"];
+  const { $, C, esc, money, I, t, lang, Cart, store, orderText, copy, igDm, toast } = OG;
+  const cities = ["Casablanca","Rabat","Salé","Témara","Kénitra","Mohammedia","Marrakech","Fès","Meknès","Tanger","Tétouan","Agadir","Oujda","El Jadida","Safi","Béni Mellal","Nador","Khouribga","Settat","Laâyoune"];
+  const OTHER = "__other";
   const saved = store.get("offgrid_customer", {});
 
   function summaryHTML() {
     return `<aside class="summary g-navy grain dark">
-      <div class="row-between" style="margin-bottom:6px"><span class="display" style="font-size:26px">Your order</span><a href="#" data-open-cart class="mono" style="color:var(--paper)">Edit</a></div>
+      <div class="row-between" style="margin-bottom:6px"><span class="display" style="font-size:26px">${t("co.yourorder")}</span><a href="#" data-open-cart class="mono" style="color:var(--paper)">${t("co.edit")}</a></div>
       <div id="sum-lines">${Cart.linesHTML(true)}</div>
-      <div class="row-between" style="padding-top:18px"><span class="mono">Subtotal</span><b style="font-style:italic;font-stretch:115%;font-size:28px">${money(Cart.total())}</b></div>
-      <div class="row-between" style="padding-top:6px;opacity:.8"><span class="mono">Delivery</span><span>Confirmed by message</span></div>
+      <div class="totals" style="padding-top:18px">${Cart.totalsHTML()}</div>
+      ${Cart.freeBarHTML()}
     </aside>`;
   }
 
   function formView() {
     if (!Cart.count()) {
-      $("#co").innerHTML = `<div class="empty" style="padding-bottom:120px"><p class="display h-md">Your bag is empty</p><a class="btn btn-dark" href="shop.html">Shop the drop ${I.arrow}</a></div>`;
+      $("#co").innerHTML = `<div class="empty" style="padding-bottom:120px"><p class="display h-md">${t("bag.empty")}</p><a class="btn btn-dark" href="shop.html">${t("bag.shop")} ${I.arrow}</a></div>`;
       return;
     }
     $("#co").innerHTML = `<div class="checkout">
       <form class="checkout-form" id="form" novalidate>
-        <div class="steps mono"><span class="on">1 · Details</span><span>2 · Send order</span></div>
+        <div class="steps mono"><span class="on">${t("co.step1")}</span><span>${t("co.step2")}</span></div>
         <div class="form">
-          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required value="${esc(saved.name||"")}"><span class="err">Please enter your name.</span></div>
-          <div class="field"><label for="f-phone">Phone (WhatsApp)</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 XX XX XX XX" required value="${esc(saved.phone||"")}"><span class="err">Please enter a valid phone number.</span></div>
-          <div class="field"><label for="f-city">City</label><select id="f-city" name="city" required><option value="">Choose your city</option>${cities.map(c=>`<option${saved.city===c?" selected":""}>${c}</option>`).join("")}</select><span class="err">Please choose your city.</span></div>
-          <div class="field" id="other-wrap" hidden><label for="f-other">Your city</label><input id="f-other" name="other" value="${esc(saved.other||"")}"><span class="err">Please enter your city.</span></div>
-          <div class="field full"><label for="f-address">Delivery address</label><input id="f-address" name="address" autocomplete="street-address" required value="${esc(saved.address||"")}"><span class="err">Please enter your address.</span></div>
-          <div class="field full"><label for="f-note">Note (optional)</label><textarea id="f-note" name="note" placeholder="Anything we should know?"></textarea></div>
+          <div class="field"><label for="f-name">${t("co.name")}</label><input id="f-name" name="name" autocomplete="name" required value="${esc(saved.name||"")}"><span class="err">${t("co.err.name")}</span></div>
+          <div class="field"><label for="f-phone">${t("co.phone")}</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 XX XX XX XX" dir="ltr" required value="${esc(saved.phone||"")}"><span class="err">${t("co.err.phone")}</span></div>
+          <div class="field"><label for="f-city">${t("co.city")}</label><select id="f-city" name="city" required><option value="">${t("co.citych")}</option>${cities.map(c=>`<option${saved.city===c?" selected":""}>${c}</option>`).join("")}<option value="${OTHER}"${saved.city===OTHER?" selected":""}>${t("co.other_city")}</option></select><span class="err">${t("co.err.city")}</span></div>
+          <div class="field" id="other-wrap" hidden><label for="f-other">${t("co.other")}</label><input id="f-other" name="other" value="${esc(saved.other||"")}"><span class="err">${t("co.err.other")}</span></div>
+          <div class="field full"><label for="f-address">${t("co.address")}</label><input id="f-address" name="address" autocomplete="street-address" required value="${esc(saved.address||"")}"><span class="err">${t("co.err.address")}</span></div>
+          <div class="field full"><label for="f-note">${t("co.note")}</label><textarea id="f-note" name="note" placeholder="${t("co.noteph")}"></textarea></div>
         </div>
-        <p class="note" style="margin:24px 0">When you place your order, we prepare a ready-to-send message with everything inside. You send it to OFFGRID ${C.whatsapp ? "on WhatsApp or Instagram" : "on Instagram"} and we confirm delivery and payment with you directly.</p>
-        <button class="btn btn-dark btn-block" type="submit">Place order · ${money(Cart.total())} ${I.arrow}</button>
+        <p class="note" style="margin:24px 0">${t("co.info")}</p>
+        <button class="btn btn-dark btn-block" type="submit">${t("co.place")} · ${money(Cart.total())} ${I.arrow}</button>
       </form>
       ${summaryHTML()}
     </div>`;
     const city = $("#f-city"), other = $("#other-wrap");
-    const toggle = () => other.hidden = city.value !== "Other"; toggle(); city.onchange = toggle;
+    const toggle = () => other.hidden = city.value !== OTHER; toggle(); city.onchange = toggle;
     $("#form").onsubmit = submit;
   }
 
   function submit(e) {
     e.preventDefault();
-    const f = e.target, v = Object.fromEntries(new FormData(f));
+    const v = Object.fromEntries(new FormData(e.target));
     let ok = true;
     const check = (id, cond) => { const w = $("#"+id).closest(".field"); w.classList.toggle("invalid", !cond); if (!cond && ok) { $("#"+id).focus(); ok = false; } };
     check("f-name", v.name.trim().length > 1);
     check("f-phone", v.phone.replace(/\D/g,"").length >= 9);
     check("f-city", !!v.city);
-    if (v.city === "Other") check("f-other", v.other.trim().length > 1);
+    if (v.city === OTHER) check("f-other", v.other.trim().length > 1);
     check("f-address", v.address.trim().length > 4);
     if (!ok) return;
     store.set("offgrid_customer", { name: v.name, phone: v.phone, city: v.city, other: v.other, address: v.address });
     const d = new Date();
     const ref = "OG-" + String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0") + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
-    const order = { ref, items: Cart.items(), total: Cart.total(), name: v.name.trim(), phone: v.phone.trim(), city: v.city === "Other" ? v.other.trim() : v.city, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
+    const order = { ref, items: Cart.items(), subtotal: Cart.subtotal(), delivery: Cart.delivery(), total: Cart.total(), name: v.name.trim(), phone: v.phone.trim(), city: v.city === OTHER ? v.other.trim() : v.city, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
     store.set("offgrid_last_order", order);
     Cart.clear();
     doneView(order);
@@ -88,23 +91,22 @@ document.addEventListener("og:ready", () => {
 
   function doneView(o) {
     const text = orderText(o);
-    $("#co-title").textContent = "Almost done";
+    $("#co-title").textContent = t("co.almost");
     $("#co").innerHTML = `<div class="success">
-      <div class="steps mono" style="justify-content:center"><span>1 · Details</span><span class="on">2 · Send order</span></div>
+      <div class="steps mono" style="justify-content:center"><span>${t("co.step1")}</span><span class="on">${t("co.step2")}</span></div>
       <span style="width:52px;color:var(--navy)">${I.star}</span>
-      <h2 class="display h-md">Order ${esc(o.ref)} is ready</h2>
-      <p class="lede" style="margin:0 auto">Send it to OFFGRID to confirm. We'll reply with delivery and payment details for ${esc(o.city)}.</p>
+      <h2 class="display h-md">${t("co.readytitle", { ref: esc(o.ref) })}</h2>
+      <p class="lede" style="margin:0 auto">${t("co.readytxt", { city: esc(o.city) })}</p>
       <div class="cta-row" style="justify-content:center">
-        ${C.whatsapp ? `<a class="btn btn-dark" target="_blank" rel="noopener" href="https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}">${I.wa} Send on WhatsApp</a>` : ""}
-        <button class="btn ${C.whatsapp ? "btn-outline" : "btn-dark"}" type="button" id="send-ig">${I.ig} Send on Instagram</button>
-        <button class="btn btn-outline" type="button" id="copy">Copy order</button>
+        <button class="btn btn-dark" type="button" id="send-ig">${I.ig} ${t("co.sendig")}</button>
+        <button class="btn btn-outline" type="button" id="copy">${t("co.copy")}</button>
       </div>
-      <p class="mono" id="ig-hint" style="opacity:.7;max-width:520px;line-height:1.7">Instagram: your order is copied automatically — just paste it in the chat and send.</p>
-      <div class="order-box" aria-label="Your order message">${esc(text)}</div>
-      <a href="shop.html" class="mono">← Continue shopping</a>
+      <p class="mono" style="opacity:.7;max-width:520px;line-height:1.7">${t("co.hint")}</p>
+      <div class="order-box" aria-label="${t("co.yourorder")}" dir="auto">${esc(text)}</div>
+      <a href="shop.html" class="mono">${t("co.continue")}</a>
     </div>`;
-    $("#send-ig").onclick = async () => { await copy(text); toast("Order copied — paste it in the Instagram chat", false); setTimeout(() => window.open(igDm, "_blank", "noopener"), 400); };
-    $("#copy").onclick = async () => { toast(await copy(text) ? "Order copied" : "Select the text below to copy it", false); };
+    $("#send-ig").onclick = async () => { await copy(text); toast(t("toast.copied"), false); setTimeout(() => window.open(igDm, "_blank", "noopener"), 400); };
+    $("#copy").onclick = async () => { await copy(text); toast(t("toast.copied"), false); };
     scrollTo({ top: 0, behavior: "smooth" });
   }
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avis clients — OFFGRID Streetwear</title>
+<meta name="description" content="Les avis des clients OFFGRID. Tu as reçu ta pièce ? Laisse ton avis.">
+<meta name="theme-color" content="#F2EADB">
+<meta property="og:title" content="Avis clients — OFFGRID Streetwear">
+<meta property="og:description" content="Les avis des clients OFFGRID. Tu as reçu ta pièce ? Laisse ton avis.">
+<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
+<script src="/assets/js/products.js" defer></script>
+<script src="/assets/js/app.js" defer></script>
+</head>
+<body data-solid="1">
+<main id="main" class="container">
+  <section style="padding:clamp(48px,6vw,80px) 0 28px">
+    <span class="mono eyebrow">OFFGRID</span>
+    <h1 class="display h-xl" style="margin-top:16px" data-i18n="rev.title"></h1>
+    <p class="lede" style="margin-top:16px" data-i18n="rev.lede"></p>
+  </section>
+  <div class="rev-summary" id="rev-summary" hidden></div>
+  <div class="reviews-grid" id="list" style="margin-bottom:64px"></div>
+  <section class="rev-form-wrap" style="padding-bottom:110px">
+    <form class="checkout-form rev-form g-soft" id="rform" novalidate>
+      <h2 class="display h-md" style="margin-bottom:22px" data-i18n="rev.formtitle"></h2>
+      <div class="form">
+        <div class="field"><label for="r-name" data-i18n="rev.name"></label><input id="r-name" name="name" maxlength="40" required><span class="err" data-i18n="contact.err.name"></span></div>
+        <div class="field"><label for="r-product" data-i18n="rev.product"></label><select id="r-product" name="product"></select></div>
+        <div class="field full"><span class="label mono" data-i18n="rev.rating"></span>
+          <div class="rate" id="rate" role="radiogroup"></div><input type="hidden" name="rating" id="r-rating" value="5"></div>
+        <div class="field full"><label for="r-text" data-i18n="rev.text"></label><textarea id="r-text" name="text" maxlength="600" required></textarea><span class="err" data-i18n="contact.err.msg"></span></div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      </div>
+      <button class="btn btn-dark btn-block" type="submit" style="margin-top:22px" data-i18n="rev.send"></button>
+      <p class="mono form-msg" id="r-msg" role="status"></p>
+    </form>
+  </section>
+</main>
+<script>
+document.addEventListener("og:ready", async () => {
+  const { $, $$, P, I, t, lang, reviewHTML, stars } = OG;
+  $("#r-product").innerHTML = P.map(p => `<option value="${p.id}">${p.name}</option>`).join("");
+  const pre = new URLSearchParams(location.search).get("product"); if (pre) $("#r-product").value = pre;
+  let rating = 5;
+  const drawRate = () => { $("#rate").innerHTML = [1,2,3,4,5].map(i => `<button type="button" role="radio" aria-checked="${i===rating}" aria-label="${i}/5" data-r="${i}" class="${i<=rating?"on":""}">${I.star}</button>`).join(""); $("#r-rating").value = rating; };
+  drawRate(); $("#rate").onclick = e => { const b = e.target.closest("[data-r]"); if (b) { rating = +b.dataset.r; drawRate(); } };
+
+  async function load() {
+    const box = $("#list");
+    box.innerHTML = `<p class="mono muted-line">${t("rev.empty")}</p>`;
+    try {
+      const d = await (await fetch("/api/reviews")).json();
+      const list = d.reviews || [];
+      if (list.length) {
+        box.innerHTML = list.map(reviewHTML).join("");
+        const avg = list.reduce((n, r) => n + r.rating, 0) / list.length;
+        $("#rev-summary").hidden = false;
+        $("#rev-summary").innerHTML = `<b class="display">${avg.toFixed(1)}</b>${stars(Math.round(avg))}<span class="mono">${list.length} ${t("nav.reviews").toLowerCase()}</span>`;
+      }
+    } catch (_) {}
+  }
+  load();
+
+  $("#rform").onsubmit = async e => {
+    e.preventDefault();
+    const f = e.target, v = Object.fromEntries(new FormData(f)); let ok = true;
+    const check = (id, c) => { const w = $("#"+id).closest(".field"); w.classList.toggle("invalid", !c); if (!c && ok) { $("#"+id).focus(); ok = false; } };
+    check("r-name", v.name.trim().length > 1); check("r-text", v.text.trim().length > 4);
+    if (!ok) return;
+    const btn = f.querySelector("button[type=submit]"), msg = $("#r-msg"); btn.disabled = true;
+    try {
+      const r = await fetch("/api/reviews", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...v, rating: +v.rating, lang }) });
+      if (!r.ok) throw 0;
+      f.reset(); rating = 5; drawRate(); msg.textContent = t("rev.thanks"); msg.className = "mono form-msg ok";
+    } catch (_) { msg.textContent = t("rev.err"); msg.className = "mono form-msg bad"; }
+    btn.disabled = false;
+  };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin — OFFGRID</title>
+<meta name="description" content="Espace privé.">
+<meta name="theme-color" content="#F2EADB">
+<meta property="og:title" content="Admin — OFFGRID">
+<meta property="og:description" content="Espace privé.">
+<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
+<script src="/assets/js/products.js" defer></script>
+<script src="/assets/js/app.js" defer></script>
+</head>
+<body data-solid="1">
+<main id="main" class="container" style="padding-bottom:110px">
+  <section style="padding:clamp(40px,5vw,64px) 0 24px">
+    <span class="mono eyebrow">OFFGRID · Admin</span>
+    <h1 class="display h-lg" style="margin-top:14px">Avis & newsletter</h1>
+  </section>
+  <form id="login" class="checkout-form" style="max-width:520px">
+    <div class="field"><label for="k">Clé admin</label><input id="k" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-dark btn-block" style="margin-top:18px">Entrer</button>
+    <p class="mono form-msg bad" id="lmsg"></p>
+  </form>
+  <div id="panel" hidden>
+    <div class="admin-stats" id="stats"></div>
+    <h2 class="display h-md" style="margin:36px 0 16px">Avis en attente</h2>
+    <div id="pending" class="admin-list"></div>
+    <h2 class="display h-md" style="margin:36px 0 16px">Avis publiés</h2>
+    <div id="approved" class="admin-list"></div>
+    <div class="row-between" style="margin:36px 0 16px;flex-wrap:wrap;gap:12px"><h2 class="display h-md">Newsletter</h2><button class="btn btn-outline" type="button" id="csv">Exporter CSV</button></div>
+    <div id="subs" class="admin-list"></div>
+  </div>
+</main>
+<script>
+document.addEventListener("og:ready", () => {
+  const { $, esc, byId, stars } = OG;
+  let key = sessionStorage.getItem("og_admin") || "", data = null;
+  const api = (action, extra = {}) => fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key, action, ...extra }) }).then(r => { if (r.status === 401) throw new Error("401"); return r.json(); });
+  const date = s => new Date(s).toLocaleString("fr-MA", { dateStyle: "medium", timeStyle: "short" });
+  const row = (r, pending) => `<div class="admin-item"><div><b>${esc(r.name)}</b> · ${stars(r.rating)} <span class="mono">${esc((byId(r.product)||{}).name||r.product)} · ${date(r.at)}</span><p>${esc(r.text)}</p></div>
+    <div class="admin-actions">${pending ? `<button class="btn btn-dark" data-a="approve" data-id="${r.id}">Publier</button>` : ""}<button class="btn btn-outline" data-a="delete" data-id="${r.id}" data-from="${pending?"pending":"approved"}">Supprimer</button></div></div>`;
+  async function load() {
+    data = await api("list");
+    $("#login").hidden = true; $("#panel").hidden = false;
+    $("#stats").innerHTML = `<div><b>${data.pending.length}</b><span class="mono">en attente</span></div><div><b>${data.approved.length}</b><span class="mono">publiés</span></div><div><b>${data.subscribers.length}</b><span class="mono">inscrits</span></div>`;
+    $("#pending").innerHTML = data.pending.map(r => row(r, true)).join("") || `<p class="mono muted-line">Aucun avis en attente.</p>`;
+    $("#approved").innerHTML = data.approved.map(r => row(r, false)).join("") || `<p class="mono muted-line">Aucun avis publié.</p>`;
+    $("#subs").innerHTML = data.subscribers.map(s => `<div class="admin-item"><div><b>${esc(s.email)}</b> <span class="mono">${esc(s.lang||"")} · ${date(s.at)}</span></div></div>`).join("") || `<p class="mono muted-line">Aucun inscrit pour l'instant.</p>`;
+  }
+  $("#login").onsubmit = async e => { e.preventDefault(); key = $("#k").value.trim();
+    try { await load(); sessionStorage.setItem("og_admin", key); } catch (_) { $("#lmsg").textContent = "Clé incorrecte."; } };
+  document.addEventListener("click", async e => {
+    const b = e.target.closest("[data-a]"); if (!b) return;
+    if (b.dataset.a === "delete" && !confirm("Supprimer cet avis ?")) return;
+    b.disabled = true; await api(b.dataset.a, { id: b.dataset.id, from: b.dataset.from }); load();
+  });
+  $("#csv").onclick = () => {
+    const csv = "email,langue,date\n" + data.subscribers.map(s => `${s.email},${s.lang||""},${s.at}`).join("\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "offgrid-newsletter.csv"; a.click();
+  };
+  if (key) load().catch(() => sessionStorage.removeItem("og_admin"));
+});
+</script>
+</body>
+</html>

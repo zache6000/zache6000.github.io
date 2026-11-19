@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OFFGRID Streetwear — More than just clothing</title>
-<meta name="description" content="OFFGRID is a streetwear brand from Morocco. Shop Drop 02: New Future, Radio Dreams and Lost Paradise oversized hoodies.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OFFGRID — Streetwear Casablanca · More than just clothing</title>
+<meta name="description" content="OFFGRID, marque streetwear de Casablanca. Hoodies oversize en coton premium — 280 MAD, livraison partout au Maroc en 48 h, paiement à la livraison.">
 <meta name="theme-color" content="#F2EADB">
-<meta property="og:title" content="OFFGRID Streetwear — More than just clothing">
-<meta property="og:description" content="OFFGRID is a streetwear brand from Morocco. Shop Drop 02: New Future, Radio Dreams and Lost Paradise oversized hoodies.">
+<meta property="og:title" content="OFFGRID — Streetwear Casablanca · More than just clothing">
+<meta property="og:description" content="OFFGRID, marque streetwear de Casablanca. Hoodies oversize en coton premium — 280 MAD, livraison partout au Maroc en 48 h, paiement à la livraison.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
@@ -23,25 +25,25 @@
 <section class="hero g-hero grain">
   <div class="container hero-in">
     <div class="hero-copy">
-      <span class="mono eyebrow reveal">Fall / Winter 2025 — Drop 02</span>
-      <h1 class="display h-xl reveal">Same People.<br>New Dreams.<br>Bigger Goals.</h1>
-      <p class="lede reveal">OFFGRID is your streetwear brand — more than just clothing. Heavyweight cotton, oversized cuts and prints made to outlast the trend. From Morocco.</p>
+      <span class="mono eyebrow reveal" data-i18n="hero.kicker"></span>
+      <h1 class="display h-xl reveal" data-i18n="hero.title"></h1>
+      <p class="lede reveal" data-i18n="hero.lede"></p>
       <div class="cta-row reveal">
-        <a class="btn btn-dark" href="shop.html">Shop the drop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-outline" href="lookbook.html">View lookbook</a>
+        <a class="btn btn-dark" href="shop.html"><span data-i18n="hero.cta"></span> <svg class="dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-outline" href="lookbook.html" data-i18n="hero.cta2"></a>
       </div>
       <div class="hero-stats mono reveal">
-        <div><b>450G</b>Premium cotton</div>
-        <div><b>Oversize</b>Drop shoulder</div>
-        <div><b>DTF</b>High-def print</div>
+        <div><b data-i18n="hero.s1b"></b><span data-i18n="hero.s1"></span></div>
+        <div><b data-i18n="hero.s2b"></b><span data-i18n="hero.s2"></span></div>
+        <div><b data-i18n="hero.s3b"></b><span data-i18n="hero.s3"></span></div>
       </div>
     </div>
     <div class="hero-media reveal">
       <div class="hero-frame">
-        <img src="/assets/img/nf-model-front.webp" alt="Model wearing the cream New Future hoodie" fetchpriority="high">
+        <img src="/assets/img/nf-model-front.webp" alt="New Future hoodie" fetchpriority="high">
         <a class="float-card" href="product.html?id=new-future">
           <img src="/assets/img/nf-backprint.webp" alt="">
-          <span><span class="mono" style="font-size:10.5px;color:var(--muted)">Model 02 · Shop now</span><b>"New Future" Hoodie</b></span>
+          <span><span class="mono" style="font-size:10.5px;color:var(--muted)" data-i18n="hero.card"></span><b>New Future</b></span>
         </a>
         <span class="star" style="width:58px;top:-24px;right:-16px;color:var(--navy)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="currentColor"/></svg></span>
         <span class="star" style="width:28px;top:110px;right:-44px;color:var(--paper);animation-duration:9s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="currentColor"/></svg></span>
@@ -50,82 +52,90 @@
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true"><div class="marquee-track">
-  <span>OFFGRID ✦ More than just clothing ✦ Same people ✦ New dreams ✦ Bigger goals ✦ Your streetwear brand ✦</span>
-  <span>OFFGRID ✦ More than just clothing ✦ Same people ✦ New dreams ✦ Bigger goals ✦ Your streetwear brand ✦</span>
-</div></div>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span data-i18n="marquee"></span><span data-i18n="marquee"></span></div></div>
+
+<section class="container" style="padding-top:clamp(40px,6vw,80px)">
+  <div class="drop-band g-dark grain dark reveal">
+    <div><span class="mono eyebrow" data-i18n="announce.drop"></span><p class="display" style="font-size:clamp(28px,3.4vw,44px);margin:10px 0 0">Drop 03 · 22.11</p></div>
+    <div class="cd-big" data-cd-big></div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div><span class="mono eyebrow reveal">Drop 02 — Hoodie collection</span>
-      <h2 class="display h-lg reveal" style="margin-top:14px">Three pieces.<br>One mindset.</h2></div>
-      <a class="btn btn-outline reveal" href="shop.html">View all</a>
+      <div><span class="mono eyebrow reveal" data-i18n="home.collection.kicker"></span>
+      <h2 class="display h-lg reveal" style="margin-top:14px" data-i18n="home.collection.title"></h2></div>
+      <a class="btn btn-outline reveal" href="shop.html" data-i18n="home.viewall"></a>
     </div>
-    <div class="grid" id="home-grid"></div>
+    <div class="grid grid-4" id="home-grid"></div>
   </div>
 </section>
 
-<section class="section g-soft grain" style="padding-top:0;background:transparent">
+<section class="section" style="padding-top:0">
   <div class="container split">
-    <a href="product.html?id=new-future" class="rounded reveal" style="aspect-ratio:4/5;display:block"><img src="/assets/img/nf-model-back.webp" alt="Back of the New Future hoodie with the butterfly print" loading="lazy"></a>
-    <div style="display:flex;flex-direction:column;gap:24px" class="reveal">
-      <span class="mono eyebrow">Featured — Model 02</span>
-      <h2 class="display h-lg">"New Future"</h2>
-      <p class="lede">A clean, modern piece and a symbol of a better future. Butterfly back print in navy and muted blue, chest logo, a star on the sleeve. 450 gsm premium cotton, cut oversized.</p>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:420px">
-        <div class="rounded" style="aspect-ratio:1"><img src="/assets/img/nf-chest.webp" alt="Chest logo detail" loading="lazy"></div>
-        <div class="rounded" style="aspect-ratio:1"><img src="/assets/img/nf-backprint.webp" alt="Back print detail" loading="lazy"></div>
-        <div class="rounded" style="aspect-ratio:1"><img src="/assets/img/nf-sleeve.webp" alt="Sleeve star detail" loading="lazy"></div>
-      </div>
-      <div class="cta-row"><a class="btn btn-dark" href="product.html?id=new-future">Shop New Future <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-    </div>
+    <a href="product.html?id=new-future" class="rounded reveal" style="aspect-ratio:4/5;display:block"><img src="/assets/img/nf-model-back.webp" alt="New Future — dos" loading="lazy"></a>
+    <div style="display:flex;flex-direction:column;gap:24px" class="reveal" id="feature"></div>
   </div>
 </section>
 
 <section class="g-dark grain dark">
   <div class="container section" style="display:flex;flex-direction:column;gap:56px">
-    <span class="mono eyebrow reveal">OFFGRID Streetwear — Manifesto</span>
-    <h2 class="display reveal" style="font-size:clamp(44px,7vw,112px);max-width:1100px">More than just clothing. It's a mindset.</h2>
+    <span class="mono eyebrow reveal" data-i18n="home.manifesto.kicker"></span>
+    <h2 class="display reveal" style="font-size:clamp(40px,7vw,112px);max-width:1100px" data-i18n="home.manifesto.title"></h2>
     <div class="pillars">
-      <div class="reveal"><span class="mono">01 / Same people</span><p>We come from the same streets, the same circles. The clothes carry where we started.</p></div>
-      <div class="reveal"><span class="mono">02 / New dreams</span><p>Every drop is a new chapter — designed slowly, printed carefully, made to be lived in.</p></div>
-      <div class="reveal"><span class="mono">03 / Bigger goals</span><p>A reminder, every time you put it on, of what you're building.</p></div>
+      <div class="reveal"><span class="mono" data-i18n="home.p1t"></span><p data-i18n="home.p1"></p></div>
+      <div class="reveal"><span class="mono" data-i18n="home.p2t"></span><p data-i18n="home.p2"></p></div>
+      <div class="reveal"><span class="mono" data-i18n="home.p3t"></span><p data-i18n="home.p3"></p></div>
     </div>
-    <div class="reveal"><a class="btn btn-ghost-light" href="about.html">Read our story</a></div>
+    <div class="reveal"><a class="btn btn-ghost-light" href="about.html" data-i18n="nav.story"></a></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <h2 class="display h-lg reveal">Lookbook</h2>
-      <a class="mono reveal" id="ig-link" target="_blank" rel="noopener" style="text-decoration:none">@offgrid.storeoficiel ↗</a>
+      <h2 class="display h-lg reveal" data-i18n="home.reviews.title"></h2>
+      <a class="btn btn-outline reveal" href="reviews.html" data-i18n="rev.formtitle"></a>
     </div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))" id="home-look"></div>
+    <div id="home-reviews" class="reviews-grid"></div>
   </div>
 </section>
 
-<section class="container" style="padding-bottom:clamp(72px,9vw,120px)">
-  <div class="g-navy grain dark reveal" style="border-radius:36px;padding:clamp(40px,6vw,72px) clamp(24px,5vw,56px);display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
-    <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:14px">
-      <h2 class="display" style="font-size:clamp(36px,4.4vw,60px)">Get in before Drop 03.</h2>
-      <p style="margin:0;font-size:17px;opacity:.88">New drops, restocks and behind-the-scenes land on Instagram first.</p>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="display h-lg reveal" data-i18n="nav.lookbook"></h2>
+      <a class="mono reveal" id="ig-link" target="_blank" rel="noopener" style="text-decoration:none">@offgrid.storeoficiel ↗</a>
     </div>
-    <a class="btn btn-light" id="ig-cta" target="_blank" rel="noopener">Follow on Instagram</a>
+    <div class="grid look-row" id="home-look"></div>
   </div>
 </section>
 
 </main>
 <script>
-document.addEventListener("og:ready", () => {
-  const { $, P, cardHTML, Lightbox, igUrl, reveal } = OG;
+document.addEventListener("og:ready", async () => {
+  const { $, P, byId, cardHTML, priceHTML, Lightbox, igUrl, reveal, img, L, t, esc, stars } = OG;
   $("#home-grid").innerHTML = P.map(cardHTML).join("");
-  $("#ig-link").href = igUrl; $("#ig-cta").href = igUrl;
-  const look = ["/assets/img/nf-model-front.webp","/assets/img/nf-backprint.webp","/assets/img/rd-back.webp","/assets/img/lp-back.webp"];
-  $("#home-look").innerHTML = look.map((s,i)=>`<button type="button" class="rounded reveal" data-lb="${i}" style="aspect-ratio:3/4;padding:0;border:none;cursor:zoom-in"><img src="${s}" alt="Lookbook image ${i+1}" loading="lazy"></button>`).join("");
+  $("#ig-link").href = igUrl;
+  const nf = byId("new-future");
+  $("#feature").innerHTML = `<span class="mono eyebrow">${t("home.featured")} — Hoodie</span>
+    <h2 class="display h-lg">New Future</h2>${priceHTML(nf, true)}
+    <p class="lede">${esc(L(nf.description))}</p>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:420px">
+      ${["nf-chest","nf-backprint","nf-sleeve"].map(s=>`<div class="rounded" style="aspect-ratio:1"><img src="${img(s)}" alt="" loading="lazy"></div>`).join("")}
+    </div>
+    <div class="cta-row"><a class="btn btn-dark" href="product.html?id=new-future">${t("hero.cta")} ${OG.I.arrow}</a></div>`;
+  const look = ["nf-model-front","nf-backprint","rd-back","rd-front"].map(img);
+  $("#home-look").innerHTML = look.map((s,i)=>`<button type="button" class="rounded reveal" data-lb="${i}" style="aspect-ratio:3/4;padding:0;border:none;cursor:zoom-in"><img src="${s}" alt="Lookbook ${i+1}" loading="lazy"></button>`).join("");
   $("#home-look").addEventListener("click", e => { const b = e.target.closest("[data-lb]"); if (b) Lightbox.open(look, +b.dataset.lb); });
   reveal();
+  const box = $("#home-reviews");
+  box.innerHTML = `<p class="mono muted-line">${t("rev.empty")}</p>`;
+  try {
+    const r = await fetch("/api/reviews"); const d = await r.json();
+    if (d.reviews && d.reviews.length) box.innerHTML = d.reviews.slice(0,3).map(OG.reviewHTML).join("");
+  } catch (_) {}
 });
 </script>
 </body>

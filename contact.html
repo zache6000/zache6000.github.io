@@ -1,75 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact &amp; FAQ — OFFGRID Streetwear</title>
-<meta name="description" content="Contact OFFGRID Streetwear — questions about orders, sizes and delivery.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact & FAQ — OFFGRID Streetwear</title>
+<meta name="description" content="Contacte OFFGRID sur Instagram, WhatsApp ou TikTok. Livraison, tailles, paiement : toutes les réponses.">
 <meta name="theme-color" content="#F2EADB">
-<meta property="og:title" content="Contact &amp; FAQ — OFFGRID Streetwear">
-<meta property="og:description" content="Contact OFFGRID Streetwear — questions about orders, sizes and delivery.">
+<meta property="og:title" content="Contact & FAQ — OFFGRID Streetwear">
+<meta property="og:description" content="Contacte OFFGRID sur Instagram, WhatsApp ou TikTok. Livraison, tailles, paiement : toutes les réponses.">
 <meta property="og:image" content="/assets/img/nf-model-back.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/i18n.js" defer></script>
 <script src="/assets/js/products.js" defer></script>
 <script src="/assets/js/app.js" defer></script>
 </head>
 <body data-solid="1">
 <main id="main" class="container">
-  <section style="padding:clamp(48px,6vw,80px) 0 32px">
-    <span class="mono eyebrow">We reply fast</span>
-    <h1 class="display h-xl" style="margin-top:16px">Contact</h1>
+  <section style="padding:clamp(48px,6vw,80px) 0 28px">
+    <span class="mono eyebrow" data-i18n="contact.kicker"></span>
+    <h1 class="display h-xl" style="margin-top:16px" data-i18n="contact.title"></h1>
   </section>
-  <div class="checkout" style="padding-top:0">
+  <div class="contact-grid">
     <form class="checkout-form" id="cform" novalidate>
       <div class="form">
-        <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name" required><span class="err">Please enter your name.</span></div>
-        <div class="field"><label for="c-topic">Topic</label><select id="c-topic" name="topic"><option>Order question</option><option>Sizing</option><option>Delivery</option><option>Collab / business</option><option>Other</option></select></div>
-        <div class="field full"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required></textarea><span class="err">Please write a message.</span></div>
+        <div class="field"><label for="c-name" data-i18n="contact.name"></label><input id="c-name" name="name" autocomplete="name" required><span class="err" data-i18n="contact.err.name"></span></div>
+        <div class="field"><label for="c-topic" data-i18n="contact.topic"></label><select id="c-topic" name="topic">
+          <option data-i18n="contact.t1"></option><option data-i18n="contact.t2"></option><option data-i18n="contact.t3"></option><option data-i18n="contact.t4"></option><option data-i18n="contact.t5"></option></select></div>
+        <div class="field full"><label for="c-msg" data-i18n="contact.msg"></label><textarea id="c-msg" name="msg" required></textarea><span class="err" data-i18n="contact.err.msg"></span></div>
       </div>
-      <div class="cta-row" style="margin-top:20px" id="c-actions"></div>
-      <p class="mono" style="opacity:.7;margin-top:14px;line-height:1.7" id="c-hint"></p>
+      <button class="btn btn-dark btn-block" type="submit" style="margin-top:22px" id="c-send"></button>
     </form>
     <aside class="summary g-navy grain dark" style="display:flex;flex-direction:column;gap:18px">
-      <span class="display" style="font-size:28px">Reach us</span>
-      <a class="btn btn-ghost-light btn-block" id="c-ig" target="_blank" rel="noopener"></a>
-      <div id="c-extra" style="display:flex;flex-direction:column;gap:12px"></div>
-      <p style="margin:0;opacity:.8">Based in Morocco.</p>
+      <span class="display" style="font-size:28px" data-i18n="contact.reach"></span>
+      <div class="reach" id="reach"></div>
+      <p class="mono" style="opacity:.75;margin:0" data-i18n="contact.based"></p>
     </aside>
   </div>
-  <section style="padding:24px 0 110px;max-width:860px">
-    <h2 class="display h-lg" style="margin-bottom:24px">FAQ</h2>
-    <div class="acc">
-      <details><summary>How do I order?</summary><div class="acc-body">Add your pieces to the bag, fill in your details at checkout and send the ready-made order message to us. We confirm everything with you by message before shipping.</div></details>
-      <details><summary>How do I pay and how much is delivery?</summary><div class="acc-body">Payment and the delivery fee for your city are confirmed with you directly when we reply to your order.</div></details>
-      <details><summary>Which size should I take?</summary><div class="acc-body">Every hoodie is cut oversized. Take your usual size for the relaxed look, or one size down for a cleaner fit. Size M measures 60 cm across the chest and 68 cm long. Need another size's measurements? Message us.</div></details>
-      <details><summary>How do I care for the print?</summary><div class="acc-body">Wash inside out at 30°C, don't iron directly on the print and don't tumble dry.</div></details>
-      <details><summary>Will there be restocks?</summary><div class="acc-body">Drops are limited. Follow us on Instagram to hear first about restocks and Drop 03.</div></details>
+  <section class="section" style="padding-bottom:110px">
+    <h2 class="display h-lg" style="margin-bottom:28px" data-i18n="faq.title"></h2>
+    <div class="acc faq">
+      <details open><summary data-i18n="faq.q1"></summary><div class="acc-body" data-i18n="faq.a1"></div></details>
+      <details><summary data-i18n="faq.q2"></summary><div class="acc-body" data-i18n="faq.a2"></div></details>
+      <details><summary data-i18n="faq.q3"></summary><div class="acc-body" data-i18n="faq.a3"></div></details>
+      <details><summary data-i18n="faq.q4"></summary><div class="acc-body" data-i18n="faq.a4"></div></details>
+      <details><summary data-i18n="faq.q5"></summary><div class="acc-body" data-i18n="faq.a5"></div></details>
     </div>
   </section>
 </main>
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, C, I, igUrl, igDm, copy, toast } = OG;
-  $("#c-ig").innerHTML = I.ig + " @" + C.instagram; $("#c-ig").href = igUrl;
-  $("#c-extra").innerHTML = (C.whatsapp ? `<a class="btn btn-ghost-light btn-block" href="https://wa.me/${C.whatsapp}" target="_blank" rel="noopener">${I.wa} WhatsApp</a>` : "") +
-    (C.email ? `<p style="margin:0">Email: <a href="mailto:${C.email}" style="color:var(--paper)">${C.email}</a></p>` : "");
-  $("#c-actions").innerHTML = (C.whatsapp ? `<button class="btn btn-dark" type="submit" data-via="wa">${I.wa} Send on WhatsApp</button>` : "") +
-    `<button class="btn ${C.whatsapp ? "btn-outline" : "btn-dark"}" type="submit" data-via="ig">${I.ig} Send on Instagram</button>`;
-  $("#c-hint").textContent = "Instagram: your message is copied automatically — paste it in the chat.";
-  let via = "ig";
-  document.addEventListener("click", e => { const b = e.target.closest("[data-via]"); if (b) via = b.dataset.via; }, true);
+  const { $, I, t, C, igUrl, igDm, ttUrl, waUrl, copy, toast } = OG;
+  $("#c-send").innerHTML = I.ig + " " + t("contact.sendig");
+  $("#reach").innerHTML = `
+    <a class="btn btn-light btn-block" href="${igUrl}" target="_blank" rel="noopener">${I.ig} Instagram · @${C.instagram}</a>
+    <a class="btn btn-ghost-light btn-block" href="${waUrl()}" target="_blank" rel="noopener">${I.wa} ${t("contact.wa")}</a>
+    <a class="btn btn-ghost-light btn-block" href="${ttUrl}" target="_blank" rel="noopener">${I.tt} TikTok · @${C.tiktok}</a>`;
   $("#cform").onsubmit = async e => {
     e.preventDefault();
     const v = Object.fromEntries(new FormData(e.target)); let ok = true;
-    [["c-name", v.name.trim().length > 1], ["c-msg", v.message.trim().length > 2]].forEach(([id, c]) => { $("#"+id).closest(".field").classList.toggle("invalid", !c); if (!c && ok) { $("#"+id).focus(); ok = false; } });
+    const check = (id, c) => { const w = $("#"+id).closest(".field"); w.classList.toggle("invalid", !c); if (!c && ok) { $("#"+id).focus(); ok = false; } };
+    check("c-name", v.name.trim().length > 1); check("c-msg", v.msg.trim().length > 2);
     if (!ok) return;
-    const text = `Hello ${C.brand}! — ${v.topic}\n\n${v.message.trim()}\n\n— ${v.name.trim()}`;
-    if (via === "wa" && C.whatsapp) { window.open(`https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener"); return; }
-    await copy(text); toast("Message copied — paste it in the Instagram chat", false);
+    const text = `${v.topic} — ${v.name.trim()}\n\n${v.msg.trim()}`;
+    await copy(text); toast(t("toast.copiedmsg"), false);
     setTimeout(() => window.open(igDm, "_blank", "noopener"), 400);
   };
 });
