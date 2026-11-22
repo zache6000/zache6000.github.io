@@ -13,6 +13,7 @@ window.OFFGRID_CONFIG = {
   whatsapp: "212771909178",          // shown only as a button, never as text
   sizes: ["S", "M", "L", "XL"],    // default sizes; a product can override with its own "sizes"
   delivery: { casablanca: 0, other: 20 },   // MAD: free in Casablanca, 20 MAD elsewhere
+  pack: { qty: 2, price: 500 },             // any 2 hoodies for 500 MAD (mix & match)
   nextDrop: "2026-11-25T00:00:00+01:00", // launch countdown (Morocco time)
   defaultLang: "fr"
 };
@@ -22,7 +23,7 @@ window.OFFGRID_PRODUCTS = [
   {
     id: "new-future",
     name: "New Future",
-    price: 280, oldPrice: 400,
+    price: 270, oldPrice: 400,
     color: { hex: "#EDE6D8", key: "white", fr: "Blanc", en: "White", ar: "أبيض" },
     tagline: { fr: "Same people. New dreams. Bigger goals.", en: "Same people. New dreams. Bigger goals.", ar: "نفس الناس. أحلام جديدة. أهداف أكبر." },
     description: {
@@ -37,7 +38,7 @@ window.OFFGRID_PRODUCTS = [
   {
     id: "radio-dreams",
     name: "Radio Dreams",
-    price: 280, oldPrice: 400,
+    price: 270, oldPrice: 400,
     color: { hex: "#141414", key: "black", fr: "Noir", en: "Black", ar: "أسود" },
     tagline: { fr: "Tune in to better days.", en: "Tune in to better days.", ar: "التقط إشارة أيام أفضل." },
     description: {
@@ -51,7 +52,7 @@ window.OFFGRID_PRODUCTS = [
   {
     id: "static-frequency",
     name: "Static Frequency",
-    price: 280, oldPrice: 400,
+    price: 270, oldPrice: 400,
     color: { hex: "#1B2740", key: "navy", fr: "Bleu nuit", en: "Midnight blue", ar: "أزرق ليلي" },
     tagline: { fr: "Rétro radio. Identité affirmée.", en: "Retro radio. Strong identity.", ar: "راديو ريترو. هوية واضحة." },
     description: {
@@ -65,7 +66,7 @@ window.OFFGRID_PRODUCTS = [
   {
     id: "lost-souls",
     name: "Lost Souls",
-    price: 280, oldPrice: 400,
+    price: 270, oldPrice: 400,
     color: { hex: "#4A5A34", key: "green", fr: "Vert olive", en: "Olive green", ar: "أخضر زيتوني" },
     tagline: { fr: "Made to stand out.", en: "Made to stand out.", ar: "صُنع ليتميّز." },
     description: {

@@ -467,3 +467,9 @@ main{animation:pagein .7s var(--ease)}
 .grid-4 .price-wrap{justify-content:flex-start}
 .deliv-note .mono{display:flex;align-items:center;gap:10px;line-height:1.5}
 .deliv-note svg{width:20px;height:20px;flex:none}
+.pack-line{display:flex;flex-direction:column;gap:4px;padding:14px 18px;border-radius:16px;background:rgba(240,120,50,.08);border:1px solid rgba(240,120,50,.35);font-size:15px}
+.pack-line b{color:#C2410C;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.pack-note .mono{color:#C2410C;font-weight:700}
+.dark .pack-note .mono,.summary .pack-note .mono{color:#F6A36A}
+.pack-row span:last-child{color:#C2410C;font-weight:700}
+.summary .pack-row span:last-child{color:#F6A36A}

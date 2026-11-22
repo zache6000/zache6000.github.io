@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Produit — OFFGRID Streetwear</title>
-<meta name="description" content="Hoodie oversize OFFGRID en coton premium. 280 MAD, livraison 48 h partout au Maroc, paiement à la livraison.">
+<meta name="description" content="Hoodie oversize OFFGRID en coton premium. 270 MAD · pack de 2 à 500 MAD, livraison 48 h partout au Maroc, paiement à la livraison.">
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Produit — OFFGRID Streetwear">
-<meta property="og:description" content="Hoodie oversize OFFGRID en coton premium. 280 MAD, livraison 48 h partout au Maroc, paiement à la livraison.">
+<meta property="og:description" content="Hoodie oversize OFFGRID en coton premium. 270 MAD · pack de 2 à 500 MAD, livraison 48 h partout au Maroc, paiement à la livraison.">
 <meta property="og:image" content="/assets/img/nf-2.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
@@ -79,6 +79,7 @@ document.addEventListener("og:ready", () => {
         <span class="mono" style="color:var(--muted)">${esc(L(p.tagline))}</span>
       </div>
       <div class="pdp-price">${priceHTML(p, true)}<span class="mono" style="display:flex;align-items:center;gap:8px"><span class="swatch" style="background:${p.color.hex}"></span>${esc(L(p.color))}</span></div>
+      <div class="pack-line"><b>${t("pack.short")}</b><span>${t("pack.line")}</span></div>
       ${p.photos ? "" : `<div class="soon-note"><b>${t("pdp.soontitle")}</b><span>${t("pdp.soontxt")}</span></div>`}
       <p style="margin:0;font-size:17px;line-height:1.7">${esc(L(p.description))}</p>
       <div>

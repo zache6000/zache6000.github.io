@@ -79,14 +79,27 @@
     count() { return Cart.items().reduce((n, i) => n + i.qty, 0); },
     subtotal() { return Cart.items().reduce((n, i) => n + byId(i.id).price * i.qty, 0); },
     delivery(city) { return deliveryFee(city); },
-    total(city) { return Cart.subtotal() + (deliveryFee(city) || 0); },
+    packs() {
+      const pk = C.pack; if (!pk) return { n: 0, off: 0 };
+      const units = []; Cart.items().forEach(i => { for (let k = 0; k < i.qty; k++) units.push(byId(i.id).price); });
+      units.sort((a, b) => b - a);
+      let n = 0, off = 0;
+      for (let k = 0; k + pk.qty <= units.length; k += pk.qty) { const s = units.slice(k, k + pk.qty).reduce((a, b) => a + b, 0); if (s > pk.price) { n++; off += s - pk.price; } }
+      return { n, off };
+    },
+    discount() { return Cart.packs().off; },
+    total(city) { return Cart.subtotal() - Cart.discount() + (deliveryFee(city) || 0); },
     freeBarHTML() {
-      return `<div class="freebar deliv-note"><span class="mono">${I.truck}${t("bag.deliverynote")}</span></div>`;
+      const n = Cart.count(), pk = C.pack;
+      const packMsg = !pk ? "" : (n % pk.qty === 1 ? t("pack.hint") : (n >= pk.qty ? t("pack.ok") : ""));
+      return `${packMsg ? `<div class="freebar pack-note"><span class="mono">${packMsg}</span></div>` : ""}<div class="freebar deliv-note"><span class="mono">${I.truck}${t("bag.deliverynote")}</span></div>`;
     },
     totalsHTML(city) {
       const d = deliveryFee(city);
       const dTxt = d == null ? t("bag.deliverycity") : (d ? money(d) : t("bag.free"));
+      const pk = Cart.packs();
       return `<div class="row-between"><span class="mono">${t("bag.subtotal")}</span><span>${money(Cart.subtotal())}</span></div>
+        ${pk.off ? `<div class="row-between pack-row"><span class="mono">${t("pack.row")}${pk.n > 1 ? " ×" + pk.n : ""}</span><span>−${money(pk.off)}</span></div>` : ""}
         <div class="row-between"><span class="mono">${t("bag.delivery")}</span><span>${dTxt}</span></div>
         <div class="row-between total"><span class="mono">${t("bag.total")}</span><b>${money(Cart.total(city))}</b></div>`;
     },
@@ -160,7 +173,7 @@
     const navHTML = links.map(([h, k]) => `<a href="/${h}.html"${page === h ? ' aria-current="page"' : ""}>${t(k)}</a>`).join("");
     document.body.insertAdjacentHTML("afterbegin", `
       <a href="#main" class="sr-only">${t("a11y.skip")}</a>
-      <div class="announce"><span data-cd-inline></span><span aria-hidden="true">✦</span><span>${t("announce.cod")}</span><span aria-hidden="true">✦</span><span>${t("announce.ship")}</span></div>
+      <div class="announce"><span data-cd-inline></span><span aria-hidden="true">✦</span><span>${t("pack.short")}</span><span aria-hidden="true">✦</span><span>${t("announce.cod")}</span><span aria-hidden="true">✦</span><span>${t("announce.ship")}</span></div>
       <header class="header${document.body.dataset.solid ? " solid" : ""}" id="header">
         <div class="container header-in">
           <a class="logo" href="/index.html" aria-label="OFFGRID"><span class="logo-mark" role="img" aria-label="OFFGRID Streetwear"></span></a>
@@ -325,9 +338,9 @@
   function orderText(o) {
     const lines = o.items.map(it => { const p = byId(it.id); return `• ${p.name} — ${L(p.color)} — ${t("order.size")} ${it.size} × ${it.qty} = ${money(p.price * it.qty)}`; });
     return [`${t("order.hello")} ${o.ref}`, "", ...lines, "",
-      `${t("order.subtotal")}: ${money(o.subtotal)}`, `${t("order.delivery")}: ${o.delivery ? money(o.delivery) : t("bag.free")}`, `${t("order.total")}: ${money(o.total)}`, t("order.payment"), "",
+      `${t("order.subtotal")}: ${money(o.subtotal)}`, o.discount ? `${t("pack.row")}: −${money(o.discount)}` : null, `${t("order.delivery")}: ${o.delivery ? money(o.delivery) : t("bag.free")}`, `${t("order.total")}: ${money(o.total)}`, t("order.payment"), "",
       `${t("order.name")}: ${o.name}`, `${t("order.phone")}: ${o.phone}`, `${t("order.city")}: ${o.city}`, `${t("order.address")}: ${o.address}`, o.note ? `${t("order.note")}: ${o.note}` : ""]
-      .filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n").trim();
+      .filter(l => l !== null).filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n").trim();
   }
   async function copy(text) {
     try { await navigator.clipboard.writeText(text); return true; }

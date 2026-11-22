@@ -87,7 +87,7 @@ document.addEventListener("og:ready", () => {
     const d = new Date();
     const ref = "OG-" + String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0") + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
     const cityName = v.city === OTHER ? v.other.trim() : v.city;
-    const order = { ref, items: Cart.items(), subtotal: Cart.subtotal(), delivery: Cart.delivery(cityName), total: Cart.total(cityName), name: v.name.trim(), phone: v.phone.trim(), city: cityName, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
+    const order = { ref, items: Cart.items(), subtotal: Cart.subtotal(), discount: Cart.discount(), delivery: Cart.delivery(cityName), total: Cart.total(cityName), name: v.name.trim(), phone: v.phone.trim(), city: cityName, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
     store.set("offgrid_last_order", order);
     Cart.clear();
     doneView(order);
