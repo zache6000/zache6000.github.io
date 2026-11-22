@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       subtotal: num(b.subtotal, 100000), discount: num(b.discount, 100000), delivery: num(b.delivery, 1000), total: num(b.total, 100000),
       name, phone, city, address, note: cleanText(b.note, 400),
       lang: ["fr", "en", "ar"].includes(b.lang) ? b.lang : "fr",
+      consentAt: b.consent === true ? new Date().toISOString() : null,
       at: new Date().toISOString()
     };
     await saveJSON(`orders/${ref}.json`, order, { random: true });

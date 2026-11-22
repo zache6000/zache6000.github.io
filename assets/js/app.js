@@ -167,7 +167,7 @@
       <label class="sr-only" for="${id}">${t("news.email")}</label>
       <input id="${id}" type="email" name="email" inputmode="email" autocomplete="email" placeholder="${t("news.email")}" required>
       <button class="btn btn-light" type="submit">${t("news.join")}</button>
-      <p class="news-msg mono" role="status"></p></form>`;
+      <p class="news-msg mono" role="status"></p><p class="news-note">${t("news.privacy")}</p></form>`;
 
   function layout() {
     const navHTML = links.map(([h, k]) => `<a href="/${h}.html"${page === h ? ' aria-current="page"' : ""}>${t(k)}</a>`).join("");
@@ -212,6 +212,7 @@
             </div>
           </div>
           <div class="footer-word" aria-hidden="true">OFFGRID</div>
+          <div class="footer-legal mono"><span class="footer-official">✓ ${t("legal.official")} · @${esc(C.instagram)}</span><span class="footer-legal-links"><a href="/legal.html">${t("legal.link")}</a><a href="/legal.html#confidentialite">${t("legal.privacy")}</a></span></div>
           <div class="footer-bottom mono"><span>© ${new Date().getFullYear()} ${esc(C.legalName)} · ${esc(C.city)}</span>${langSwitch("lang-light")}<span style="display:flex;gap:10px;align-items:center"><span style="width:16px;height:16px;display:inline-flex">${I.globe}</span>Maroc</span></div>
         </div>
       </footer>
