@@ -15,9 +15,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css?v=e5a8e37da2">
-<script src="/assets/js/i18n.js?v=659675767d" defer></script>
+<script src="/assets/js/i18n.js?v=2aef7ec86e" defer></script>
 <script src="/assets/js/products.js?v=2a9dbe9080" defer></script>
 <script src="/assets/js/app.js?v=ebeecd9d8d" defer></script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-solid="1">
 <main id="main" class="container">
@@ -29,11 +31,15 @@
     <form class="checkout-form" id="cform" novalidate>
       <div class="form">
         <div class="field"><label for="c-name" data-i18n="contact.name"></label><input id="c-name" name="name" autocomplete="name" required><span class="err" data-i18n="contact.err.name"></span></div>
+        <div class="field"><label for="c-reach" data-i18n="contact.reach2"></label><input id="c-reach" name="contact" autocomplete="tel" dir="auto" required><span class="err" data-i18n="contact.err.reach2"></span></div>
         <div class="field"><label for="c-topic" data-i18n="contact.topic"></label><select id="c-topic" name="topic">
           <option data-i18n="contact.t1"></option><option data-i18n="contact.t2"></option><option data-i18n="contact.t3"></option><option data-i18n="contact.t4"></option><option data-i18n="contact.t5"></option></select></div>
+        <div class="field"><label for="c-ref" data-i18n="contact.ref"></label><input id="c-ref" name="ref" dir="ltr" placeholder="OG-…"></div>
         <div class="field full"><label for="c-msg" data-i18n="contact.msg"></label><textarea id="c-msg" name="msg" required></textarea><span class="err" data-i18n="contact.err.msg"></span></div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
       </div>
       <button class="btn btn-dark btn-block" type="submit" style="margin-top:22px" id="c-send"></button>
+      <p class="mono form-msg" id="c-msg-out" role="status"></p>
     </form>
     <aside class="summary g-navy grain dark" style="display:flex;flex-direction:column;gap:18px">
       <span class="display" style="font-size:28px" data-i18n="contact.reach"></span>
@@ -55,20 +61,29 @@
 <script>
 document.addEventListener("og:ready", () => {
   const { $, I, t, C, igUrl, igDm, ttUrl, waUrl, copy, toast } = OG;
-  $("#c-send").innerHTML = I.ig + " " + t("contact.sendig");
+  const { lang } = OG;
+  const sendLabel = () => { $("#c-send").innerHTML = t("contact.send") + " " + I.arrow; };
+  sendLabel();
+  $("#c-reach").placeholder = t("contact.reach2ph");
   $("#reach").innerHTML = `
     <a class="btn btn-light btn-block" href="${igUrl}" target="_blank" rel="noopener">${I.ig} Instagram · @${C.instagram}</a>
     <a class="btn btn-ghost-light btn-block" href="${waUrl()}" target="_blank" rel="noopener">${I.wa} ${t("contact.wa")}</a>
     <a class="btn btn-ghost-light btn-block" href="${ttUrl}" target="_blank" rel="noopener">${I.tt} TikTok · @${C.tiktok}</a>`;
   $("#cform").onsubmit = async e => {
     e.preventDefault();
-    const v = Object.fromEntries(new FormData(e.target)); let ok = true;
+    const f = e.target, out = $("#c-msg-out");
+    const v = Object.fromEntries(new FormData(f)); let ok = true;
     const check = (id, c) => { const w = $("#"+id).closest(".field"); w.classList.toggle("invalid", !c); if (!c && ok) { $("#"+id).focus(); ok = false; } };
-    check("c-name", v.name.trim().length > 1); check("c-msg", v.msg.trim().length > 2);
+    check("c-name", v.name.trim().length > 1); check("c-reach", v.contact.trim().length > 2); check("c-msg", v.msg.trim().length > 2);
     if (!ok) return;
-    const text = `${v.topic} — ${v.name.trim()}\n\n${v.msg.trim()}`;
-    await copy(text); toast(t("toast.copiedmsg"), false);
-    setTimeout(() => window.open(igDm, "_blank", "noopener"), 400);
+    const btn = $("#c-send"); btn.disabled = true; out.textContent = ""; out.className = "mono form-msg";
+    try {
+      const r = await fetch("/api/messages", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...v, lang: typeof lang === "function" ? lang() : lang }) });
+      if (!r.ok) throw new Error(r.status);
+      f.reset(); out.textContent = t("contact.sent"); out.className = "mono form-msg ok";
+    } catch (_) {
+      out.innerHTML = `${t("contact.fail")} <a href="${igDm}" target="_blank" rel="noopener">@${C.instagram}</a>`; out.className = "mono form-msg bad";
+    } finally { btn.disabled = false; }
   };
 });
 </script>

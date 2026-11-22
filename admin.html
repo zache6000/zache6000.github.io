@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
 <title>Admin — OFFGRID</title>
 <meta name="description" content="Espace privé.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OFFGRID Admin">
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Admin — OFFGRID">
 <meta property="og:description" content="Espace privé.">
@@ -15,59 +18,365 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Noto+Kufi+Arabic:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css?v=e5a8e37da2">
-<script src="/assets/js/i18n.js?v=659675767d" defer></script>
+<script src="/assets/js/i18n.js?v=2aef7ec86e" defer></script>
 <script src="/assets/js/products.js?v=2a9dbe9080" defer></script>
 <script src="/assets/js/app.js?v=ebeecd9d8d" defer></script>
 </head>
 <body data-solid="1">
-<main id="main" class="container" style="padding-bottom:110px">
-  <section style="padding:clamp(40px,5vw,64px) 0 24px">
+<style>
+.adm{padding-bottom:110px}
+.adm-head{padding:clamp(28px,4vw,56px) 0 18px;display:flex;flex-direction:column;gap:10px}
+.adm-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.adm-tools{display:flex;gap:8px;flex-wrap:wrap}.adm-tools .btn{min-height:40px;padding:0 16px}
+.adm-tabs{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 0;margin:0 0 18px;background:var(--paper,#F2EADB);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.adm-tabs::-webkit-scrollbar{display:none}
+.adm-tabs button{flex:0 0 auto;border:1px solid var(--line);background:transparent;border-radius:999px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:inherit;display:inline-flex;gap:8px;align-items:center}
+.adm-tabs button.on{background:var(--ink,#111);color:var(--paper,#F2EADB);border-color:var(--ink,#111)}
+.adm-tabs i{font-style:normal;font-size:11px;min-width:20px;height:20px;border-radius:999px;background:#C2410C;color:#fff;display:inline-grid;place-items:center;padding:0 6px}
+.adm-tabs i:empty{display:none}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kpi b{font-size:clamp(24px,3.2vw,34px);font-weight:900;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi span{font-size:11px;opacity:.65;text-transform:uppercase;letter-spacing:.06em}
+.kpi small{font-size:12px;opacity:.7}
+.kpi.dark{background:var(--ink,#111);color:var(--paper,#F2EADB);border-color:transparent}
+.adm-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;margin-top:14px}
+@media(max-width:900px){.adm-grid{grid-template-columns:minmax(0,1fr)}}
+.card{border:1px solid var(--line);border-radius:22px;padding:18px;min-width:0}
+.card h3{margin:0 0 14px;font-size:15px;font-weight:800;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.card h3 .mono{font-size:11px;opacity:.6;font-weight:400}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:inherit}
+.seg button.on{background:var(--ink,#111);color:var(--paper,#F2EADB)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:170px;padding-top:8px}
+.bars .b{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;min-width:0}
+.bars .b em{font-style:normal;font-size:10px;opacity:.7}
+.bars .b div{width:100%;max-width:26px;border-radius:7px 7px 3px 3px;background:var(--ink,#111);min-height:3px;transition:height .5s cubic-bezier(.2,.8,.2,1)}
+.bars .b.zero div{background:var(--line)}
+.bars .b span{font-size:9px;opacity:.55;white-space:nowrap}
+.hbars{display:flex;flex-direction:column;gap:12px}
+.hbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;font-size:14px}
+.hbar .t{height:8px;border-radius:99px;background:var(--line);grid-column:1/-1;overflow:hidden}
+.hbar .t div{height:100%;border-radius:99px;background:var(--ink,#111)}
+.hbar b{font-weight:800}.hbar span{font-size:12px;opacity:.7;white-space:nowrap}
+.todo{display:flex;flex-direction:column;gap:8px}
+.todo button{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:transparent;font:inherit;cursor:pointer;color:inherit;text-align:start}
+.todo button b{font-size:20px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:inherit}
+.chip.on{background:var(--ink,#111);color:var(--paper,#F2EADB);border-color:var(--ink,#111)}
+.search{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:inherit;background:transparent;color:inherit;margin-bottom:12px}
+.olist{display:flex;flex-direction:column;gap:12px}
+.ord{border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.ord-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ord-h .mono{font-size:12px;opacity:.7}
+.ord-name{font-size:17px;font-weight:800}
+.ord-items{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.ord-items li{display:flex;justify-content:space-between;gap:10px}
+.ord-tot{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;opacity:.85;border-top:1px dashed var(--line);padding-top:8px}
+.ord-tot b{opacity:1}
+.ord-info{font-size:14px;line-height:1.55;word-break:break-word}
+.ord-act{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ord-act .btn{min-height:40px;padding:0 14px;font-size:13px}
+.ord-act select{border:1px solid var(--line);border-radius:999px;padding:10px 12px;font:inherit;font-size:13px;font-weight:700;background:transparent;color:inherit}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800;white-space:nowrap}
+.pill:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st-new{background:#FDE7D3;color:#9A3412}.st-confirmed{background:#DBE7F7;color:#1E3A8A}.st-shipped{background:#E8E0F7;color:#5B21B6}
+.st-delivered{background:#D9F0E1;color:#166534}.st-cancelled{background:#ECECEC;color:#555}.st-done{background:#D9F0E1;color:#166534}
+.linkbtn{border:0;background:none;color:inherit;opacity:.6;font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;padding:6px}
+.empty-line{opacity:.6;padding:18px 0}
+.vis-cta{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.wa-float,.announce,.footer{display:none!important}
+@media(max-width:600px){.bars{gap:3px}.bars .b:nth-child(even) span{visibility:hidden}}
+</style>
+<main id="main" class="container adm">
+  <section class="adm-head">
     <span class="mono eyebrow">OFFGRID · Admin</span>
-    <h1 class="display h-lg" style="margin-top:14px">Avis & newsletter</h1>
+    <div class="adm-top">
+      <h1 class="display h-lg" style="margin:0">Tableau de bord</h1>
+      <div class="adm-tools" id="tools" hidden>
+        <button class="btn btn-outline" type="button" id="refresh">↻ Actualiser</button>
+        <button class="btn btn-outline" type="button" id="logout">Déconnexion</button>
+      </div>
+    </div>
+    <p class="mono" id="updated" style="opacity:.6;margin:0"></p>
   </section>
+
   <form id="login" class="checkout-form" style="max-width:520px">
     <div class="field"><label for="k">Clé admin</label><input id="k" type="password" autocomplete="current-password" required></div>
     <button class="btn btn-dark btn-block" style="margin-top:18px">Entrer</button>
     <p class="mono form-msg bad" id="lmsg"></p>
   </form>
+
   <div id="panel" hidden>
-    <div class="admin-stats" id="stats"></div>
-    <h2 class="display h-md" style="margin:36px 0 16px">Avis en attente</h2>
-    <div id="pending" class="admin-list"></div>
-    <h2 class="display h-md" style="margin:36px 0 16px">Avis publiés</h2>
-    <div id="approved" class="admin-list"></div>
-    <div class="row-between" style="margin:36px 0 16px;flex-wrap:wrap;gap:12px"><h2 class="display h-md">Newsletter</h2><button class="btn btn-outline" type="button" id="csv">Exporter CSV</button></div>
-    <div id="subs" class="admin-list"></div>
+    <nav class="adm-tabs" aria-label="Sections">
+      <button type="button" data-tab="home" class="on">Aperçu</button>
+      <button type="button" data-tab="orders">Commandes <i id="b-orders"></i></button>
+      <button type="button" data-tab="support">Support <i id="b-support"></i></button>
+      <button type="button" data-tab="reviews">Avis <i id="b-reviews"></i></button>
+      <button type="button" data-tab="news">Newsletter</button>
+      <button type="button" data-tab="visits">Visiteurs</button>
+    </nav>
+
+    <section data-pane="home">
+      <div class="row-between" style="margin-bottom:12px;gap:10px;flex-wrap:wrap">
+        <h2 class="display h-md" style="margin:0">Les ventes</h2>
+        <div class="seg" id="period"><button type="button" data-d="7">7 jours</button><button type="button" data-d="30" class="on">30 jours</button><button type="button" data-d="0">Tout</button></div>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="adm-grid">
+        <div class="card"><h3>Commandes par jour <span class="mono" id="chart-cap"></span></h3><div class="bars" id="chart"></div></div>
+        <div class="card"><h3>À traiter</h3><div class="todo" id="todo"></div></div>
+      </div>
+      <div class="adm-grid">
+        <div class="card"><h3>Modèles les plus commandés <span class="mono">hoodies</span></h3><div class="hbars" id="models"></div></div>
+        <div class="card"><h3>Tailles</h3><div class="hbars" id="sizes"></div></div>
+      </div>
+      <div class="adm-grid">
+        <div class="card"><h3>Villes</h3><div class="hbars" id="cities"></div></div>
+        <div class="card"><h3>Visiteurs du site</h3><div id="vis-mini"></div></div>
+      </div>
+    </section>
+
+    <section data-pane="orders" hidden>
+      <div class="filters" id="o-filters"></div>
+      <input class="search" id="o-search" type="search" placeholder="Rechercher : nom, téléphone, ville, n° de commande…">
+      <div class="olist" id="o-list"></div>
+    </section>
+
+    <section data-pane="support" hidden>
+      <div class="filters" id="m-filters"></div>
+      <div class="olist" id="m-list"></div>
+    </section>
+
+    <section data-pane="reviews" hidden>
+      <h2 class="display h-md" style="margin:6px 0 14px">En attente</h2>
+      <div id="pending" class="admin-list"></div>
+      <h2 class="display h-md" style="margin:30px 0 14px">Publiés sur le site</h2>
+      <div id="approved" class="admin-list"></div>
+    </section>
+
+    <section data-pane="news" hidden>
+      <div class="row-between" style="margin:6px 0 14px;flex-wrap:wrap;gap:12px"><h2 class="display h-md" style="margin:0" id="subs-title">Newsletter</h2><button class="btn btn-outline" type="button" id="csv">Exporter CSV</button></div>
+      <div id="subs" class="admin-list"></div>
+    </section>
+
+    <section data-pane="visits" hidden>
+      <div id="vis-full"></div>
+    </section>
   </div>
 </main>
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, esc, byId, stars } = OG;
-  let key = sessionStorage.getItem("og_admin") || "", data = null;
-  const api = (action, extra = {}) => fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key, action, ...extra }) }).then(r => { if (r.status === 401) throw new Error("401"); return r.json(); });
-  const date = s => new Date(s).toLocaleString("fr-MA", { dateStyle: "medium", timeStyle: "short" });
-  const row = (r, pending) => `<div class="admin-item"><div><b>${esc(r.name)}</b> · ${stars(r.rating)} <span class="mono">${esc((byId(r.product)||{}).name||r.product)} · ${date(r.at)}</span><p>${esc(r.text)}</p></div>
-    <div class="admin-actions">${pending ? `<button class="btn btn-dark" data-a="approve" data-id="${r.id}">Publier</button>` : ""}<button class="btn btn-outline" data-a="delete" data-id="${r.id}" data-from="${pending?"pending":"approved"}">Supprimer</button></div></div>`;
-  async function load() {
-    data = await api("list");
-    $("#login").hidden = true; $("#panel").hidden = false;
-    $("#stats").innerHTML = `<div><b>${data.pending.length}</b><span class="mono">en attente</span></div><div><b>${data.approved.length}</b><span class="mono">publiés</span></div><div><b>${data.subscribers.length}</b><span class="mono">inscrits</span></div>`;
-    $("#pending").innerHTML = data.pending.map(r => row(r, true)).join("") || `<p class="mono muted-line">Aucun avis en attente.</p>`;
-    $("#approved").innerHTML = data.approved.map(r => row(r, false)).join("") || `<p class="mono muted-line">Aucun avis publié.</p>`;
-    $("#subs").innerHTML = data.subscribers.map(s => `<div class="admin-item"><div><b>${esc(s.email)}</b> <span class="mono">${esc(s.lang||"")} · ${date(s.at)}</span></div></div>`).join("") || `<p class="mono muted-line">Aucun inscrit pour l'instant.</p>`;
+  const { $, $$, esc, byId, stars, P } = OG;
+  const VERCEL_ANALYTICS = "https://vercel.com/zaks-projects-87b63317/offgrid-streetwear/analytics";
+  const ST = { new: "Nouvelle", confirmed: "Confirmée", shipped: "Expédiée", delivered: "Livrée", cancelled: "Annulée" };
+  const MST = { new: "À traiter", done: "Traité" };
+  const ls = { get: k => { try { return localStorage.getItem(k) || ""; } catch (_) { return ""; } }, set: (k, v) => { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch (_) {} } };
+  let key = ls.get("og_admin_key") || (() => { try { return sessionStorage.getItem("og_admin") || ""; } catch (_) { return ""; } })();
+  let data = null, visits = null, period = 30, oFilter = "new", mFilter = "new", oQuery = "", lastLoad = 0;
+
+  const api = (action, extra = {}) => fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key, action, ...extra }) })
+    .then(async r => { if (r.status === 401) throw new Error("401"); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; });
+  const TZ = "Africa/Casablanca";
+  const date = s => new Date(s).toLocaleString("fr-FR", { timeZone: TZ, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  const dayKey = d => new Date(d).toLocaleDateString("en-CA", { timeZone: TZ });
+  const mad = n => (Math.round(n) || 0).toLocaleString("fr-FR").replace(/ | /g, " ") + " MAD";
+  const oStatus = o => ((data.status.orders || {})[o.ref] || {}).s || "new";
+  const mStatus = m => ((data.status.messages || {})[m.id] || {}).s || "new";
+  const pill = (s, labels) => `<span class="pill st-${s}">${labels[s] || s}</span>`;
+  const units = o => o.items.reduce((n, i) => n + (i.qty || 0), 0);
+  const waNum = p => { let d = String(p || "").replace(/\D/g, ""); if (d.startsWith("00")) d = d.slice(2); if (d.startsWith("0") && d.length === 10) d = "212" + d.slice(1); else if (d.length === 9) d = "212" + d; return d; };
+  const modelName = i => (byId(i.id) || {}).name || i.name || i.id;
+
+  /* ---------- load ---------- */
+  async function load(fresh) {
+    data = await api("list", fresh ? { fresh: 1 } : {});
+    lastLoad = Date.now();
+    $("#login").hidden = true; $("#panel").hidden = false; $("#tools").hidden = false;
+    $("#updated").textContent = "Mis à jour " + new Date(data.at).toLocaleTimeString("fr-FR", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+    render();
+    if (visits === null) api("visits").then(v => { visits = v; renderVisits(); }).catch(() => { visits = { ok: false }; renderVisits(); });
   }
-  $("#login").onsubmit = async e => { e.preventDefault(); key = $("#k").value.trim();
-    try { await load(); sessionStorage.setItem("og_admin", key); } catch (_) { $("#lmsg").textContent = "Clé incorrecte."; } };
-  document.addEventListener("click", async e => {
-    const b = e.target.closest("[data-a]"); if (!b) return;
-    if (b.dataset.a === "delete" && !confirm("Supprimer cet avis ?")) return;
-    b.disabled = true; await api(b.dataset.a, { id: b.dataset.id, from: b.dataset.from }); load();
+  function render() { renderBadges(); renderHome(); renderOrders(); renderSupport(); renderReviews(); renderSubs(); renderVisits(); }
+
+  function renderBadges() {
+    const n = (arr, f) => arr.filter(f).length || "";
+    $("#b-orders").textContent = n(data.orders, o => oStatus(o) === "new");
+    $("#b-support").textContent = n(data.messages, m => mStatus(m) === "new");
+    $("#b-reviews").textContent = data.pending.length || "";
+  }
+
+  /* ---------- overview ---------- */
+  function inPeriod(o) { return !period || Date.now() - new Date(o.at) <= period * 864e5; }
+  function renderHome() {
+    const live = data.orders.filter(o => oStatus(o) !== "cancelled" && inPeriod(o));
+    const done = live.filter(o => ["confirmed", "shipped", "delivered"].includes(oStatus(o)));
+    const wait = live.filter(o => oStatus(o) === "new");
+    const sum = arr => arr.reduce((n, o) => n + (o.total || 0), 0);
+    const hoodies = live.reduce((n, o) => n + units(o), 0);
+    $("#kpis").innerHTML = [
+      ["dark", "Chiffre d'affaires", mad(sum(done)), `${done.length} commande${done.length > 1 ? "s" : ""} confirmée${done.length > 1 ? "s" : ""}`],
+      ["", "En attente", mad(sum(wait)), `${wait.length} à confirmer`],
+      ["", "Hoodies commandés", hoodies, `${live.length} commande${live.length > 1 ? "s" : ""} au total`],
+      ["", "Panier moyen", live.length ? mad(sum(live) / live.length) : "—", "hors annulées"]
+    ].map(([c, l, v, s]) => `<div class="kpi ${c}"><span>${l}</span><b>${v}</b><small>${s}</small></div>`).join("");
+
+    // orders per day
+    const days = period === 7 ? 7 : 14, today = new Date();
+    const keys = Array.from({ length: days }, (_, i) => dayKey(new Date(today - (days - 1 - i) * 864e5)));
+    const per = Object.fromEntries(keys.map(k => [k, { n: 0, v: 0 }]));
+    data.orders.filter(o => oStatus(o) !== "cancelled").forEach(o => { const k = dayKey(o.at); if (per[k]) { per[k].n++; per[k].v += o.total || 0; } });
+    const max = Math.max(1, ...keys.map(k => per[k].n));
+    $("#chart-cap").textContent = `${days} derniers jours`;
+    $("#chart").innerHTML = keys.map(k => { const d = per[k], dt = new Date(k + "T12:00:00");
+      return `<div class="b${d.n ? "" : " zero"}" title="${dt.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" })} : ${d.n} commande(s) · ${mad(d.v)}"><em>${d.n || ""}</em><div style="height:${d.n ? Math.max(6, d.n / max * 100) : 2}%"></div><span>${dt.getDate()}/${dt.getMonth() + 1}</span></div>`; }).join("");
+
+    // to do
+    const nO = data.orders.filter(o => oStatus(o) === "new").length, nM = data.messages.filter(m => mStatus(m) === "new").length, nR = data.pending.length;
+    $("#todo").innerHTML = [["orders", "Commandes à confirmer", nO], ["support", "Messages support", nM], ["reviews", "Avis à valider", nR], ["news", "Inscrits newsletter", data.subscribers.length]]
+      .map(([t, l, n]) => `<button type="button" data-go="${t}"><span>${l}</span><b>${n}</b></button>`).join("");
+
+    // models / sizes / cities
+    const agg = (fn) => { const m = {}; live.forEach(o => fn(o, m)); return Object.entries(m).sort((a, b) => b[1].n - a[1].n); };
+    const models = agg((o, m) => o.items.forEach(i => { const k = modelName(i); m[k] = m[k] || { n: 0, v: 0 }; m[k].n += i.qty; m[k].v += (i.price || 0) * i.qty; }));
+    P.forEach(p => { if (!models.find(x => x[0] === p.name)) models.push([p.name, { n: 0, v: 0 }]); });
+    const sizes = agg((o, m) => o.items.forEach(i => { m[i.size] = m[i.size] || { n: 0 }; m[i.size].n += i.qty; }));
+    ["S", "M", "L", "XL"].forEach(s => { if (!sizes.find(x => x[0] === s)) sizes.push([s, { n: 0 }]); });
+    const order = ["XS", "S", "M", "L", "XL", "XXL"]; sizes.sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+    const cities = agg((o, m) => { const k = (o.city || "?").trim(); m[k] = m[k] || { n: 0 }; m[k].n++; }).slice(0, 6);
+    const hb = (rows, unit, money) => { const mx = Math.max(1, ...rows.map(r => r[1].n)); return rows.length ? rows.map(([k, r]) => `<div class="hbar"><b>${esc(k)}</b><span>${r.n} ${unit}${money && r.v ? " · " + mad(r.v) : ""}</span><div class="t"><div style="width:${r.n / mx * 100}%"></div></div></div>`).join("") : `<p class="mono empty-line">Pas encore de données.</p>`; };
+    $("#models").innerHTML = hb(models, "vendu(s)", true);
+    $("#sizes").innerHTML = hb(sizes, "pièce(s)");
+    $("#cities").innerHTML = cities.length ? hb(cities, "commande(s)") : `<p class="mono empty-line">Pas encore de commandes.</p>`;
+  }
+
+  /* ---------- orders ---------- */
+  function renderOrders() {
+    const counts = { all: data.orders.length }; Object.keys(ST).forEach(s => counts[s] = data.orders.filter(o => oStatus(o) === s).length);
+    $("#o-filters").innerHTML = [["new", "Nouvelles"], ["confirmed", "Confirmées"], ["shipped", "Expédiées"], ["delivered", "Livrées"], ["cancelled", "Annulées"], ["all", "Toutes"]]
+      .map(([k, l]) => `<button type="button" class="chip${oFilter === k ? " on" : ""}" data-of="${k}">${l} · ${counts[k]}</button>`).join("");
+    const q = oQuery.toLowerCase();
+    const list = data.orders.filter(o => (oFilter === "all" || oStatus(o) === oFilter) && (!q || [o.ref, o.name, o.phone, o.city, o.address].join(" ").toLowerCase().includes(q)));
+    $("#o-list").innerHTML = list.map(o => {
+      const s = oStatus(o), w = waNum(o.phone);
+      const sum = o.items.map(i => `${modelName(i)} ${i.size}×${i.qty}`).join(", ");
+      const msg = `Salam ${o.name}, c'est OFFGRID 👋 On confirme ta commande ${o.ref} : ${sum} — total ${mad(o.total)}, paiement à la livraison. C'est bon pour toi ?`;
+      return `<article class="ord">
+        <div class="ord-h"><span class="mono">${esc(o.ref)} · ${date(o.at)}</span>${pill(s, ST)}</div>
+        <div class="ord-name">${esc(o.name)} <span class="mono" style="font-weight:400;opacity:.7">— ${esc(o.city)}</span></div>
+        <ul class="ord-items">${o.items.map(i => `<li><span>${esc(modelName(i))} · ${esc(i.size)} × ${i.qty}</span><b>${mad((i.price || 0) * i.qty)}</b></li>`).join("")}</ul>
+        <div class="ord-tot"><span>Sous-total ${mad(o.subtotal)}</span>${o.discount ? `<span>Pack −${mad(o.discount)}</span>` : ""}<span>Livraison ${o.delivery ? mad(o.delivery) : "offerte"}</span><b>Total ${mad(o.total)}</b><span>· cash à la livraison</span></div>
+        <div class="ord-info">📍 ${esc(o.address)}, ${esc(o.city)}<br>📞 <a href="tel:${esc(o.phone.replace(/\s/g, ""))}" dir="ltr">${esc(o.phone)}</a>${o.note ? `<br>📝 ${esc(o.note)}` : ""}</div>
+        <div class="ord-act">
+          <select data-ostatus="${esc(o.ref)}" aria-label="Statut">${Object.entries(ST).map(([k, l]) => `<option value="${k}"${k === s ? " selected" : ""}>${l}</option>`).join("")}</select>
+          ${w ? `<a class="btn btn-dark" href="https://wa.me/${w}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}
+          <a class="btn btn-outline" href="tel:${esc(o.phone.replace(/\s/g, ""))}">Appeler</a>
+          <button class="linkbtn" type="button" data-remove="${esc(o._path)}" data-what="cette commande">Supprimer</button>
+        </div>
+      </article>`;
+    }).join("") || `<p class="mono empty-line">${data.orders.length ? "Aucune commande ici." : "Pas encore de commandes. Elles apparaîtront ici dès qu'un client valide son panier."}</p>`;
+  }
+
+  /* ---------- support ---------- */
+  function contactLinks(c) {
+    const v = String(c || "").trim(), digits = v.replace(/\D/g, "");
+    if (digits.length >= 9 && !/[a-z]/i.test(v.replace(/^\+/, ""))) return `<a class="btn btn-dark" href="https://wa.me/${waNum(v)}" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn-outline" href="tel:${esc(v.replace(/\s/g, ""))}">Appeler</a>`;
+    const h = v.replace(/^@/, "").replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/[^\w.]/g, "");
+    return h ? `<a class="btn btn-dark" href="https://ig.me/m/${esc(h)}" target="_blank" rel="noopener">Répondre sur Instagram</a>` : "";
+  }
+  function renderSupport() {
+    const c = { new: data.messages.filter(m => mStatus(m) === "new").length, done: data.messages.filter(m => mStatus(m) === "done").length, all: data.messages.length };
+    $("#m-filters").innerHTML = [["new", "À traiter"], ["done", "Traités"], ["all", "Tous"]].map(([k, l]) => `<button type="button" class="chip${mFilter === k ? " on" : ""}" data-mf="${k}">${l} · ${c[k]}</button>`).join("");
+    const list = data.messages.filter(m => mFilter === "all" || mStatus(m) === mFilter);
+    $("#m-list").innerHTML = list.map(m => { const s = mStatus(m); return `<article class="ord">
+        <div class="ord-h"><span class="mono">${esc(m.topic || "Message")} · ${date(m.at)}${m.ref ? " · " + esc(m.ref) : ""}</span>${pill(s, MST)}</div>
+        <div class="ord-name">${esc(m.name)} <span class="mono" style="font-weight:400;opacity:.7" dir="auto">— ${esc(m.contact)}</span></div>
+        <div class="ord-info" dir="auto" style="white-space:pre-wrap">${esc(m.msg)}</div>
+        <div class="ord-act">${contactLinks(m.contact)}
+          <button class="btn btn-outline" type="button" data-mstatus="${esc(m.id)}" data-to="${s === "new" ? "done" : "new"}">${s === "new" ? "Marquer traité ✓" : "Rouvrir"}</button>
+          <button class="linkbtn" type="button" data-remove="${esc(m._path)}" data-what="ce message">Supprimer</button></div>
+      </article>`; }).join("") || `<p class="mono empty-line">${data.messages.length ? "Rien ici." : "Aucun message pour l'instant. Les messages du formulaire Contact arrivent ici."}</p>`;
+  }
+
+  /* ---------- reviews & newsletter ---------- */
+  function renderReviews() {
+    const row = (r, pending) => `<div class="admin-item"><div><b>${esc(r.name)}</b> · ${stars(r.rating)} <span class="mono">${esc((byId(r.product) || {}).name || r.product || "")} · ${date(r.at)}</span><p dir="auto">${esc(r.text)}</p></div>
+      <div class="admin-actions">${pending ? `<button class="btn btn-dark" data-a="approve" data-id="${esc(r.id)}">Publier</button>` : ""}<button class="btn btn-outline" data-a="delete" data-id="${esc(r.id)}" data-from="${pending ? "pending" : "approved"}">Supprimer</button></div></div>`;
+    $("#pending").innerHTML = data.pending.map(r => row(r, true)).join("") || `<p class="mono empty-line">Aucun avis en attente.</p>`;
+    $("#approved").innerHTML = data.approved.map(r => row(r, false)).join("") || `<p class="mono empty-line">Aucun avis publié.</p>`;
+  }
+  function renderSubs() {
+    $("#subs-title").textContent = `Newsletter · ${data.subscribers.length}`;
+    $("#subs").innerHTML = data.subscribers.map(s => `<div class="admin-item"><div><b>${esc(s.email)}</b> <span class="mono">${esc(s.lang || "")} · ${date(s.at)}</span></div></div>`).join("") || `<p class="mono empty-line">Aucun inscrit pour l'instant.</p>`;
+  }
+
+  /* ---------- visitors ---------- */
+  function renderVisits() {
+    const link = `<a class="btn btn-dark" href="${VERCEL_ANALYTICS}" target="_blank" rel="noopener">Ouvrir les statistiques ↗</a>`;
+    if (visits && visits.ok && visits.days) {
+      const d = visits.days, mx = Math.max(1, ...d.map(x => x.visitors));
+      const tot = d.reduce((n, x) => n + x.visitors, 0), pv = d.reduce((n, x) => n + x.views, 0);
+      const chart = `<div class="bars">${d.map(x => { const dt = new Date(x.day + "T12:00:00"); return `<div class="b${x.visitors ? "" : " zero"}" title="${x.day} : ${x.visitors} visiteurs · ${x.views} pages vues"><em>${x.visitors || ""}</em><div style="height:${x.visitors ? Math.max(6, x.visitors / mx * 100) : 2}%"></div><span>${dt.getDate()}/${dt.getMonth() + 1}</span></div>`; }).join("")}</div>`;
+      const list = (rows, title) => rows && rows.length ? `<div class="card"><h3>${title}</h3><div class="hbars">${rows.map(r => `<div class="hbar"><b>${esc(r.k || "direct")}</b><span>${r.n}</span><div class="t"><div style="width:${r.n / Math.max(1, rows[0].n) * 100}%"></div></div></div>`).join("")}</div></div>` : "";
+      $("#vis-mini").innerHTML = `<div class="kpis" style="grid-template-columns:1fr 1fr"><div class="kpi"><span>Visiteurs · 14 j</span><b>${tot}</b></div><div class="kpi"><span>Pages vues</span><b>${pv}</b></div></div>`;
+      $("#vis-full").innerHTML = `<div class="kpis"><div class="kpi dark"><span>Visiteurs · 14 jours</span><b>${tot}</b></div><div class="kpi"><span>Pages vues</span><b>${pv}</b></div><div class="kpi"><span>Aujourd'hui</span><b>${d[d.length - 1].visitors}</b></div><div class="kpi"><span>Commandes / visiteurs</span><b>${tot ? Math.round(data.orders.filter(o => Date.now() - new Date(o.at) <= 14 * 864e5).length / tot * 1000) / 10 + " %" : "—"}</b></div></div>
+        <div class="card" style="margin-top:14px"><h3>Visiteurs par jour <span class="mono">14 derniers jours</span></h3>${chart}</div>
+        <div class="adm-grid">${list(visits.referrers, "D'où ils viennent")}${list(visits.pages, "Pages les plus vues")}</div>
+        <div class="adm-grid">${list(visits.countries, "Pays")}${list(visits.devices, "Appareils")}</div>
+        <p style="margin-top:18px">${link}</p>`;
+      return;
+    }
+    const txt = `Les visites du site (visiteurs par jour, pages vues, pays, et d'où ils viennent : Instagram, TikTok…) sont mesurées par Vercel Analytics, sans cookies.`;
+    $("#vis-mini").innerHTML = `<div class="vis-cta"><p style="margin:0;opacity:.8">Graphique des visiteurs, pays et sources du trafic.</p>${link}</div>`;
+    $("#vis-full").innerHTML = `<div class="card vis-cta"><h3 style="margin:0">Visiteurs du site</h3><p style="margin:0;line-height:1.6;max-width:620px">${txt}</p>${link}</div>`;
+  }
+
+  /* ---------- events ---------- */
+  function show(tab) {
+    $$(".adm-tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+    $$("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== tab);
+    try { history.replaceState(null, "", "#" + tab); } catch (_) {}
+  }
+  async function act(fn, btn) {
+    if (btn) btn.disabled = true;
+    try { await fn(); await load(true); }
+    catch (e) { alert(e.message === "401" ? "Session expirée, reconnecte-toi." : "Action impossible, réessaie."); if (e.message === "401") logout(); }
+    finally { if (btn) btn.disabled = false; }
+  }
+  function logout() { ls.set("og_admin_key", ""); try { sessionStorage.removeItem("og_admin"); } catch (_) {} key = ""; data = null; visits = null; $("#panel").hidden = true; $("#tools").hidden = true; $("#login").hidden = false; $("#updated").textContent = ""; }
+
+  $("#login").onsubmit = async e => {
+    e.preventDefault(); key = $("#k").value.trim(); $("#lmsg").textContent = "";
+    try { await load(); ls.set("og_admin_key", key); $("#k").value = ""; } catch (_) { $("#lmsg").textContent = "Clé incorrecte."; }
+  };
+  $("#refresh").onclick = e => act(async () => {}, e.currentTarget);
+  $("#logout").onclick = logout;
+  $("#o-search").oninput = e => { oQuery = e.target.value; renderOrders(); };
+  document.addEventListener("click", e => {
+    const t = e.target.closest("[data-tab],[data-go],[data-of],[data-mf],[data-d],[data-a],[data-mstatus],[data-remove]"); if (!t) return;
+    if (t.dataset.tab) return show(t.dataset.tab);
+    if (t.dataset.go) return show(t.dataset.go);
+    if (t.dataset.of) { oFilter = t.dataset.of; return renderOrders(); }
+    if (t.dataset.mf) { mFilter = t.dataset.mf; return renderSupport(); }
+    if (t.dataset.d !== undefined && t.closest("#period")) { period = +t.dataset.d; $$("#period button").forEach(b => b.classList.toggle("on", b === t)); return renderHome(); }
+    if (t.dataset.a) { if (t.dataset.a === "delete" && !confirm("Supprimer cet avis ?")) return; return act(() => api(t.dataset.a, { id: t.dataset.id, from: t.dataset.from }), t); }
+    if (t.dataset.mstatus) return act(() => api("status", { kind: "message", id: t.dataset.mstatus, status: t.dataset.to }), t);
+    if (t.dataset.remove) { if (!confirm(`Supprimer ${t.dataset.what} ? C'est définitif.`)) return; return act(() => api("remove", { path: t.dataset.remove }), t); }
+  });
+  document.addEventListener("change", e => {
+    const s = e.target.closest("[data-ostatus]"); if (!s) return;
+    act(() => api("status", { kind: "order", id: s.dataset.ostatus, status: s.value }), s);
   });
   $("#csv").onclick = () => {
-    const csv = "email,langue,date\n" + data.subscribers.map(s => `${s.email},${s.lang||""},${s.at}`).join("\n");
+    const csv = "email,langue,date\n" + data.subscribers.map(s => `${s.email},${s.lang || ""},${s.at}`).join("\n");
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "offgrid-newsletter.csv"; a.click();
   };
-  if (key) load().catch(() => sessionStorage.removeItem("og_admin"));
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && data && Date.now() - lastLoad > 10 * 60 * 1000) load().catch(() => {}); });
+
+  const start = (location.hash || "").slice(1);
+  if (key) load().then(() => { if (start) show(start); }).catch(() => { logout(); });
 });
 </script>
 </body>
