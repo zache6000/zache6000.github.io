@@ -273,6 +273,7 @@ document.addEventListener("og:ready", () => {
           <select data-ostatus="${esc(o.ref)}" aria-label="Statut">${Object.entries(ST).map(([k, l]) => `<option value="${k}"${k === s ? " selected" : ""}>${l}</option>`).join("")}</select>
           ${w ? `<a class="btn btn-dark" href="https://wa.me/${w}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}
           <a class="btn btn-outline" href="tel:${esc(o.phone.replace(/\s/g, ""))}">Appeler</a>
+          <button class="btn btn-outline" type="button" data-pdf="${esc(o.ref)}">Reçu PDF ↓</button>
           <button class="linkbtn" type="button" data-remove="${esc(o._path)}" data-what="cette commande">Supprimer</button>
         </div>
       </article>`;
@@ -333,6 +334,138 @@ document.addEventListener("og:ready", () => {
     $("#vis-full").innerHTML = `<div class="card vis-cta"><h3 style="margin:0">Visiteurs du site</h3><p style="margin:0;line-height:1.6;max-width:620px">${txt}</p>${link}</div>`;
   }
 
+  /* ---------- PDF receipt ---------- */
+  const logoImg = new Image(); logoImg.src = "/assets/img/logo-mask.png";
+  try { ["400 12px Archivo", "600 12px Archivo", "800 12px Archivo", "400 12px 'Space Mono'", "700 12px 'Space Mono'", "400 12px 'Noto Kufi Arabic'", "700 12px 'Noto Kufi Arabic'"].forEach(f => document.fonts.load(f)); } catch (_) {}
+  const SANS = "Archivo, 'Noto Kufi Arabic', Arial, sans-serif", MONO = "'Space Mono', 'Courier New', monospace";
+  const INK = "#14161C", GREY = "#6B6A66", LINE = "#E4DED3";
+
+  function drawReceipt(ctx, o, draw) {
+    const W = 420, M = 34, R = W - M;
+    let y = M;
+    const font = (w, px, fam) => { ctx.font = `${w} ${px}px ${fam || SANS}`; };
+    const txt = (str, x, yy, w, px, color, align, fam) => { font(w, px, fam); if (draw) { ctx.fillStyle = color || INK; ctx.textAlign = align || "left"; ctx.fillText(String(str), x, yy); } return ctx.measureText(String(str)).width; };
+    const wrap = (str, w, px, maxW, fam) => { font(w, px, fam); const out = []; String(str || "").split(/\n/).forEach(par => { let cur = ""; par.split(/\s+/).forEach(word => { const t = cur ? cur + " " + word : word; if (ctx.measureText(t).width > maxW && cur) { out.push(cur); cur = word; } else cur = t; }); out.push(cur); }); return out; };
+    const rule = (yy, color, lw) => { if (draw) { ctx.strokeStyle = color || LINE; ctx.lineWidth = lw || 0.8; ctx.beginPath(); ctx.moveTo(M, yy); ctx.lineTo(R, yy); ctx.stroke(); } };
+    const box = (x, yy, w, h, r, color) => { if (draw) { ctx.fillStyle = color; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, yy, w, h, r); else ctx.rect(x, yy, w, h); ctx.fill(); } };
+    const s = oStatus(o);
+
+    // header
+    if (draw) {
+      if (logoImg.complete && logoImg.naturalWidth) ctx.drawImage(logoImg, M, y - 2, 34 * logoImg.naturalWidth / logoImg.naturalHeight, 34);
+      else txt("OFFGRID", M, y + 24, 900, 22);
+    }
+    txt("REÇU DE COMMANDE", R, y + 8, 700, 7.5, GREY, "right", MONO);
+    txt(o.ref, R, y + 26, 800, 15, INK, "right");
+    txt(new Date(o.at).toLocaleString("fr-FR", { timeZone: TZ, day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }), R, y + 40, 400, 7.5, GREY, "right", MONO);
+    y += 54; rule(y, INK, 1.2); y += 22;
+
+    // client / delivery columns
+    const colW = (R - M - 18) / 2, x2 = M + colW + 18;
+    txt("CLIENT", M, y, 700, 7, GREY, "left", MONO);
+    txt("LIVRAISON", x2, y, 700, 7, GREY, "left", MONO);
+    let yl = y + 16, yr = y + 16;
+    wrap(o.name, 800, 12, colW).forEach(l => { txt(l, M, yl, 800, 12); yl += 15; });
+    txt(o.phone, M, yl, 400, 9.5); yl += 13;
+    wrap(o.address, 400, 9.5, colW).forEach(l => { txt(l, M, yl, 400, 9.5); yl += 13; });
+    txt(o.city, M, yl, 400, 9.5); yl += 13;
+    txt(o.city, x2, yr, 800, 12); yr += 15;
+    txt("Frais : " + (o.delivery ? mad(o.delivery) : "offerts"), x2, yr, 400, 9.5); yr += 13;
+    txt("Paiement : espèces à la livraison", x2, yr, 400, 9.5); yr += 13;
+    txt("Statut : " + (ST[s] || s), x2, yr, 400, 9.5); yr += 13;
+    y = Math.max(yl, yr) + 8;
+
+    // note
+    if (o.note) {
+      const lines = wrap(o.note, 400, 9.5, R - M - 24), h = 24 + lines.length * 13;
+      box(M, y, R - M, h, 8, "#F4F1EB");
+      txt("NOTE DU CLIENT", M + 12, y + 14, 700, 7, GREY, "left", MONO);
+      lines.forEach((l, i) => txt(l, M + 12, y + 28 + i * 13, 400, 9.5));
+      y += h + 14;
+    } else y += 6;
+
+    // items
+    const cSize = M + 150, cQty = M + 204, cUnit = R - 82;
+    txt("ARTICLE", M, y, 700, 7, GREY, "left", MONO); txt("TAILLE", cSize, y, 700, 7, GREY, "left", MONO); txt("QTÉ", cQty, y, 700, 7, GREY, "right", MONO);
+    txt("PRIX", cUnit, y, 700, 7, GREY, "right", MONO); txt("TOTAL", R, y, 700, 7, GREY, "right", MONO);
+    y += 7; rule(y, INK, 0.8); y += 16;
+    o.items.forEach(i => {
+      const nm = wrap("Hoodie " + modelName(i), 700, 10, cSize - M - 12);
+      nm.forEach((l, k) => txt(l, M, y + k * 13, 700, 10));
+      txt(i.size, cSize, y, 400, 10); txt("× " + i.qty, cQty, y, 400, 10, INK, "right");
+      txt(mad(i.price || 0), cUnit, y, 400, 10, INK, "right"); txt(mad((i.price || 0) * i.qty), R, y, 700, 10, INK, "right");
+      y += 8 + nm.length * 13 - 4; rule(y); y += 16;
+    });
+
+    // totals
+    const tl = R - 150;
+    const row = (l, v, bold) => { txt(l, tl, y, bold ? 800 : 400, bold ? 11 : 9.5, bold ? INK : GREY); txt(v, R, y, bold ? 800 : 400, bold ? 11 : 9.5, INK, "right"); y += bold ? 18 : 14; };
+    y += 2;
+    row("Sous-total", mad(o.subtotal));
+    if (o.discount) row("Pack 2 hoodies", "− " + mad(o.discount));
+    row("Livraison", o.delivery ? mad(o.delivery) : "Offerte");
+    if (draw) { ctx.strokeStyle = INK; ctx.lineWidth = 0.8; ctx.beginPath(); ctx.moveTo(tl, y - 6); ctx.lineTo(R, y - 6); ctx.stroke(); }
+    y += 10; row("TOTAL", mad(o.total), true);
+    y += 6;
+
+    // amount to collect
+    box(M, y, R - M, 48, 10, INK);
+    txt("À PAYER À LA LIVRAISON", M + 16, y + 20, 700, 7.5, "#F3F0E8", "left", MONO);
+    txt("En espèces, à la réception du colis", M + 16, y + 34, 400, 8.5, "#BDB8AE");
+    txt(mad(o.total), R - 16, y + 31, 800, 19, "#FFFFFF", "right");
+    y += 48 + 26;
+
+    // signature
+    txt("Reçu le : ____ / ____ / ________", M, y, 400, 8, GREY, "left", MONO);
+    txt("Signature client : ______________", R, y, 400, 8, GREY, "right", MONO);
+    y += 22; rule(y); y += 18;
+
+    // footer
+    txt("Merci pour ta commande ! OFFGRID Streetwear · Casablanca", M, y, 700, 9); y += 13;
+    txt("offgrid-streetwear.vercel.app · Instagram @offgrid.storeofficiel", M, y, 400, 7.5, GREY, "left", MONO); y += 12;
+    wrap("Retour possible sous 7 jours après réception, article non porté (loi 31-08). Conditions : offgrid-streetwear.vercel.app/legal.html", 400, 7, R - M, MONO)
+      .forEach(l => { txt(l, M, y, 400, 7, GREY, "left", MONO); y += 10; });
+    return y + M - 10;
+  }
+
+  function receiptPdf(o) {
+    const PT_W = 420, S = 3;
+    const probe = document.createElement("canvas").getContext("2d");
+    const PT_H = Math.max(595, Math.ceil(drawReceipt(probe, o, false)));
+    const cv = document.createElement("canvas"); cv.width = PT_W * S; cv.height = PT_H * S;
+    const ctx = cv.getContext("2d");
+    ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.scale(S, S); ctx.textBaseline = "alphabetic";
+    drawReceipt(ctx, o, true);
+    const bin = atob(cv.toDataURL("image/jpeg", 0.93).split(",")[1]);
+    const jpg = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) jpg[i] = bin.charCodeAt(i);
+    // minimal one-page PDF wrapping the JPEG
+    const enc = new TextEncoder(), parts = [], offs = []; let len = 0;
+    const push = x => { const b = typeof x === "string" ? enc.encode(x) : x; parts.push(b); len += b.length; };
+    const obj = (n, f) => { offs[n] = len; push(n + " 0 obj\n"); f(); push("\nendobj\n"); };
+    const content = `q ${PT_W} 0 0 ${PT_H} 0 0 cm /Im0 Do Q`;
+    push("%PDF-1.4\n");
+    obj(1, () => push("<< /Type /Catalog /Pages 2 0 R >>"));
+    obj(2, () => push("<< /Type /Pages /Kids [3 0 R] /Count 1 >>"));
+    obj(3, () => push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PT_W} ${PT_H}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>`));
+    obj(4, () => { push(`<< /Type /XObject /Subtype /Image /Width ${cv.width} /Height ${cv.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpg.length} >>\nstream\n`); push(jpg); push("\nendstream"); });
+    obj(5, () => push(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`));
+    obj(6, () => push(`<< /Title (OFFGRID ${o.ref.replace(/[()\\]/g, "")}) /Producer (OFFGRID Admin) >>`));
+    const xref = len;
+    push("xref\n0 7\n0000000000 65535 f \n" + [1, 2, 3, 4, 5, 6].map(n => String(offs[n]).padStart(10, "0") + " 00000 n \n").join(""));
+    push(`trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
+    return new Blob(parts, { type: "application/pdf" });
+  }
+
+  function saveFile(blob, name) {
+    const dl = () => { const u = URL.createObjectURL(blob), a = document.createElement("a"); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000); };
+    let file = null; try { file = new File([blob], name, { type: "application/pdf" }); } catch (_) {}
+    const touch = window.matchMedia && matchMedia("(pointer: coarse)").matches;
+    if (touch && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: name }).catch(e => { if (!e || e.name !== "AbortError") dl(); });
+    } else dl();
+  }
+
   /* ---------- events ---------- */
   function show(tab) {
     $$(".adm-tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
@@ -355,7 +488,7 @@ document.addEventListener("og:ready", () => {
   $("#logout").onclick = logout;
   $("#o-search").oninput = e => { oQuery = e.target.value; renderOrders(); };
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-tab],[data-go],[data-of],[data-mf],[data-d],[data-a],[data-mstatus],[data-remove]"); if (!t) return;
+    const t = e.target.closest("[data-tab],[data-go],[data-of],[data-mf],[data-d],[data-a],[data-mstatus],[data-pdf],[data-remove]"); if (!t) return;
     if (t.dataset.tab) return show(t.dataset.tab);
     if (t.dataset.go) return show(t.dataset.go);
     if (t.dataset.of) { oFilter = t.dataset.of; return renderOrders(); }
@@ -363,6 +496,11 @@ document.addEventListener("og:ready", () => {
     if (t.dataset.d !== undefined && t.closest("#period")) { period = +t.dataset.d; $$("#period button").forEach(b => b.classList.toggle("on", b === t)); return renderHome(); }
     if (t.dataset.a) { if (t.dataset.a === "delete" && !confirm("Supprimer cet avis ?")) return; return act(() => api(t.dataset.a, { id: t.dataset.id, from: t.dataset.from }), t); }
     if (t.dataset.mstatus) return act(() => api("status", { kind: "message", id: t.dataset.mstatus, status: t.dataset.to }), t);
+    if (t.dataset.pdf) {
+      const o = data.orders.find(x => x.ref === t.dataset.pdf); if (!o) return;
+      try { saveFile(receiptPdf(o), `OFFGRID-${o.ref}.pdf`); } catch (err) { console.error(err); alert("Impossible de créer le PDF, réessaie."); }
+      return;
+    }
     if (t.dataset.remove) { if (!confirm(`Supprimer ${t.dataset.what} ? C'est définitif.`)) return; return act(() => api("remove", { path: t.dataset.remove }), t); }
   });
   document.addEventListener("change", e => {
