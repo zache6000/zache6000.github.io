@@ -32,7 +32,7 @@ window.OFFGRID_PRODUCTS = [
       ar: "هودي أبيض بأسلوب ستريتوير بسيط، يزيّنه تصميم فراشة أصلي يرمز إلى الحرية والتحوّل. تفاصيل مدروسة بعناية لإطلالة فريدة، منعشة وخالدة."
     },
     sizes: ["S", "M", "L"],
-    images: ["nf-1", "nf-2", "film-1", "nf-3"],
+    images: ["nf-1", "nf-2", "nf-3"],
     card: "nf-1", hover: "nf-2", photos: true
   },
   {
@@ -60,7 +60,7 @@ window.OFFGRID_PRODUCTS = [
       en: "A midnight-blue oversized hoodie inspired by vintage style and retro radio culture. Its exclusive graphic mixes bold typography, technical details and orange accents for a unique streetwear look. A piece that shows its identity without overdoing it.",
       ar: "هودي واسع بلون أزرق ليلي مستوحى من العالم الكلاسيكي وثقافة الراديو القديمة. يمزج تصميمه الحصري بين خط جريء وتفاصيل تقنية ولمسات برتقالية لإطلالة ستريتوير فريدة. قطعة تعبّر عن هويتها دون مبالغة."
     },
-    images: ["sf-1", "sf-3", "sf-2", "sf-4", "film-3", "film-2"],
+    images: ["sf-1", "sf-3", "sf-2", "sf-4", "film-3"],
     card: "sf-1", hover: "sf-3", photos: true
   },
   {

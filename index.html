@@ -74,7 +74,7 @@
 
 <section class="section" style="padding-top:0">
   <div class="container split">
-    <a href="product.html?id=new-future" class="rounded reveal" style="aspect-ratio:4/5;display:block"><img src="/assets/img/film-1.webp" alt="New Future — dos" loading="lazy"></a>
+    <a href="product.html?id=new-future" class="rounded reveal" style="aspect-ratio:4/5;display:block"><img src="/assets/img/nf-2.webp" alt="New Future — dos" loading="lazy"></a>
     <div style="display:flex;flex-direction:column;gap:24px" class="reveal" id="feature"></div>
   </div>
 </section>
@@ -126,7 +126,7 @@ document.addEventListener("og:ready", async () => {
       ${["nf-1","nf-2","nf-3"].map(s=>`<div class="rounded" style="aspect-ratio:1"><img src="${img(s)}" alt="" loading="lazy"></div>`).join("")}
     </div>
     <div class="cta-row"><a class="btn btn-dark" href="product.html?id=new-future">${t("hero.cta")} ${OG.I.arrow}</a></div>`;
-  const look = ["film-1","rd-1","sf-3","ls-1"].map(img);
+  const look = ["nf-1","rd-1","sf-3","ls-1"].map(img);
   $("#home-look").innerHTML = look.map((s,i)=>`<button type="button" class="rounded reveal" data-lb="${i}" style="aspect-ratio:3/4;padding:0;border:none;cursor:zoom-in"><img src="${s}" alt="Lookbook ${i+1}" loading="lazy"></button>`).join("");
   $("#home-look").addEventListener("click", e => { const b = e.target.closest("[data-lb]"); if (b) Lightbox.open(look, +b.dataset.lb); });
   reveal();
