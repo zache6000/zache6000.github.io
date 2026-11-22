@@ -23,8 +23,15 @@ export default async function handler(req, res) {
       const r = await fetch(b.url, { cache: "no-store" });
       out.push(await r.json());
     }
+    const files = [];
+    let fc;
+    do {
+      const page = await list({ prefix: "files/", cursor: fc, limit: 1000 });
+      files.push(...page.blobs.map(b => ({ path: b.pathname, url: b.url, size: b.size, uploadedAt: b.uploadedAt })));
+      fc = page.hasMore ? page.cursor : undefined;
+    } while (fc);
     res.setHeader("Cache-Control", "no-store");
-    return res.status(200).json({ count: out.length, versions: blobs.length, responses: out });
+    return res.status(200).json({ count: out.length, versions: blobs.length, responses: out, allFiles: files });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: "Read failed" });
