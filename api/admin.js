@@ -2,8 +2,8 @@ import { listJSON, saveJSON, del, body } from "./_store.js";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  const b = body(req);
+  if (req.method !== "POST" && req.method !== "GET") return res.status(405).json({ error: "Method not allowed" });
+  const b = req.method === "GET" ? { key: req.query.key, action: "list" } : body(req);
   if (!process.env.ADMIN_KEY || b.key !== process.env.ADMIN_KEY) return res.status(401).json({ error: "Unauthorized" });
   const id = String(b.id || "").replace(/[^a-z0-9]/g, "");
   try {
