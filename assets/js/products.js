@@ -8,7 +8,7 @@ window.OFFGRID_CONFIG = {
   legalName: "Off Grid",
   city: "Casablanca",
   currency: "MAD",
-  instagram: "offgrid.storeoficiel",
+  instagram: "offgrid.storeofficiel",
   tiktok: "offgrid.storeofficiel",
   whatsapp: "212771909178",          // shown only as a button, never as text
   sizes: ["S", "M", "L", "XL"],    // default sizes; a product can override with its own "sizes"
