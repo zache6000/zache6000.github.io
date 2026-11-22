@@ -473,3 +473,33 @@ main{animation:pagein .7s var(--ease)}
 .dark .pack-note .mono,.summary .pack-note .mono{color:#F6A36A}
 .pack-row span:last-child{color:#C2410C;font-weight:700}
 .summary .pack-row span:last-child{color:#F6A36A}
+
+/* ---- mobile / tablet stability: nothing can widen the page, so pinch-zoom-out can't break the layout ---- */
+html{overflow-x:hidden;max-width:100%}
+body{max-width:100%;overflow-x:hidden;overflow-x:clip;position:relative;touch-action:manipulation}
+body::after{inset:0!important;width:100%!important;height:100%!important}
+.drawer{visibility:hidden;transition:transform .55s var(--ease),visibility 0s linear .55s}
+.drawer.open{visibility:visible;transition:transform .55s var(--ease),visibility 0s}
+.mnav{visibility:hidden;transition:transform .6s var(--ease),visibility 0s linear .6s}
+.mnav.open{visibility:visible;transition:transform .6s var(--ease),visibility 0s}
+img,video{max-width:100%}
+/* tablets: comfortable 2-3 column grids and readable hero */
+@media (min-width:641px) and (max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .look-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .hero-in{gap:40px}
+  .pdp{gap:36px}
+}
+@media (min-width:1025px) and (max-width:1280px){ .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))} }
+@media (min-width:900px){
+  .hero-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,4vw,64px)}
+  .hero-media .hero-frame{width:min(100%,380px)}
+}
+@media (min-width:641px) and (max-width:899px){
+  .hero-media .hero-frame{width:min(100%,420px)}
+  .hero-frame>img{aspect-ratio:4/5;max-height:none}
+}
+@media (min-width:641px) and (max-width:1100px){
+  .announce span:nth-child(n+4){display:none}
+}
