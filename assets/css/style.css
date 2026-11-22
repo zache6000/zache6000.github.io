@@ -465,3 +465,5 @@ main{animation:pagein .7s var(--ease)}
 .grid-4 .card-info{flex-direction:column;align-items:stretch;gap:10px}
 .grid-4 .card-info>div:last-child{flex-direction:row!important;align-items:center!important;justify-content:space-between}
 .grid-4 .price-wrap{justify-content:flex-start}
+.deliv-note .mono{display:flex;align-items:center;gap:10px;line-height:1.5}
+.deliv-note svg{width:20px;height:20px;flex:none}

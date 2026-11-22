@@ -36,7 +36,9 @@
   const igDm = "https://ig.me/m/" + C.instagram;
   const ttUrl = "https://www.tiktok.com/@" + C.tiktok;
   const waUrl = text => "https://wa.me/" + C.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
-  const deliveryFee = sub => (sub <= 0 || sub >= C.delivery.freeFrom) ? 0 : C.delivery.fee;
+  const isCasa = city => /casa|dar\s*el\s*beida|الدار البيضاء|كازا/i.test(String(city || ""));
+  const deliveryFee = city => (city == null || city === "") ? null : (isCasa(city) ? C.delivery.casablanca : C.delivery.other);
+  const sizesOf = p => (p && p.sizes) || C.sizes;
 
   const I = {
     bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
@@ -62,7 +64,7 @@
 
   /* ---------- cart ---------- */
   const Cart = {
-    items() { return store.get("offgrid_cart", []).filter(i => byId(i.id) && C.sizes.includes(i.size)); },
+    items() { return store.get("offgrid_cart", []).filter(i => byId(i.id) && sizesOf(byId(i.id)).includes(i.size)); },
     save(items) { store.set("offgrid_cart", items); Cart.render(); },
     add(id, size, qty = 1) {
       const items = Cart.items();
@@ -76,17 +78,17 @@
     clear() { Cart.save([]); },
     count() { return Cart.items().reduce((n, i) => n + i.qty, 0); },
     subtotal() { return Cart.items().reduce((n, i) => n + byId(i.id).price * i.qty, 0); },
-    delivery() { return deliveryFee(Cart.subtotal()); },
-    total() { return Cart.subtotal() + Cart.delivery(); },
+    delivery(city) { return deliveryFee(city); },
+    total(city) { return Cart.subtotal() + (deliveryFee(city) || 0); },
     freeBarHTML() {
-      const sub = Cart.subtotal(), left = C.delivery.freeFrom - sub, pct = Math.min(100, sub / C.delivery.freeFrom * 100);
-      return `<div class="freebar"><span class="mono">${left > 0 ? t("bag.freeleft", { x: money(left) }) : t("bag.freeok")}</span><span class="freebar-track"><span style="width:${pct}%"></span></span></div>`;
+      return `<div class="freebar deliv-note"><span class="mono">${I.truck}${t("bag.deliverynote")}</span></div>`;
     },
-    totalsHTML() {
-      const d = Cart.delivery();
+    totalsHTML(city) {
+      const d = deliveryFee(city);
+      const dTxt = d == null ? t("bag.deliverycity") : (d ? money(d) : t("bag.free"));
       return `<div class="row-between"><span class="mono">${t("bag.subtotal")}</span><span>${money(Cart.subtotal())}</span></div>
-        <div class="row-between"><span class="mono">${t("bag.delivery")}</span><span>${d ? money(d) : t("bag.free")}</span></div>
-        <div class="row-between total"><span class="mono">${t("bag.total")}</span><b>${money(Cart.total())}</b></div>`;
+        <div class="row-between"><span class="mono">${t("bag.delivery")}</span><span>${dTxt}</span></div>
+        <div class="row-between total"><span class="mono">${t("bag.total")}</span><b>${money(Cart.total(city))}</b></div>`;
     },
     linesHTML(compact) {
       return Cart.items().map((it, idx) => {
@@ -296,7 +298,7 @@
         ${p.photos ? `<img class="img-hover" src="${img(p.hover)}" alt="" loading="lazy">` : ""}
         <span class="badge">${p.photos ? t("price.save") : t("card.soon")}</span>
         <div class="quick"><p class="mono">${t("card.quick")}</p><div class="quick-sizes">
-          ${C.sizes.map(s => `<button type="button" data-quick="${p.id}" data-size="${s}" aria-label="${esc(p.name)} ${s}">${s}</button>`).join("")}
+          ${sizesOf(p).map(s => `<button type="button" data-quick="${p.id}" data-size="${s}" aria-label="${esc(p.name)} ${s}">${s}</button>`).join("")}
         </div></div>
       </div>
       <div class="card-info">
@@ -338,7 +340,7 @@
       <div class="review-foot"><b>${esc(r.name)}</b><span class="mono">${p ? esc(p.name) + " · " : ""}${t("rev.verified")}</span></div></article>`;
   }
 
-  window.OG = { reviewHTML, C, P, $, $$, esc, money, byId, img, I, L, t, lang, Cart, toast, Lightbox, cardHTML, priceHTML, stars, reveal, openCart, store, orderText, copy, igUrl, igDm, ttUrl, waUrl, newsForm, applyI18n };
+  window.OG = { reviewHTML, sizesOf, isCasa, deliveryFee, C, P, $, $$, esc, money, byId, img, I, L, t, lang, Cart, toast, Lightbox, cardHTML, priceHTML, stars, reveal, openCart, store, orderText, copy, igUrl, igDm, ttUrl, waUrl, newsForm, applyI18n };
 
   document.addEventListener("DOMContentLoaded", () => {
     applyI18n();

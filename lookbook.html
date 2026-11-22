@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Lookbook — OFFGRID Streetwear">
 <meta property="og:description" content="Le lookbook OFFGRID : New Future et Radio Dreams portés.">
-<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<meta property="og:image" content="/assets/img/nf-2.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
 <script>
 document.addEventListener("og:ready", () => {
   const { $, img, t, Lightbox, reveal } = OG;
-  const items = [["nf-model-back","new-future"],["rd-back","radio-dreams"],["nf-model-front","new-future"],["rd-backprint","radio-dreams"],["nf-backprint","new-future"],["rd-front","radio-dreams"],["nf-flat-back","new-future"],["rd-chest","radio-dreams"],["nf-chest","new-future"],["nf-sleeve","new-future"],["nf-flat-front","new-future"]];
+  const items = [["film-1","new-future"],["rd-1","radio-dreams"],["sf-3","static-frequency"],["ls-1","lost-souls"],["film-3","static-frequency"],["nf-2","new-future"],["sf-1","static-frequency"],["ls-2","lost-souls"],["film-2","static-frequency"],["nf-1","new-future"],["rd-2","radio-dreams"],["sf-4","static-frequency"],["nf-3","new-future"],["sf-2","static-frequency"]];
   const list = items.map(i => img(i[0]));
   $("#look").innerHTML = items.map(([s,id],i)=>`<figure class="look-item reveal"><button type="button" data-lb="${i}" aria-label="Lookbook ${i+1}"><img src="${img(s)}" alt="" loading="lazy"></button><a class="mono look-shop" href="product.html?id=${id}">${t("look.shop")} ↗</a></figure>`).join("");
   $("#look").addEventListener("click", e => { const b = e.target.closest("[data-lb]"); if (b) Lightbox.open(list, +b.dataset.lb); });

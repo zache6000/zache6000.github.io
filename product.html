@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Produit — OFFGRID Streetwear">
 <meta property="og:description" content="Hoodie oversize OFFGRID en coton premium. 280 MAD, livraison 48 h partout au Maroc, paiement à la livraison.">
-<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<meta property="og:image" content="/assets/img/nf-2.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
 
 <script>
 document.addEventListener("og:ready", () => {
-  const { $, $$, P, C, esc, money, byId, img, I, L, t, Cart, toast, Lightbox, cardHTML, priceHTML, reveal } = OG;
+  const { $, $$, P, C, esc, money, byId, img, I, L, t, Cart, toast, Lightbox, cardHTML, priceHTML, reveal, sizesOf } = OG;
   const p = byId(new URLSearchParams(location.search).get("id")) || P[0];
   const imgs = p.images.map(img);
   document.title = p.name + " — OFFGRID Streetwear";
@@ -83,7 +83,7 @@ document.addEventListener("og:ready", () => {
       <p style="margin:0;font-size:17px;line-height:1.7">${esc(L(p.description))}</p>
       <div>
         <div class="opt-label"><span class="mono">${t("pdp.size")} — <span id="size-label">${t("pdp.choose")}</span></span><button class="link-btn mono" type="button" id="open-sg">${t("pdp.guide")}</button></div>
-        <div class="sizes" id="sizes" role="group" aria-label="${t("pdp.size")}">${C.sizes.map(s=>`<button type="button" data-s="${s}" aria-pressed="false">${s}</button>`).join("")}</div>
+        <div class="sizes" id="sizes" role="group" aria-label="${t("pdp.size")}">${sizesOf(p).map(s=>`<button type="button" data-s="${s}" aria-pressed="false">${s}</button>`).join("")}</div>
       </div>
       <div class="buy-row">
         <div class="qty" role="group" aria-label="${t("pdp.qty")}"><button type="button" id="q-minus" aria-label="−">−</button><span id="q-val">1</span><button type="button" id="q-plus" aria-label="+">+</button></div>
@@ -97,7 +97,7 @@ document.addEventListener("og:ready", () => {
         <div class="perk">${I.truck}<span>48 h · Maroc</span></div>
       </div>
       <div class="acc">
-        <details open><summary>${t("pdp.details")}</summary><div class="acc-body"><ul><li>${t("pdp.d1")}</li><li>${t("pdp.d2")}</li><li>${t("pdp.d3")}</li><li>${t("pdp.d4")}</li></ul></div></details>
+        <details open><summary>${t("pdp.details")}</summary><div class="acc-body"><ul><li>${t("pdp.d1")}</li><li>${t("pdp.d2")}</li><li>${t("pdp.d3")} ${sizesOf(p).join(", ")}</li><li>${t("pdp.d4")}</li></ul></div></details>
         <details><summary>${t("pdp.delivery")}</summary><div class="acc-body">${t("pdp.deliverytxt")}</div></details>
         <details><summary>${t("pdp.care")}</summary><div class="acc-body">${t("pdp.caretxt")}</div></details>
       </div>

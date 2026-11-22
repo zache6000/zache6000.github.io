@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F2EADB">
 <meta property="og:title" content="Commande — OFFGRID Streetwear">
 <meta property="og:description" content="Finalise ta commande OFFGRID : paiement en cash à la livraison, livraison 48 h partout au Maroc.">
-<meta property="og:image" content="/assets/img/nf-model-back.webp">
+<meta property="og:image" content="/assets/img/nf-2.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{var l=JSON.parse(localStorage.getItem("offgrid_lang")||'"fr"'),q=new URLSearchParams(location.search).get("lang");if(q)l=q;if(l==="ar"){document.documentElement.dir="rtl";document.documentElement.lang="ar"}else if(l==="en")document.documentElement.lang="en"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,7 @@
 <script>
 document.addEventListener("og:ready", () => {
   const { $, C, esc, money, I, t, lang, Cart, store, orderText, copy, igDm, toast } = OG;
+  const curCity = () => { const c = $("#f-city"); if (!c || !c.value) return null; return c.value === OTHER ? ($("#f-other").value.trim() || null) : c.value; };
   const cities = ["Casablanca","Rabat","Salé","Témara","Kénitra","Mohammedia","Marrakech","Fès","Meknès","Tanger","Tétouan","Agadir","Oujda","El Jadida","Safi","Béni Mellal","Nador","Khouribga","Settat","Laâyoune"];
   const OTHER = "__other";
   const saved = store.get("offgrid_customer", {});
@@ -38,7 +39,7 @@ document.addEventListener("og:ready", () => {
     return `<aside class="summary g-navy grain dark">
       <div class="row-between" style="margin-bottom:6px"><span class="display" style="font-size:26px">${t("co.yourorder")}</span><a href="#" data-open-cart class="mono" style="color:var(--paper)">${t("co.edit")}</a></div>
       <div id="sum-lines">${Cart.linesHTML(true)}</div>
-      <div class="totals" style="padding-top:18px">${Cart.totalsHTML()}</div>
+      <div class="totals" id="sum-totals" style="padding-top:18px">${Cart.totalsHTML(saved.city === OTHER ? saved.other : saved.city)}</div>
       ${Cart.freeBarHTML()}
     </aside>`;
   }
@@ -60,12 +61,14 @@ document.addEventListener("og:ready", () => {
           <div class="field full"><label for="f-note">${t("co.note")}</label><textarea id="f-note" name="note" placeholder="${t("co.noteph")}"></textarea></div>
         </div>
         <p class="note" style="margin:24px 0">${t("co.info")}</p>
-        <button class="btn btn-dark btn-block" type="submit">${t("co.place")} · ${money(Cart.total())} ${I.arrow}</button>
+        <button class="btn btn-dark btn-block" type="submit" id="place">${t("co.place")} · ${money(Cart.total(saved.city === OTHER ? saved.other : saved.city))} ${I.arrow}</button>
       </form>
       ${summaryHTML()}
     </div>`;
     const city = $("#f-city"), other = $("#other-wrap");
-    const toggle = () => other.hidden = city.value !== OTHER; toggle(); city.onchange = toggle;
+    const refresh = () => { const c = curCity(); $("#sum-totals").innerHTML = Cart.totalsHTML(c); $("#place").innerHTML = `${t("co.place")} · ${money(Cart.total(c))} ${I.arrow}`; };
+    const toggle = () => { other.hidden = city.value !== OTHER; refresh(); }; toggle(); city.onchange = toggle;
+    $("#f-other").oninput = refresh;
     $("#form").onsubmit = submit;
   }
 
@@ -83,7 +86,8 @@ document.addEventListener("og:ready", () => {
     store.set("offgrid_customer", { name: v.name, phone: v.phone, city: v.city, other: v.other, address: v.address });
     const d = new Date();
     const ref = "OG-" + String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0") + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
-    const order = { ref, items: Cart.items(), subtotal: Cart.subtotal(), delivery: Cart.delivery(), total: Cart.total(), name: v.name.trim(), phone: v.phone.trim(), city: v.city === OTHER ? v.other.trim() : v.city, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
+    const cityName = v.city === OTHER ? v.other.trim() : v.city;
+    const order = { ref, items: Cart.items(), subtotal: Cart.subtotal(), delivery: Cart.delivery(cityName), total: Cart.total(cityName), name: v.name.trim(), phone: v.phone.trim(), city: cityName, address: v.address.trim(), note: v.note.trim(), at: d.toISOString() };
     store.set("offgrid_last_order", order);
     Cart.clear();
     doneView(order);

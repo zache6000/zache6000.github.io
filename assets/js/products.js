@@ -11,9 +11,9 @@ window.OFFGRID_CONFIG = {
   instagram: "offgrid.storeoficiel",
   tiktok: "offgrid.storeofficiel",
   whatsapp: "212771909178",          // shown only as a button, never as text
-  sizes: ["S", "M", "L"],
-  delivery: { fee: 20, freeFrom: 1000 },
-  nextDrop: "2026-11-22T00:00:00+01:00", // countdown target (Morocco time)
+  sizes: ["S", "M", "L", "XL"],    // default sizes; a product can override with its own "sizes"
+  delivery: { casablanca: 0, other: 20 },   // MAD: free in Casablanca, 20 MAD elsewhere
+  nextDrop: "2026-11-25T00:00:00+01:00", // launch countdown (Morocco time)
   defaultLang: "fr"
 };
 
@@ -30,8 +30,9 @@ window.OFFGRID_PRODUCTS = [
       en: "A white hoodie with a minimalist streetwear style, elevated by an original butterfly design that stands for freedom and transformation. Carefully thought-out details for a unique, fresh and timeless look.",
       ar: "هودي أبيض بأسلوب ستريتوير بسيط، يزيّنه تصميم فراشة أصلي يرمز إلى الحرية والتحوّل. تفاصيل مدروسة بعناية لإطلالة فريدة، منعشة وخالدة."
     },
-    images: ["nf-model-back", "nf-model-front", "nf-flat-back", "nf-flat-front", "nf-backprint", "nf-chest", "nf-sleeve"],
-    card: "nf-model-front", hover: "nf-model-back", photos: true
+    sizes: ["S", "M", "L"],
+    images: ["nf-1", "nf-2", "film-1", "nf-3"],
+    card: "nf-1", hover: "nf-2", photos: true
   },
   {
     id: "radio-dreams",
@@ -44,8 +45,8 @@ window.OFFGRID_PRODUCTS = [
       en: "A black oversized hoodie with a bold streetwear character, inspired by the retro-futuristic universe. Its back print mixes a satellite illustration, dynamic typography and star details for a unique visual effect. Cream accents add an elegant contrast, while the small chest logo completes the design perfectly.",
       ar: "هودي أسود واسع بطابع ستريتوير قوي، مستوحى من عالم الريترو المستقبلي. تجمع الطباعة الخلفية بين رسم لطبق القمر الصناعي وخط ديناميكي وتفاصيل نجمية لتأثير بصري فريد. لمسات الكريمي تضيف تباينًا أنيقًا، بينما يكمل الشعار الصغير على الصدر التصميم بشكل مثالي."
     },
-    images: ["rd-back", "rd-front", "rd-backprint", "rd-chest"],
-    card: "rd-front", hover: "rd-back", photos: true
+    images: ["rd-1", "rd-2"],
+    card: "rd-1", hover: "rd-2", photos: true
   },
   {
     id: "static-frequency",
@@ -58,7 +59,8 @@ window.OFFGRID_PRODUCTS = [
       en: "A midnight-blue oversized hoodie inspired by vintage style and retro radio culture. Its exclusive graphic mixes bold typography, technical details and orange accents for a unique streetwear look. A piece that shows its identity without overdoing it.",
       ar: "هودي واسع بلون أزرق ليلي مستوحى من العالم الكلاسيكي وثقافة الراديو القديمة. يمزج تصميمه الحصري بين خط جريء وتفاصيل تقنية ولمسات برتقالية لإطلالة ستريتوير فريدة. قطعة تعبّر عن هويتها دون مبالغة."
     },
-    images: ["ph-static-frequency"], card: "ph-static-frequency", hover: "ph-static-frequency", photos: false
+    images: ["sf-1", "sf-3", "sf-2", "sf-4", "film-3", "film-2"],
+    card: "sf-1", hover: "sf-3", photos: true
   },
   {
     id: "lost-souls",
@@ -71,6 +73,7 @@ window.OFFGRID_PRODUCTS = [
       en: "An olive-green oversized hoodie with a vintage streetwear style. An exclusive design with bold graphic details and a retro-effect cream print. Made to stand out, designed to be different.",
       ar: "هودي واسع بلون أخضر زيتوني بأسلوب ستريتوير كلاسيكي. تصميم حصري بتفاصيل جرافيكية جريئة وطباعة كريمية بتأثير ريترو. صُنع ليتميّز، وصُمّم ليكون مختلفًا."
     },
-    images: ["ph-lost-souls"], card: "ph-lost-souls", hover: "ph-lost-souls", photos: false
+    images: ["ls-1", "ls-2"],
+    card: "ls-1", hover: "ls-2", photos: true
   }
 ];
